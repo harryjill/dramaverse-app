@@ -1,0 +1,403 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1"><meta name="theme-color" content="#111014"><title>DramaVerse — AI Mini Dramas</title>
+<style>
+*{box-sizing:border-box}body{margin:0;background:#100f13;color:#f8f5fa;font-family:Inter,system-ui,Arial,sans-serif}header{padding:20px 18px 12px;display:flex;justify-content:space-between;align-items:center;position:sticky;top:0;background:#100f13ee;backdrop-filter:blur(10px);z-index:3}.logo{font-size:21px;font-weight:900;letter-spacing:-.6px}.logo span{color:#ff4b78}.avatar{background:#28232c;border:1px solid #453b48;border-radius:50%;width:36px;height:36px;display:grid;place-items:center}.wrap{max-width:900px;margin:auto;padding:0 16px 95px}.hero{height:400px;border-radius:22px;overflow:hidden;position:relative;background:linear-gradient(0deg,#100f13 2%,transparent 65%),linear-gradient(115deg,#52233e,#d45868 45%,#2a314e);margin:8px 0 24px;padding:22px;display:flex;align-items:flex-end}.hero:before{content:"✦";position:absolute;right:15%;top:18%;font-size:100px;color:#ffe7ef88}.hero-content{position:relative;z-index:1;max-width:440px}.eyebrow{color:#ff7998;font-size:11px;font-weight:800;letter-spacing:2px}.hero h1{font-size:36px;line-height:1.02;margin:9px 0}.hero p{color:#e7dfe7;font-size:14px;max-width:350px}.btn{border:0;border-radius:30px;padding:12px 18px;font-weight:800;cursor:pointer}.primary{background:#ff4b78;color:white}.secondary{background:#302b34;color:#fff;border:1px solid #554a57;margin-left:8px}.section-head{display:flex;justify-content:space-between;align-items:center;margin:24px 0 12px}.section-head h2{font-size:18px;margin:0}.see{font-size:12px;color:#ff7896}.chips{display:flex;gap:8px;overflow:auto;padding-bottom:7px}.chip{border:1px solid #3a333e;background:#1c1920;color:#ccc;border-radius:25px;padding:8px 14px;white-space:nowrap;font-size:12px}.chip.active{background:#ff4b78;border-color:#ff4b78;color:#fff}.grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}.card{background:#1a171e;border:1px solid #2a242e;border-radius:15px;overflow:hidden;cursor:pointer}.poster{height:190px;position:relative;display:flex;align-items:flex-end;padding:12px;background:linear-gradient(145deg,#55253f,#c85d76);background-size:cover;background-position:center}.poster:after{content:"✧";position:absolute;top:10px;right:14px;font-size:60px;color:#ffffff55}.p2{background:linear-gradient(145deg,#172d48,#4c86a4)}.p3{background:linear-gradient(145deg,#332447,#a35d8b)}.p4{background:linear-gradient(145deg,#49261f,#b36e43)}.p5{background:linear-gradient(145deg,#1f3d35,#5b977a)}.p6{background:linear-gradient(145deg,#30313e,#777a9b)}.tag{position:relative;z-index:1;background:#100f13b8;padding:5px 8px;border-radius:7px;font-size:10px}.card-info{padding:11px}.card-info h3{margin:0 0 5px;font-size:14px}.card-info p{margin:0;color:#a9a1ad;font-size:11px}.bottom{position:fixed;bottom:0;left:0;right:0;background:#151218f2;border-top:1px solid #2e2831;display:flex;justify-content:space-around;padding:12px 8px 18px;z-index:4}.navitem{font-size:11px;color:#aaa;text-align:center;cursor:pointer}.navitem b{display:block;font-size:18px;margin-bottom:3px}.navitem.sel{color:#ff4b78}.screen{display:none}.screen.active{display:block}.searchbox{width:100%;padding:13px 15px;background:#201c24;border:1px solid #39313e;border-radius:14px;color:white;margin:14px 0}.empty{color:#aaa;text-align:center;padding:40px 10px}.modal{position:fixed;inset:0;background:#09080beF;z-index:8;display:none;overflow:auto}.modal.open{display:block}.modal-inner{max-width:700px;margin:auto;padding:20px}.close{background:#29232e;color:white;border:0;border-radius:50%;width:38px;height:38px;font-size:20px;cursor:pointer}.playerbox{min-height:220px;background:#09080b;border-radius:18px;overflow:hidden;margin-top:18px;color:#f9e9f0;position:relative}.playerbox video{width:100%;max-height:70vh;aspect-ratio:9/16;object-fit:contain;background:#050505;display:block}.player-controls{display:flex;gap:8px;margin:12px 0}.player-controls button{flex:1;border:1px solid #39313e;border-radius:12px;padding:12px;background:#211d25;color:#fff;font-weight:700;cursor:pointer}.player-controls button:disabled{opacity:.35}.episode{width:100%;padding:14px;margin:7px 0;text-align:left;background:#211d25;color:white;border:1px solid #39313e;border-radius:12px;cursor:pointer}.episode small{display:block;color:#a9a0ad;margin-top:4px}.toast{position:fixed;bottom:85px;left:50%;transform:translateX(-50%);background:#39313e;padding:10px 15px;border-radius:20px;display:none;z-index:12;font-size:12px;max-width:90vw;text-align:center}
+@media(min-width:700px){.grid{grid-template-columns:repeat(3,minmax(0,1fr))}.poster{height:230px}.hero{height:440px}}
+.admin-row{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:12px;margin:8px 0;background:#1a171e;border:1px solid #302934;border-radius:12px}.admin-row strong{font-size:13px}.admin-row small{display:block;color:#aaa;margin-top:4px}.admin-actions{display:flex;gap:6px}.admin-actions button{border:1px solid #554a57;background:#302b34;color:#fff;border-radius:9px;padding:8px 10px;cursor:pointer}.admin-actions .danger{border-color:#8a344b;color:#ff9bb2}
+.ad-label{display:block;font-size:12px;color:#d6ceda;margin-top:10px;font-weight:700}
+.ad-toggle{display:flex;align-items:center;gap:10px;margin:12px 0;font-size:13px;font-weight:700;cursor:pointer}
+.ad-toggle input{width:18px;height:18px;accent-color:#ff4b78}
+.stats-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px;margin:12px 0}
+.stat-box{background:#141117;border:1px solid #2e2733;border-radius:12px;padding:12px}
+.stat-box span{display:block;font-size:11px;color:#a9a0ad}
+.stat-box strong{display:block;font-size:17px;margin-top:4px;color:#fff}
+.demo-banner{background:#2b1924;border:1px solid #75344b;color:#ffb6c9;border-radius:12px;padding:10px 12px;font-size:12px;line-height:1.5;margin:10px 0}
+.ad-modal{position:fixed;inset:0;background:#070609f5;z-index:11;display:none;align-items:center;justify-content:center;padding:18px}
+.ad-modal.open{display:flex}
+.ad-card{width:100%;max-width:440px;background:#19151e;border:1px solid #3e3346;border-radius:20px;padding:20px;text-align:center}
+.ad-badge{display:inline-block;background:#ff4b7826;color:#ff7998;border:1px solid #ff4b7866;font-size:10px;font-weight:800;letter-spacing:1px;padding:4px 10px;border-radius:99px}
+.ad-visual{margin:14px 0;background:#0d0b10;border:1px dashed #473b50;border-radius:14px;padding:14px;min-height:150px;display:flex;flex-direction:column;align-items:center;justify-content:center}
+.ad-visual video{width:100%;max-height:240px;border-radius:10px;background:#000}
+</style></head><body>
+<header><div class="logo">Drama<span>Verse</span> ✦</div><div class="avatar">👤</div></header><main class="wrap">
+<div id="home" class="screen active"><section class="hero"><div class="hero-content"><div class="eyebrow">EXCLUSIVE MINI DRAMA</div><h1>My Contract<br>With The CEO</h1><p>One contract. Two secrets. A love neither of them planned.</p><button class="btn primary" onclick="openDrama(0)">▶ Watch now</button><button class="btn secondary" onclick="saveDrama(0)">♡ Save</button></div></section>
+<div class="section-head"><h2>Browse by genre</h2></div><div class="chips" id="genres"><button class="chip active" onclick="filterGenre('All',this)">All</button><button class="chip" onclick="filterGenre('Romance',this)">Romance</button><button class="chip" onclick="filterGenre('Revenge',this)">Revenge</button><button class="chip" onclick="filterGenre('Fantasy',this)">Fantasy</button><button class="chip" onclick="filterGenre('Thriller',this)">Thriller</button></div>
+<div class="section-head"><h2>Trending dramas</h2><span class="see">Short episodes · Demo</span></div><div class="grid" id="dramaGrid"></div></div>
+<div id="search" class="screen"><div class="section-head"><h2>Search dramas</h2></div><input class="searchbox" id="searchInput" placeholder="Search title or genre…" oninput="render(this.value)"><div class="grid" id="searchGrid"></div></div>
+<div id="saved" class="screen"><div class="section-head"><h2>My watchlist</h2></div><div class="grid" id="savedGrid"></div><div class="empty" id="savedEmpty">Saved dramas will appear here.</div></div>
+
+<div id="admin" class="screen">
+  <div class="section-head"><h2>Admin Dashboard</h2><span class="see">LOCAL DEMO</span></div>
+
+  <div class="card" style="padding:16px;margin-bottom:14px;cursor:default">
+    <h3 style="margin-top:0">Advertisement Settings</h3>
+    <p style="color:#aaa;font-size:12px;line-height:1.5;margin-top:0">Configure automatic ad triggers after completed videos. Changes save immediately to this browser.</p>
+    <label class="ad-toggle">
+      <input type="checkbox" id="adEnabledToggle" onchange="saveAdSettings()">
+      <span>Enable / Disable Advertisements</span>
+    </label>
+    <label class="ad-label" for="adTypeSelect">Advertisement Format</label>
+    <select class="searchbox" id="adTypeSelect" onchange="saveAdSettings()">
+      <option value="fullscreen">Full-screen Advertisements</option>
+      <option value="video">Video Advertisements</option>
+      <option value="both">Both Advertisement Types</option>
+    </select>
+    <label class="ad-label" for="adFrequencySelect">Advertisement Frequency (Completed Videos)</label>
+    <select class="searchbox" id="adFrequencySelect" onchange="saveAdSettings()">
+      <option value="3">Every 3 completed videos</option>
+      <option value="5">Every 5 completed videos</option>
+      <option value="10">Every 10 completed videos</option>
+    </select>
+  </div>
+
+  <div class="card" style="padding:16px;margin:14px 0;cursor:default">
+    <h3 style="margin-top:0">Admin Earnings Dashboard (Demo)</h3>
+    <div class="demo-banner"><strong>DEMO DATA ONLY:</strong> Simulated impressions and estimated PHP figures below are local preview estimates—not real ad network revenue or actual bank payouts.</div>
+    <div class="stats-grid">
+      <div class="stat-box"><span>Total Completed Video Views</span><strong id="statCompletedVideos">0</strong></div>
+      <div class="stat-box"><span>Total Ad Impressions (Demo)</span><strong id="statAdImpressions">0</strong></div>
+      <div class="stat-box"><span>Estimated Earnings (PHP · Demo)</span><strong id="statEstimatedPhp">₱0.00</strong></div>
+      <div class="stat-box"><span>Payment Status</span><strong id="statPaymentStatus" style="font-size:13px;color:#ff9bb2">Demo Only · Unlinked</strong></div>
+    </div>
+    <p id="adSettingsOverview" style="color:#b8b0be;font-size:12px;line-height:1.5;margin:10px 0"></p>
+    <button class="btn secondary" style="margin-left:0;width:100%" onclick="resetAdStats()">↺ Reset Demo Ad &amp; View Stats</button>
+  </div>
+
+  <div class="card" style="padding:16px;margin-bottom:14px;cursor:default">
+    <h3 style="margin-top:0">Add a drama</h3>
+    <input class="searchbox" id="adminTitle" placeholder="Drama title">
+    <input class="searchbox" id="adminGenre" placeholder="Genre (e.g. Romance)">
+    <input class="searchbox" id="adminDesc" placeholder="Short description">
+    <input class="searchbox" id="adminPoster" placeholder="Poster image URL (optional)">
+    <input class="searchbox" id="adminEpisodes" type="number" min="1" max="500" value="12" placeholder="Number of episodes">
+    <button class="btn primary" style="width:100%" onclick="adminAddDrama()">＋ Add drama</button>
+  </div>
+  <div class="card" style="padding:16px;margin:14px 0;cursor:default">
+    <h3 style="margin-top:0">Upload an episode</h3>
+    <p style="color:#aaa;font-size:12px;line-height:1.5">Pumili ng drama, episode number, at video file mula sa cellphone mo. MP4 ang pinaka-recommended.</p>
+    <select class="searchbox" id="uploadDrama"></select>
+    <input class="searchbox" id="uploadEpisodeNo" type="number" min="1" value="1" placeholder="Episode number">
+    <input class="searchbox" id="uploadEpisodeTitle" placeholder="Episode title (optional)">
+    <input class="searchbox" id="episodeVideoFile" type="file" accept="video/*">
+    <button class="btn primary" style="width:100%" onclick="uploadEpisode()">⬆ Save episode video</button>
+    <p id="uploadStatus" style="color:#aaa;font-size:12px;line-height:1.5">Videos are stored only in this browser on this device. Large files may use significant phone storage.</p>
+  </div>
+  <div class="section-head"><h2>Manage dramas</h2><span class="see" id="adminCount"></span></div>
+  <div id="adminDramaList"></div>
+  <p style="color:#aaa;font-size:12px;line-height:1.6">Demo admin only: changes are saved in this browser on this device. There is no secure login, cloud database, or shared publishing yet.</p>
+</div>
+<div id="profile" class="screen"><div class="section-head"><h2>My Profile</h2></div><div class="card" style="padding:22px;margin-top:12px;cursor:default"><div style="font-size:40px">👤</div><h3>DramaVerse Viewer</h3><p style="color:#aaa;font-size:13px">Demo profile · Sign-in feature can be added later.</p></div><div class="section-head"><h2>App info</h2></div><p style="color:#aaa;font-size:13px;line-height:1.7">DramaVerse is a demo mini-drama streaming interface. The titles and artwork are sample concepts; actual licensed videos and accounts are not connected yet.</p></div>
+</main><nav class="bottom"><div class="navitem sel" onclick="showScreen('home',this)"><b>⌂</b>Home</div><div class="navitem" onclick="showScreen('search',this)"><b>⌕</b>Search</div><div class="navitem" onclick="showScreen('saved',this)"><b>♡</b>Saved</div><div class="navitem" onclick="showScreen('profile',this)"><b>◉</b>Profile</div><div class="navitem" onclick="showScreen('admin',this)"><b>⚙</b>Admin</div></nav>
+
+<div class="modal" id="player"><div class="modal-inner"><button class="close" onclick="closePlayer()">×</button><div class="playerbox"><video id="videoPlayer" controls playsinline preload="metadata"><source src="https://storage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4" type="video/mp4">Your browser does not support video playback.</video></div><div class="player-controls"><button onclick="previousEpisode()">⏮ Previous</button><button onclick="togglePlay()">▶ / ⏸ Play</button><button onclick="nextEpisode()">Next ⏭</button></div><h2 id="playerTitle">Drama title</h2><p style="color:#aaa;font-size:13px" id="episodeLabel">Select an episode</p><div id="episodeList"></div></div></div>
+
+<div class="ad-modal" id="adModal" role="dialog" aria-modal="true" aria-labelledby="adModalTitle">
+  <div class="ad-card">
+    <span class="ad-badge" id="adFormatTag">DEMO AD</span>
+    <h3 id="adModalTitle" style="margin:10px 0 6px">Sponsored Break</h3>
+    <p id="adModalDesc" style="color:#b8b0be;font-size:12px;margin:0;line-height:1.5">Simulated ad impression after completing a video milestone.</p>
+    <div class="ad-visual" id="adVisualBox"></div>
+    <button class="btn primary" id="adContinueBtn" style="width:100%" onclick="dismissAdAndContinue()">▶ Continue Watching</button>
+  </div>
+</div>
+
+<div class="toast" id="toast"></div>
+<script>
+const dramas=[
+{title:'My Contract With The CEO',genre:'Romance',eps:24,desc:'A fake marriage becomes a real love story.',cls:'',badge:'HOT'},
+{title:'Reborn To Take Revenge',genre:'Revenge',eps:30,desc:'She returns with a plan to expose them all.',cls:'p2',badge:'NEW'},
+{title:'The Moon’s Secret',genre:'Fantasy',eps:18,desc:'An ordinary girl discovers an extraordinary fate.',cls:'p3',badge:'FANTASY'},
+{title:'Love After Midnight',genre:'Romance',eps:20,desc:'Two strangers meet when the city sleeps.',cls:'p4',badge:'ROMANCE'},
+{title:'The Last Witness',genre:'Thriller',eps:16,desc:'A witness. A mystery. A dangerous truth.',cls:'p5',badge:'MYSTERY'},
+{title:'CEO’s Hidden Heir',genre:'Romance',eps:22,desc:'A secret child changes the fate of two families.',cls:'p6',badge:'TRENDING'}];
+
+let currentFilter='All',saved=JSON.parse(localStorage.getItem('dvSaved')||'[]');
+try { const stored=JSON.parse(localStorage.getItem('dvDramas')||'null'); if(Array.isArray(stored)&&stored.length) dramas.splice(0,dramas.length,...stored); } catch(e){}
+dramas.forEach((d,i)=>{if(!d.id)d.id='dv_legacy_'+i+'_'+Math.random().toString(36).slice(2,7);});
+
+// Advertisement Settings & Demo Earnings State
+const DEFAULT_AD_SETTINGS={enabled:true,type:'both',frequency:3};
+const DEFAULT_AD_STATS={completedVideos:0,adImpressions:0,demoEstimatedPhp:0,cycleCompleted:0,bothToggleIndex:0};
+const DEMO_RATE_PER_IMPRESSION_PHP=0.45;
+
+let adSettings=loadAdSettings();
+let adStats=loadAdStats();
+let currentVideoCompletedInSession=false;
+let pendingAfterAdAction=null;
+
+function loadAdSettings(){
+  try{
+    const raw=JSON.parse(localStorage.getItem('dvAdSettings')||'null');
+    if(raw&&typeof raw==='object'){
+      const freq=[3,5,10].includes(Number(raw.frequency))?Number(raw.frequency):3;
+      const type=['fullscreen','video','both'].includes(raw.type)?raw.type:'both';
+      return {enabled:Boolean(raw.enabled),type,frequency:freq};
+    }
+  }catch(e){}
+  return {...DEFAULT_AD_SETTINGS};
+}
+
+function loadAdStats(){
+  try{
+    const raw=JSON.parse(localStorage.getItem('dvAdStats')||'null');
+    if(raw&&typeof raw==='object'){
+      return {
+        completedVideos:Math.max(0,Number(raw.completedVideos)||0),
+        adImpressions:Math.max(0,Number(raw.adImpressions)||0),
+        demoEstimatedPhp:Math.max(0,Number(raw.demoEstimatedPhp)||0),
+        cycleCompleted:Math.max(0,Number(raw.cycleCompleted)||0),
+        bothToggleIndex:Math.max(0,Number(raw.bothToggleIndex)||0)
+      };
+    }
+  }catch(e){}
+  return {...DEFAULT_AD_STATS};
+}
+
+function saveAdSettings(){
+  const enabled=Boolean(document.getElementById('adEnabledToggle')?.checked);
+  const type=document.getElementById('adTypeSelect')?.value||'both';
+  const frequency=[3,5,10].includes(Number(document.getElementById('adFrequencySelect')?.value))?Number(document.getElementById('adFrequencySelect').value):3;
+  adSettings={enabled,type,frequency};
+  localStorage.setItem('dvAdSettings',JSON.stringify(adSettings));
+  renderAdAdminUI();
+  toast('Advertisement settings saved');
+}
+
+function resetAdStats(){
+  adStats={...DEFAULT_AD_STATS};
+  localStorage.setItem('dvAdStats',JSON.stringify(adStats));
+  renderAdAdminUI();
+  toast('Demo statistics reset');
+}
+
+function formatAdTypeLabel(type){
+  if(type==='fullscreen')return 'Full-screen Advertisements';
+  if(type==='video')return 'Video Advertisements';
+  return 'Both Advertisement Types';
+}
+
+function renderAdAdminUI(){
+  const toggle=document.getElementById('adEnabledToggle');
+  const typeSel=document.getElementById('adTypeSelect');
+  const freqSel=document.getElementById('adFrequencySelect');
+  if(toggle)toggle.checked=adSettings.enabled;
+  if(typeSel)typeSel.value=adSettings.type;
+  if(freqSel)freqSel.value=String(adSettings.frequency);
+
+  const cEl=document.getElementById('statCompletedVideos');
+  const iEl=document.getElementById('statAdImpressions');
+  const pEl=document.getElementById('statEstimatedPhp');
+  const sEl=document.getElementById('statPaymentStatus');
+  const oEl=document.getElementById('adSettingsOverview');
+
+  if(cEl)cEl.textContent=String(adStats.completedVideos);
+  if(iEl)iEl.textContent=String(adStats.adImpressions);
+  if(pEl)pEl.textContent='₱'+Number(adStats.demoEstimatedPhp||0).toFixed(2);
+  if(sEl)sEl.textContent='Demo Mode · No Real Payout';
+  if(oEl){
+    oEl.textContent=`Status: ${adSettings.enabled?'Enabled':'Disabled'} · Format: ${formatAdTypeLabel(adSettings.type)} · Trigger: Every ${adSettings.frequency} completed videos (${adStats.cycleCompleted}/${adSettings.frequency} in current cycle).`;
+  }
+}
+
+/*
+ * Future Real Ad Network Hook (e.g., Google AdMob in Android APK / Capacitor / WebView bridge):
+ * Replace triggerAdImpression() bridge call when packaging for Android with a native plugin
+ * (such as Capacitor AdMob) and fetch verified revenue/payouts from your AdMob/AdSense account
+ * dashboard—never store bank account numbers in client HTML/JS/APK code.
+ */
+function requestRealAdNetworkIfAvailable(formatToShow){
+  if(window.DramaVerseNativeAds && typeof window.DramaVerseNativeAds.showAd === 'function'){
+    window.DramaVerseNativeAds.showAd(formatToShow);
+  }
+}
+
+function resolveAdFormat(){
+  if(adSettings.type==='fullscreen'||adSettings.type==='video')return adSettings.type;
+  const chosen=adStats.bothToggleIndex%2===0?'fullscreen':'video';
+  adStats.bothToggleIndex=(adStats.bothToggleIndex+1)%2;
+  return chosen;
+}
+
+function showAdModal(formatToShow,onContinue){
+  pendingAfterAdAction=typeof onContinue==='function'?onContinue:null;
+  const modal=document.getElementById('adModal');
+  const tag=document.getElementById('adFormatTag');
+  const title=document.getElementById('adModalTitle');
+  const desc=document.getElementById('adModalDesc');
+  const box=document.getElementById('adVisualBox');
+
+  adStats.adImpressions+=1;
+  adStats.demoEstimatedPhp=Number((adStats.adImpressions*DEMO_RATE_PER_IMPRESSION_PHP).toFixed(2));
+  localStorage.setItem('dvAdStats',JSON.stringify(adStats));
+  renderAdAdminUI();
+  requestRealAdNetworkIfAvailable(formatToShow);
+
+  if(formatToShow==='video'){
+    tag.textContent='DEMO VIDEO AD';
+    title.textContent='Sponsored Video Preview';
+    desc.textContent='Simulated video ad slot (Demo impression recorded). Tap Continue Watching when ready.';
+    box.innerHTML=`<video id="demoAdVideo" controls playsinline muted preload="metadata" src="https://storage.googleapis.com/gtv-videos-bucket/sample/ForBiggerBlazes.mp4"></video><small style="color:#9e95a6;margin-top:8px">Sample ad clip · Demo only</small>`;
+    const adv=document.getElementById('demoAdVideo');
+    if(adv)adv.play().catch(()=>{});
+  }else{
+    tag.textContent='DEMO FULL-SCREEN AD';
+    title.textContent='DramaVerse Featured Sponsor';
+    desc.textContent='Simulated full-screen interstitial placement after completing '+adSettings.frequency+' videos.';
+    box.innerHTML=`<div style="font-size:34px">✦</div><strong style="margin-top:6px;font-size:15px">Demo Full-Screen Placement</strong><small style="color:#9e95a6;margin-top:6px">No real money is charged or earned in browser demo mode.</small>`;
+  }
+  modal.classList.add('open');
+}
+
+function dismissAdAndContinue(){
+  const adv=document.getElementById('demoAdVideo');
+  if(adv&&typeof adv.pause==='function')adv.pause();
+  document.getElementById('adModal').classList.remove('open');
+  const fn=pendingAfterAdAction;
+  pendingAfterAdAction=null;
+  if(fn)fn();
+}
+
+function handleVideoCompleted(){
+  if(currentVideoCompletedInSession)return;
+  currentVideoCompletedInSession=true;
+
+  adStats.completedVideos+=1;
+  adStats.cycleCompleted+=1;
+
+  let shouldShowAd=false;
+  if(adSettings.enabled && adStats.cycleCompleted>=adSettings.frequency){
+    shouldShowAd=true;
+    adStats.cycleCompleted=0;
+  }
+
+  localStorage.setItem('dvAdStats',JSON.stringify(adStats));
+  renderAdAdminUI();
+
+  const advanceAfterCompletion=()=>{
+    const d=dramas[activeDrama];
+    if(d && activeEpisode<d.eps){
+      activeEpisode++;
+      loadEpisode();
+      playCurrent();
+    }else{
+      toast('Completed final episode! Tap any episode to replay.');
+    }
+  };
+
+  if(shouldShowAd){
+    const v=document.getElementById('videoPlayer');
+    if(v)v.pause();
+    showAdModal(resolveAdFormat(),advanceAfterCompletion);
+  }else{
+    advanceAfterCompletion();
+  }
+}
+
+// Fixed persistDramas() structure (cleanly closed before IndexedDB helpers)
+function persistDramas(){
+  localStorage.setItem('dvDramas',JSON.stringify(dramas));
+  render();
+  showAdminDramas();
+  refreshUploadDrama();
+}
+
+// Episode video storage: IndexedDB keeps video files as blobs on this device.
+const DB_NAME='DramaVerseVideos', DB_VERSION=1;
+function openVideoDB(){return new Promise((resolve,reject)=>{const req=indexedDB.open(DB_NAME,DB_VERSION);req.onupgradeneeded=()=>{if(!req.result.objectStoreNames.contains('episodes'))req.result.createObjectStore('episodes',{keyPath:'key'});};req.onsuccess=()=>resolve(req.result);req.onerror=()=>reject(req.error);});}
+async function saveEpisodeVideo(dramaId,episode,record){const db=await openVideoDB();return new Promise((resolve,reject)=>{const tx=db.transaction('episodes','readwrite');tx.objectStore('episodes').put({key:String(dramaId)+'_'+episode,dramaId,episode,...record});tx.oncomplete=()=>resolve();tx.onerror=()=>reject(tx.error);});}
+async function getEpisodeVideo(dramaId,episode){try{const db=await openVideoDB();return await new Promise((resolve,reject)=>{const req=db.transaction('episodes','readonly').objectStore('episodes').get(String(dramaId)+'_'+episode);req.onsuccess=()=>resolve(req.result||null);req.onerror=()=>reject(req.error);});}catch(e){return null;}}
+function episodeMetaLabel(dramaId,episode){return '';}
+function refreshUploadDrama(){const sel=document.getElementById('uploadDrama');if(!sel)return;const old=sel.value;sel.innerHTML=dramas.map((d,i)=>`<option value="${i}">${escapeHTML(d.title)}</option>`).join('');if(old!==''&&Number(old)<dramas.length)sel.value=old;}
+async function uploadEpisode(){const idx=Number(document.getElementById('uploadDrama').value);const d=dramas[idx];const ep=Math.max(1,Number(document.getElementById('uploadEpisodeNo').value)||1);const file=document.getElementById('episodeVideoFile').files[0];const status=document.getElementById('uploadStatus');if(!d){toast('Add a drama first');return;}if(!file){toast('Choose a video file first');return;}if(!file.type.startsWith('video/')){toast('Please choose a video file');return;}if(file.size>500*1024*1024){toast('File is over 500 MB. Choose a smaller video.');return;}status.textContent='Saving video… please keep this page open.';try{if(!d.id)d.id='dv_'+Date.now()+'_'+Math.random().toString(36).slice(2,8);await saveEpisodeVideo(d.id,ep,{blob:file,name:file.name,title:document.getElementById('uploadEpisodeTitle').value.trim()});d.eps=Math.max(d.eps||1,ep);persistDramas();refreshUploadDrama();document.getElementById('uploadEpisodeNo').value=ep+1;document.getElementById('episodeVideoFile').value='';status.textContent='Saved: '+file.name+' ('+(file.size/1024/1024).toFixed(1)+' MB). Stored on this device only.';toast('Episode video saved!');}catch(err){status.textContent='Could not save. Check available phone storage and try a smaller video.';toast('Video save failed');}}
+
+function card(d,i){
+  const posterStyle=d.poster?`style="background-image:linear-gradient(0deg,#100f13b8,transparent),url('${escapeHTML(d.poster)}')"` : '';
+  return `<div class="card" onclick="openDrama(${i})"><div class="poster ${d.cls||''}" ${posterStyle}><span class="tag">${escapeHTML(d.badge||'DRAMA')}</span></div><div class="card-info"><h3>${escapeHTML(d.title)}</h3><p>${escapeHTML(d.genre)} · ${d.eps} episodes</p></div></div>`;
+}
+function render(q=''){
+  let arr=dramas.map((d,i)=>({d,i})).filter(x=>(currentFilter==='All'||x.d.genre===currentFilter)&&(!q||x.d.title.toLowerCase().includes(q.toLowerCase())||x.d.genre.toLowerCase().includes(q.toLowerCase())));
+  document.getElementById('dramaGrid').innerHTML=arr.map(x=>card(x.d,x.i)).join('');
+  document.getElementById('searchGrid').innerHTML=dramas.map((d,i)=>({d,i})).filter(x=>!q||x.d.title.toLowerCase().includes(q.toLowerCase())||x.d.genre.toLowerCase().includes(q.toLowerCase())).map(x=>card(x.d,x.i)).join('');
+}
+function filterGenre(g,el){currentFilter=g;document.querySelectorAll('.chip').forEach(c=>c.classList.remove('active'));el.classList.add('active');render()}
+function showScreen(id,el){document.querySelectorAll('.screen').forEach(s=>s.classList.remove('active'));document.getElementById(id).classList.add('active');document.querySelectorAll('.navitem').forEach(n=>n.classList.remove('sel'));el.classList.add('sel');if(id==='saved')showSaved();if(id==='admin'){showAdminDramas();renderAdAdminUI();refreshUploadDrama();}}
+
+let activeDrama=0,activeEpisode=1;
+function openDrama(i){
+  if(!dramas[i])return;
+  activeDrama=i;activeEpisode=1;loadEpisode();document.getElementById('player').classList.add('open');playCurrent();
+}
+function loadEpisode(){
+  const d=dramas[activeDrama];if(!d)return;
+  document.getElementById('playerTitle').textContent=d.title;
+  document.getElementById('episodeLabel').textContent=`Episode ${activeEpisode} of ${d.eps}`;
+  let list='';
+  for(let e=1;e<=d.eps;e++)list+=`<button class="episode" style="${e===activeEpisode?'border-color:#ff4b78;background:#30232b':''}" onclick="selectEpisode(${e})">Episode ${e}<small>${e===activeEpisode?'Now selected':'Tap to play'}${episodeMetaLabel(d.id,e)}</small></button>`;
+  document.getElementById('episodeList').innerHTML=list;
+  document.querySelectorAll('#episodeList .episode')[activeEpisode-1]?.scrollIntoView({block:'nearest'});
+}
+function selectEpisode(e){activeEpisode=e;loadEpisode();playCurrent();}
+
+let currentVideoUrl=null;
+async function playCurrent(){
+  currentVideoCompletedInSession=false;
+  const v=document.getElementById('videoPlayer');
+  v.pause();
+  if(currentVideoUrl){URL.revokeObjectURL(currentVideoUrl);currentVideoUrl=null;}
+  const rec=await getEpisodeVideo(dramas[activeDrama].id,activeEpisode);
+  if(rec&&rec.blob){currentVideoUrl=URL.createObjectURL(rec.blob);v.src=currentVideoUrl;}
+  else{v.src='https://storage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4';}
+  v.load();
+  v.play().catch(()=>toast('Tap Play to start video'));
+}
+
+function togglePlay(){const v=document.getElementById('videoPlayer');if(v.paused)v.play().catch(()=>{});else v.pause();}
+function nextEpisode(){const d=dramas[activeDrama];if(activeEpisode<d.eps){activeEpisode++;loadEpisode();playCurrent();}else toast('You reached the last episode');}
+function previousEpisode(){if(activeEpisode>1){activeEpisode--;loadEpisode();playCurrent();}else toast('This is the first episode');}
+document.getElementById('videoPlayer').addEventListener('ended',handleVideoCompleted);
+function closePlayer(){document.getElementById('videoPlayer').pause();document.getElementById('player').classList.remove('open');}
+function episodeToast(e){selectEpisode(e);}
+function saveDrama(i){if(!saved.includes(i)){saved.push(i);localStorage.setItem('dvSaved',JSON.stringify(saved));toast('Added to your watchlist ♡')}else toast('Already in your watchlist')}
+function showSaved(){
+  const valid=saved.filter(i=>typeof i==='number'&&i>=0&&i<dramas.length);
+  if(valid.length!==saved.length){saved=valid;localStorage.setItem('dvSaved',JSON.stringify(saved));}
+  let el=document.getElementById('savedGrid');
+  el.innerHTML=saved.map(i=>card(dramas[i],i)).join('');
+  document.getElementById('savedEmpty').style.display=saved.length?'none':'block';
+}
+function toast(msg){let t=document.getElementById('toast');t.textContent=msg;t.style.display='block';clearTimeout(window._dvToastTimer);window._dvToastTimer=setTimeout(()=>t.style.display='none',2300)}
+
+function adminAddDrama(){
+ const title=document.getElementById('adminTitle').value.trim();
+ const genre=document.getElementById('adminGenre').value.trim()||'Drama';
+ const desc=document.getElementById('adminDesc').value.trim();
+ const poster=document.getElementById('adminPoster').value.trim();
+ const eps=Math.max(1,Math.min(500,Number(document.getElementById('adminEpisodes').value)||1));
+ if(!title){toast('Please enter a drama title');return;}
+ dramas.unshift({id:'dv_'+Date.now()+'_'+Math.random().toString(36).slice(2,8),title,genre,eps,desc:desc||'A new drama on DramaVerse.',cls:'',badge:'NEW',poster});
+ persistDramas();
+ ['adminTitle','adminGenre','adminDesc','adminPoster'].forEach(id=>document.getElementById(id).value='');
+ document.getElementById('adminEpisodes').value=12;toast('Drama added to this device');
+}
+function showAdminDramas(){
+ const list=document.getElementById('adminDramaList');if(!list)return;
+ document.getElementById('adminCount').textContent=dramas.length+' titles';
+ list.innerHTML=dramas.map((d,i)=>`<div class="admin-row"><div><strong>${escapeHTML(d.title)}</strong><small>${escapeHTML(d.genre)} · ${d.eps} episodes</small></div><div class="admin-actions"><button onclick="adminEditDrama(${i})">Edit</button><button class="danger" onclick="adminDeleteDrama(${i})">Delete</button></div></div>`).join('');
+}
+function escapeHTML(s){return String(s||'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));}
+function adminEditDrama(i){
+ const d=dramas[i],title=prompt('Drama title:',d.title);if(title===null)return;
+ const genre=prompt('Genre:',d.genre);if(genre===null)return;
+ const desc=prompt('Description:',d.desc||'');if(desc===null)return;
+ const eps=prompt('Number of episodes:',d.eps);if(eps===null)return;
+ d.title=title.trim()||d.title;d.genre=genre.trim()||d.genre;d.desc=desc.trim();d.eps=Math.max(1,Math.min(500,Number(eps)||d.eps));
+ persistDramas();toast('Drama updated');
+}
+function adminDeleteDrama(i){
+ if(!confirm('Delete "'+dramas[i].title+'"?'))return;
+ dramas.splice(i,1);saved=saved.filter(x=>x!==i).map(x=>x>i?x-1:x);
+ localStorage.setItem('dvSaved',JSON.stringify(saved));persistDramas();toast('Drama deleted');
+}
+
+render();showAdminDramas();refreshUploadDrama();renderAdAdminUI();
+</script></body></html>
