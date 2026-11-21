@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1"><meta name="theme-color" content="#111014"><title>DramaVerse — AI Mini Dramas</title>
 <style>
-*{box-sizing:border-box}body{margin:0;background:#100f13;color:#f8f5fa;font-family:Inter,system-ui,Arial,sans-serif}header{padding:20px 18px 12px;display:flex;justify-content:space-between;align-items:center;position:sticky;top:0;background:#100f13ee;backdrop-filter:blur(10px);z-index:3}.logo{font-size:21px;font-weight:900;letter-spacing:-.6px}.logo span{color:#ff4b78}.avatar{background:#28232c;border:1px solid #453b48;border-radius:50%;width:36px;height:36px;display:grid;place-items:center}.wrap{max-width:900px;margin:auto;padding:0 16px 95px}.hero{height:400px;border-radius:22px;overflow:hidden;position:relative;background:linear-gradient(0deg,#100f13 2%,transparent 65%),linear-gradient(115deg,#52233e,#d45868 45%,#2a314e);margin:8px 0 24px;padding:22px;display:flex;align-items:flex-end}.hero:before{content:"✦";position:absolute;right:15%;top:18%;font-size:100px;color:#ffe7ef88}.hero-content{position:relative;z-index:1;max-width:440px}.eyebrow{color:#ff7998;font-size:11px;font-weight:800;letter-spacing:2px}.hero h1{font-size:36px;line-height:1.02;margin:9px 0}.hero p{color:#e7dfe7;font-size:14px;max-width:350px}.btn{border:0;border-radius:30px;padding:12px 18px;font-weight:800;cursor:pointer}.primary{background:#ff4b78;color:white}.secondary{background:#302b34;color:#fff;border:1px solid #554a57;margin-left:8px}.section-head{display:flex;justify-content:space-between;align-items:center;margin:24px 0 12px}.section-head h2{font-size:18px;margin:0}.see{font-size:12px;color:#ff7896}.chips{display:flex;gap:8px;overflow:auto;padding-bottom:7px}.chip{border:1px solid #3a333e;background:#1c1920;color:#ccc;border-radius:25px;padding:8px 14px;white-space:nowrap;font-size:12px}.chip.active{background:#ff4b78;border-color:#ff4b78;color:#fff}.grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}.card{background:#1a171e;border:1px solid #2a242e;border-radius:15px;overflow:hidden;cursor:pointer}.poster{height:190px;position:relative;display:flex;align-items:flex-end;padding:12px;background:linear-gradient(145deg,#55253f,#c85d76);background-size:cover;background-position:center}.poster:after{content:"✧";position:absolute;top:10px;right:14px;font-size:60px;color:#ffffff55}.p2{background:linear-gradient(145deg,#172d48,#4c86a4)}.p3{background:linear-gradient(145deg,#332447,#a35d8b)}.p4{background:linear-gradient(145deg,#49261f,#b36e43)}.p5{background:linear-gradient(145deg,#1f3d35,#5b977a)}.p6{background:linear-gradient(145deg,#30313e,#777a9b)}.tag{position:relative;z-index:1;background:#100f13b8;padding:5px 8px;border-radius:7px;font-size:10px}.card-info{padding:11px}.card-info h3{margin:0 0 5px;font-size:14px}.card-info p{margin:0;color:#a9a1ad;font-size:11px}.bottom{position:fixed;bottom:0;left:0;right:0;background:#151218f2;border-top:1px solid #2e2831;display:flex;justify-content:space-around;padding:12px 8px 18px;z-index:4}.navitem{font-size:11px;color:#aaa;text-align:center;cursor:pointer}.navitem b{display:block;font-size:18px;margin-bottom:3px}.navitem.sel{color:#ff4b78}.screen{display:none}.screen.active{display:block}.searchbox{width:100%;padding:13px 15px;background:#201c24;border:1px solid #39313e;border-radius:14px;color:white;margin:14px 0}.empty{color:#aaa;text-align:center;padding:40px 10px}.modal{position:fixed;inset:0;background:#09080beF;z-index:8;display:none;overflow:auto}.modal.open{display:block}.modal-inner{max-width:700px;margin:auto;padding:20px}.close{background:#29232e;color:white;border:0;border-radius:50%;width:38px;height:38px;font-size:20px;cursor:pointer}.playerbox{min-height:220px;background:#09080b;border-radius:18px;overflow:hidden;margin-top:18px;color:#f9e9f0;position:relative}.playerbox video{width:100%;max-height:70vh;aspect-ratio:9/16;object-fit:contain;background:#050505;display:block}.player-controls{display:flex;gap:8px;margin:12px 0}.player-controls button{flex:1;border:1px solid #39313e;border-radius:12px;padding:12px;background:#211d25;color:#fff;font-weight:700;cursor:pointer}.player-controls button:disabled{opacity:.35}.episode{width:100%;padding:14px;margin:7px 0;text-align:left;background:#211d25;color:white;border:1px solid #39313e;border-radius:12px;cursor:pointer}.episode small{display:block;color:#a9a0ad;margin-top:4px}.toast{position:fixed;bottom:85px;left:50%;transform:translateX(-50%);background:#39313e;padding:10px 15px;border-radius:20px;display:none;z-index:12;font-size:12px;max-width:90vw;text-align:center}
+*{box-sizing:border-box}body{margin:0;background:#100f13;color:#f8f5fa;font-family:Inter,system-ui,Arial,sans-serif}header{padding:16px 18px 12px;display:flex;justify-content:space-between;align-items:center;gap:10px;position:sticky;top:0;background:#100f13ee;backdrop-filter:blur(10px);z-index:3}.brand-wrap{display:flex;align-items:center;gap:9px;min-width:0}.brand-logo-img{width:30px;height:30px;border-radius:9px;object-fit:cover;border:1px solid #453b48;display:none;flex-shrink:0}.logo{font-size:20px;font-weight:900;letter-spacing:-.6px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.logo span{color:#ff4b78}.header-right{display:flex;align-items:center;gap:8px;flex-shrink:0}.role-pill{font-size:11px;font-weight:800;padding:5px 10px;border-radius:99px;background:#241e2a;border:1px solid #44384f;color:#e7dfe7;cursor:pointer;white-space:nowrap}.role-pill.admin{background:#ff4b7826;border-color:#ff4b7888;color:#ff8ea9}.avatar{background:#28232c;border:1px solid #453b48;border-radius:50%;width:36px;height:36px;display:grid;place-items:center;cursor:pointer;flex-shrink:0;overflow:hidden}.avatar img{width:100%;height:100%;object-fit:cover;display:none}.wrap{max-width:900px;margin:auto;padding:0 16px 95px}.hero{height:400px;border-radius:22px;overflow:hidden;position:relative;background:linear-gradient(0deg,#100f13 2%,transparent 65%),linear-gradient(115deg,#52233e,#d45868 45%,#2a314e);margin:8px 0 24px;padding:22px;display:flex;align-items:flex-end}.hero:before{content:"✦";position:absolute;right:15%;top:18%;font-size:100px;color:#ffe7ef88}.hero-content{position:relative;z-index:1;max-width:440px}.eyebrow{color:#ff7998;font-size:11px;font-weight:800;letter-spacing:2px}.hero h1{font-size:36px;line-height:1.02;margin:9px 0}.hero p{color:#e7dfe7;font-size:14px;max-width:350px}.btn{border:0;border-radius:30px;padding:12px 18px;font-weight:800;cursor:pointer}.primary{background:#ff4b78;color:white}.secondary{background:#302b34;color:#fff;border:1px solid #554a57;margin-left:8px}.section-head{display:flex;justify-content:space-between;align-items:center;margin:24px 0 12px}.section-head h2{font-size:18px;margin:0}.see{font-size:12px;color:#ff7896}.chips{display:flex;gap:8px;overflow:auto;padding-bottom:7px}.chip{border:1px solid #3a333e;background:#1c1920;color:#ccc;border-radius:25px;padding:8px 14px;white-space:nowrap;font-size:12px}.chip.active{background:#ff4b78;border-color:#ff4b78;color:#fff}.grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}.card{background:#1a171e;border:1px solid #2a242e;border-radius:15px;overflow:hidden;cursor:pointer}.poster{height:190px;position:relative;display:flex;align-items:flex-end;padding:12px;background:linear-gradient(145deg,#55253f,#c85d76);background-size:cover;background-position:center}.poster:after{content:"✧";position:absolute;top:10px;right:14px;font-size:60px;color:#ffffff55}.p2{background:linear-gradient(145deg,#172d48,#4c86a4)}.p3{background:linear-gradient(145deg,#332447,#a35d8b)}.p4{background:linear-gradient(145deg,#49261f,#b36e43)}.p5{background:linear-gradient(145deg,#1f3d35,#5b977a)}.p6{background:linear-gradient(145deg,#30313e,#777a9b)}.tag{position:relative;z-index:1;background:#100f13b8;padding:5px 8px;border-radius:7px;font-size:10px}.card-info{padding:11px}.card-info h3{margin:0 0 5px;font-size:14px}.card-info p{margin:0;color:#a9a1ad;font-size:11px}.bottom{position:fixed;bottom:0;left:0;right:0;background:#151218f2;border-top:1px solid #2e2831;display:flex;justify-content:space-around;padding:12px 8px 18px;z-index:4}.navitem{font-size:11px;color:#aaa;text-align:center;cursor:pointer}.navitem b{display:block;font-size:18px;margin-bottom:3px}.navitem.sel{color:#ff4b78}.screen{display:none}.screen.active{display:block}.searchbox{width:100%;padding:13px 15px;background:#201c24;border:1px solid #39313e;border-radius:14px;color:white;margin:10px 0}.empty{color:#aaa;text-align:center;padding:40px 10px}.modal{position:fixed;inset:0;background:#09080beF;z-index:8;display:none;overflow:auto}.modal.open{display:block}.modal-inner{max-width:700px;margin:auto;padding:20px}.close{background:#29232e;color:white;border:0;border-radius:50%;width:38px;height:38px;font-size:20px;cursor:pointer}.playerbox{min-height:220px;background:#09080b;border-radius:18px;overflow:hidden;margin-top:18px;color:#f9e9f0;position:relative}.playerbox video{width:100%;max-height:70vh;aspect-ratio:9/16;object-fit:contain;background:#050505;display:block}.player-controls{display:flex;gap:8px;margin:12px 0}.player-controls button{flex:1;border:1px solid #39313e;border-radius:12px;padding:12px;background:#211d25;color:#fff;font-weight:700;cursor:pointer}.player-controls button:disabled{opacity:.35}.episode{width:100%;padding:14px;margin:7px 0;text-align:left;background:#211d25;color:white;border:1px solid #39313e;border-radius:12px;cursor:pointer}.episode small{display:block;color:#a9a0ad;margin-top:4px}.toast{position:fixed;bottom:85px;left:50%;transform:translateX(-50%);background:#39313e;padding:10px 15px;border-radius:20px;display:none;z-index:12;font-size:12px;max-width:90vw;text-align:center}
 @media(min-width:700px){.grid{grid-template-columns:repeat(3,minmax(0,1fr))}.poster{height:230px}.hero{height:440px}}
 .admin-row{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:12px;margin:8px 0;background:#1a171e;border:1px solid #302934;border-radius:12px}.admin-row strong{font-size:13px}.admin-row small{display:block;color:#aaa;margin-top:4px}.admin-actions{display:flex;gap:6px}.admin-actions button{border:1px solid #554a57;background:#302b34;color:#fff;border-radius:9px;padding:8px 10px;cursor:pointer}.admin-actions .danger{border-color:#8a344b;color:#ff9bb2}
 .ad-label{display:block;font-size:12px;color:#d6ceda;margin-top:10px;font-weight:700}
@@ -12,6 +12,10 @@
 .stat-box span{display:block;font-size:11px;color:#a9a0ad}
 .stat-box strong{display:block;font-size:17px;margin-top:4px;color:#fff}
 .demo-banner{background:#2b1924;border:1px solid #75344b;color:#ffb6c9;border-radius:12px;padding:10px 12px;font-size:12px;line-height:1.5;margin:10px 0}
+.email-preview{background:#141117;border:1px solid #32293a;border-radius:14px;padding:14px;margin-top:12px;font-size:12px;line-height:1.6}
+.email-preview strong{color:#ff8ea9}
+.logo-preview-box{display:flex;align-items:center;gap:12px;background:#141117;border:1px solid #2e2733;border-radius:12px;padding:10px 12px;margin-top:8px}
+.logo-preview-box img{width:46px;height:46px;border-radius:11px;object-fit:cover;border:1px solid #453b48;display:none}
 .ad-modal{position:fixed;inset:0;background:#070609f5;z-index:11;display:none;align-items:center;justify-content:center;padding:18px}
 .ad-modal.open{display:flex}
 .ad-card{width:100%;max-width:440px;background:#19151e;border:1px solid #3e3346;border-radius:20px;padding:20px;text-align:center}
@@ -19,19 +23,62 @@
 .ad-visual{margin:14px 0;background:#0d0b10;border:1px dashed #473b50;border-radius:14px;padding:14px;min-height:150px;display:flex;flex-direction:column;align-items:center;justify-content:center}
 .ad-visual video{width:100%;max-height:240px;border-radius:10px;background:#000}
 </style></head><body>
-<header><div class="logo">Drama<span>Verse</span> ✦</div><div class="avatar">👤</div></header><main class="wrap">
-<div id="home" class="screen active"><section class="hero"><div class="hero-content"><div class="eyebrow">EXCLUSIVE MINI DRAMA</div><h1>My Contract<br>With The CEO</h1><p>One contract. Two secrets. A love neither of them planned.</p><button class="btn primary" onclick="openDrama(0)">▶ Watch now</button><button class="btn secondary" onclick="saveDrama(0)">♡ Save</button></div></section>
+<header>
+  <div class="brand-wrap">
+    <img id="headerBrandLogo" class="brand-logo-img" alt="App Logo">
+    <div class="logo" id="headerBrandTitle">Drama<span>Verse</span> ✦</div>
+  </div>
+  <div class="header-right">
+    <button class="role-pill" id="headerRoleBadge" onclick="showScreen('profile', document.getElementById('navProfile'))">Sign in</button>
+    <div class="avatar" onclick="showScreen('profile', document.getElementById('navProfile'))" title="Account &amp; Gmail Login">
+      <span id="headerAvatarEmoji">👤</span>
+      <img id="headerAvatarImg" alt="Profile Logo">
+    </div>
+  </div>
+</header>
+<main class="wrap">
+<div id="home" class="screen active"><section class="hero"><div class="hero-content"><div class="eyebrow">EXCLUSIVE MINI DRAMA</div><h1 id="heroBrandHeadline">My Contract<br>With The CEO</h1><p id="heroBrandSubtext">One contract. Two secrets. A love neither of them planned.</p><button class="btn primary" onclick="openDrama(0)">▶ Watch now</button><button class="btn secondary" onclick="saveDrama(0)">♡ Save</button></div></section>
 <div class="section-head"><h2>Browse by genre</h2></div><div class="chips" id="genres"><button class="chip active" onclick="filterGenre('All',this)">All</button><button class="chip" onclick="filterGenre('Romance',this)">Romance</button><button class="chip" onclick="filterGenre('Revenge',this)">Revenge</button><button class="chip" onclick="filterGenre('Fantasy',this)">Fantasy</button><button class="chip" onclick="filterGenre('Thriller',this)">Thriller</button></div>
 <div class="section-head"><h2>Trending dramas</h2><span class="see">Short episodes · Demo</span></div><div class="grid" id="dramaGrid"></div></div>
 <div id="search" class="screen"><div class="section-head"><h2>Search dramas</h2></div><input class="searchbox" id="searchInput" placeholder="Search title or genre…" oninput="render(this.value)"><div class="grid" id="searchGrid"></div></div>
 <div id="saved" class="screen"><div class="section-head"><h2>My watchlist</h2></div><div class="grid" id="savedGrid"></div><div class="empty" id="savedEmpty">Saved dramas will appear here.</div></div>
 
 <div id="admin" class="screen">
-  <div class="section-head"><h2>Admin Dashboard</h2><span class="see">LOCAL DEMO</span></div>
+  <div class="section-head"><h2>Admin Panel</h2><span class="see" id="adminSessionEmail">ADMIN ONLY</span></div>
 
   <div class="card" style="padding:16px;margin-bottom:14px;cursor:default">
-    <h3 style="margin-top:0">Advertisement Settings</h3>
-    <p style="color:#aaa;font-size:12px;line-height:1.5;margin-top:0">Configure automatic ad triggers after completed videos. Changes save immediately to this browser.</p>
+    <h3 style="margin-top:0">App Logo &amp; Branding Setup</h3>
+    <p style="color:#aaa;font-size:12px;line-height:1.5;margin-top:0">Ilagay dito ang app name, logo/icon image, at featured banner text. Naka-save sa device mo at hindi nakikita ng normal viewers.</p>
+
+    <label class="ad-label" for="brandAppNameInput">App Name</label>
+    <input class="searchbox" id="brandAppNameInput" placeholder="e.g. DramaVerse">
+
+    <label class="ad-label" for="brandLogoFileInput">Upload Logo / Icon Image (PNG/JPG)</label>
+    <input class="searchbox" id="brandLogoFileInput" type="file" accept="image/*" onchange="handleLogoFileUpload(this)">
+
+    <label class="ad-label" for="brandLogoUrlInput">Logo Image URL (optional)</label>
+    <input class="searchbox" id="brandLogoUrlInput" placeholder="https://... (optional if uploaded)">
+
+    <label class="ad-label" for="brandHeroTitleInput">Featured Hero Title</label>
+    <input class="searchbox" id="brandHeroTitleInput" placeholder="e.g. My Contract With The CEO">
+
+    <label class="ad-label" for="brandHeroDescInput">Featured Hero Subtitle</label>
+    <input class="searchbox" id="brandHeroDescInput" placeholder="Short description on Home banner">
+
+    <div class="logo-preview-box">
+      <img id="adminLogoPreviewImg" alt="Logo Preview">
+      <span id="adminLogoPreviewText" style="font-size:12px;color:#b8b0be">No custom logo uploaded yet (default mark active)</span>
+    </div>
+
+    <div style="display:flex;gap:8px;flex-wrap:wrap;margin-top:12px">
+      <button class="btn primary" style="flex:1;min-width:150px" onclick="saveBrandingSettings()">💾 Save Branding</button>
+      <button class="btn secondary" style="margin-left:0" onclick="resetBrandingSettings()">↺ Reset Logo &amp; Name</button>
+    </div>
+  </div>
+
+  <div class="card" style="padding:16px;margin:14px 0;cursor:default">
+    <h3 style="margin-top:0">Ads Setup</h3>
+    <p style="color:#aaa;font-size:12px;line-height:1.5;margin-top:0">Configure automatic ad triggers after completed videos and store your AdMob reference IDs inside Admin Panel.</p>
     <label class="ad-toggle">
       <input type="checkbox" id="adEnabledToggle" onchange="saveAdSettings()">
       <span>Enable / Disable Advertisements</span>
@@ -48,6 +95,14 @@
       <option value="5">Every 5 completed videos</option>
       <option value="10">Every 10 completed videos</option>
     </select>
+
+    <label class="ad-label" for="admobAppIdInput">AdMob App ID (for Android APK build)</label>
+    <input class="searchbox" id="admobAppIdInput" placeholder="ca-app-pub-XXXXXXXXXXXXXXXX~YYYYYYYYYY">
+
+    <label class="ad-label" for="admobRewardedIdInput">AdMob Interstitial / Rewarded Unit ID (optional)</label>
+    <input class="searchbox" id="admobRewardedIdInput" placeholder="ca-app-pub-XXXXXXXXXXXXXXXX/ZZZZZZZZZZ">
+
+    <button class="btn secondary" style="margin-left:0;width:100%;margin-top:4px" onclick="saveAdMobIds()">💾 Save AdMob Reference IDs</button>
   </div>
 
   <div class="card" style="padding:16px;margin:14px 0;cursor:default">
@@ -84,10 +139,48 @@
   </div>
   <div class="section-head"><h2>Manage dramas</h2><span class="see" id="adminCount"></span></div>
   <div id="adminDramaList"></div>
-  <p style="color:#aaa;font-size:12px;line-height:1.6">Demo admin only: changes are saved in this browser on this device. There is no secure login, cloud database, or shared publishing yet.</p>
 </div>
-<div id="profile" class="screen"><div class="section-head"><h2>My Profile</h2></div><div class="card" style="padding:22px;margin-top:12px;cursor:default"><div style="font-size:40px">👤</div><h3>DramaVerse Viewer</h3><p style="color:#aaa;font-size:13px">Demo profile · Sign-in feature can be added later.</p></div><div class="section-head"><h2>App info</h2></div><p style="color:#aaa;font-size:13px;line-height:1.7">DramaVerse is a demo mini-drama streaming interface. The titles and artwork are sample concepts; actual licensed videos and accounts are not connected yet.</p></div>
-</main><nav class="bottom"><div class="navitem sel" onclick="showScreen('home',this)"><b>⌂</b>Home</div><div class="navitem" onclick="showScreen('search',this)"><b>⌕</b>Search</div><div class="navitem" onclick="showScreen('saved',this)"><b>♡</b>Saved</div><div class="navitem" onclick="showScreen('profile',this)"><b>◉</b>Profile</div><div class="navitem" onclick="showScreen('admin',this)"><b>⚙</b>Admin</div></nav>
+
+<div id="profile" class="screen">
+  <div class="section-head"><h2>Account &amp; Gmail Sign-In</h2><span class="see" id="accountRoleTag">VIEWER</span></div>
+  <div class="card" style="padding:20px;margin-top:12px;cursor:default">
+    <div style="display:flex;align-items:center;gap:12px">
+      <div style="font-size:38px">👤</div>
+      <div>
+        <h3 id="profileName" style="margin:0">DramaVerse Guest</h3>
+        <p id="profileEmailText" style="color:#aaa;font-size:12px;margin:4px 0 0">Not signed in yet · Enter your Gmail below</p>
+      </div>
+    </div>
+
+    <label class="ad-label" for="loginDisplayName">Display Name (optional)</label>
+    <input class="searchbox" id="loginDisplayName" placeholder="e.g. Viewer Name">
+
+    <label class="ad-label" for="loginGmailInput">Gmail Address</label>
+    <input class="searchbox" id="loginGmailInput" type="email" placeholder="name@gmail.com">
+
+    <div style="display:flex;gap:8px;flex-wrap:wrap;margin-top:6px">
+      <button class="btn primary" style="flex:1;min-width:160px" onclick="handleGmailSignIn()">✦ Continue with Gmail</button>
+      <button class="btn secondary" style="margin-left:0" onclick="handleSignOut()">Sign out</button>
+    </div>
+
+    <div class="email-preview" id="welcomeEmailBox">
+      <strong>Welcome / Account Email Template</strong><br>
+      Kapag nag-login o nag-create ng account gamit ang Gmail, dito makikita ang welcome confirmation summary. Para makarating ang totoong email sa Gmail inbox ng user, ikonekta ang backend/EmailJS endpoint sa <code>EMAIL_WEBHOOK_URL</code>.
+    </div>
+  </div>
+
+  <div class="section-head"><h2>App info</h2></div>
+  <p id="appInfoSummary" style="color:#aaa;font-size:13px;line-height:1.7">DramaVerse is an AI mini-drama streaming app. Sign in with your Gmail to watch and manage your watchlist.</p>
+</div>
+</main>
+
+<nav class="bottom">
+  <div class="navitem sel" id="navHome" onclick="showScreen('home',this)"><b>⌂</b>Home</div>
+  <div class="navitem" id="navSearch" onclick="showScreen('search',this)"><b>⌕</b>Search</div>
+  <div class="navitem" id="navSaved" onclick="showScreen('saved',this)"><b>♡</b>Saved</div>
+  <div class="navitem" id="navProfile" onclick="showScreen('profile',this)"><b>◉</b>Profile</div>
+  <div class="navitem" id="navAdmin" style="display:none" onclick="showScreen('admin',this)"><b>⚙</b>Admin</div>
+</nav>
 
 <div class="modal" id="player"><div class="modal-inner"><button class="close" onclick="closePlayer()">×</button><div class="playerbox"><video id="videoPlayer" controls playsinline preload="metadata"><source src="https://storage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4" type="video/mp4">Your browser does not support video playback.</video></div><div class="player-controls"><button onclick="previousEpisode()">⏮ Previous</button><button onclick="togglePlay()">▶ / ⏸ Play</button><button onclick="nextEpisode()">Next ⏭</button></div><h2 id="playerTitle">Drama title</h2><p style="color:#aaa;font-size:13px" id="episodeLabel">Select an episode</p><div id="episodeList"></div></div></div>
 
@@ -103,6 +196,270 @@
 
 <div class="toast" id="toast"></div>
 <script>
+const ADMIN_GMAILS=['harryequibal0@gmail.com'];
+const EMAIL_WEBHOOK_URL='';
+
+const DEFAULT_BRANDING={
+  appName:'DramaVerse',
+  logoSrc:'',
+  heroTitle:'My Contract\nWith The CEO',
+  heroDesc:'One contract. Two secrets. A love neither of them planned.'
+};
+
+function normalizeGmail(email){return String(email||'').trim().toLowerCase();}
+function isAdminGmail(email){return ADMIN_GMAILS.includes(normalizeGmail(email));}
+function escapeHTML(s){return String(s||'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));}
+
+function loadBranding(){
+  try{
+    const raw=JSON.parse(localStorage.getItem('dvBranding')||'null');
+    if(raw&&typeof raw==='object'){
+      return {
+        appName:String(raw.appName||DEFAULT_BRANDING.appName).trim()||DEFAULT_BRANDING.appName,
+        logoSrc:typeof raw.logoSrc==='string'?raw.logoSrc:'',
+        heroTitle:typeof raw.heroTitle==='string'&&raw.heroTitle.trim()?raw.heroTitle:DEFAULT_BRANDING.heroTitle,
+        heroDesc:typeof raw.heroDesc==='string'&&raw.heroDesc.trim()?raw.heroDesc:DEFAULT_BRANDING.heroDesc
+      };
+    }
+  }catch(e){}
+  return {...DEFAULT_BRANDING};
+}
+
+let branding=loadBranding();
+
+function applyBrandingUI(){
+  const cleanName=branding.appName||'DramaVerse';
+  document.title=cleanName+' — AI Mini Dramas';
+
+  const headerTitleEl=document.getElementById('headerBrandTitle');
+  if(headerTitleEl){
+    const half=Math.ceil(cleanName.length/2);
+    const firstPart=cleanName.slice(0,half);
+    const secondPart=cleanName.slice(half);
+    headerTitleEl.innerHTML=`${escapeHTML(firstPart)}<span>${escapeHTML(secondPart)}</span> ✦`;
+  }
+
+  const hLogo=document.getElementById('headerBrandLogo');
+  const avImg=document.getElementById('headerAvatarImg');
+  const avEmoji=document.getElementById('headerAvatarEmoji');
+  const prevImg=document.getElementById('adminLogoPreviewImg');
+  const prevText=document.getElementById('adminLogoPreviewText');
+
+  const hasValidLogo=Boolean(branding.logoSrc && (branding.logoSrc.startsWith('data:image/') || branding.logoSrc.startsWith('https://') || branding.logoSrc.startsWith('http://')));
+  if(hasValidLogo){
+    if(hLogo){hLogo.src=branding.logoSrc;hLogo.style.display='block';}
+    if(avImg){avImg.src=branding.logoSrc;avImg.style.display='block';}
+    if(avEmoji){avEmoji.style.display='none';}
+    if(prevImg){prevImg.src=branding.logoSrc;prevImg.style.display='block';}
+    if(prevText){prevText.textContent='Custom logo active';}
+  }else{
+    if(hLogo){hLogo.removeAttribute('src');hLogo.style.display='none';}
+    if(avImg){avImg.removeAttribute('src');avImg.style.display='none';}
+    if(avEmoji){avEmoji.style.display='block';}
+    if(prevImg){prevImg.removeAttribute('src');prevImg.style.display='none';}
+    if(prevText){prevText.textContent='No custom logo active (default mark shown)';}
+  }
+
+  const heroH1=document.getElementById('heroBrandHeadline');
+  const heroP=document.getElementById('heroBrandSubtext');
+  if(heroH1)heroH1.innerHTML=escapeHTML(branding.heroTitle).replace(/\n/g,'<br>');
+  if(heroP)heroP.textContent=branding.heroDesc;
+
+  const infoEl=document.getElementById('appInfoSummary');
+  if(infoEl)infoEl.textContent=`${cleanName} is an AI mini-drama streaming app. Sign in with your Gmail to watch and manage your watchlist.`;
+
+  const nameInput=document.getElementById('brandAppNameInput');
+  const urlInput=document.getElementById('brandLogoUrlInput');
+  const hTitleInput=document.getElementById('brandHeroTitleInput');
+  const hDescInput=document.getElementById('brandHeroDescInput');
+  if(nameInput&&document.activeElement!==nameInput)nameInput.value=cleanName;
+  if(urlInput&&document.activeElement!==urlInput)urlInput.value=branding.logoSrc.startsWith('http')?branding.logoSrc:'';
+  if(hTitleInput&&document.activeElement!==hTitleInput)hTitleInput.value=branding.heroTitle.replace(/\n/g,' ');
+  if(hDescInput&&document.activeElement!==hDescInput)hDescInput.value=branding.heroDesc;
+}
+
+function handleLogoFileUpload(inputEl){
+  const file=inputEl?.files?.[0];
+  if(!file)return;
+  if(!file.type.startsWith('image/')){toast('Pumili ng image file (PNG/JPG)');return;}
+  if(file.size>2*1024*1024){toast('Pumili ng image na mas mababa sa 2 MB');return;}
+  const reader=new FileReader();
+  reader.onload=()=>{
+    branding.logoSrc=String(reader.result||'');
+    applyBrandingUI();
+    toast('Logo preview ready — tap Save Branding');
+  };
+  reader.readAsDataURL(file);
+}
+
+function saveBrandingSettings(){
+  const nameVal=(document.getElementById('brandAppNameInput')?.value||'').trim()||DEFAULT_BRANDING.appName;
+  const urlVal=(document.getElementById('brandLogoUrlInput')?.value||'').trim();
+  const hTitleVal=(document.getElementById('brandHeroTitleInput')?.value||'').trim()||DEFAULT_BRANDING.heroTitle;
+  const hDescVal=(document.getElementById('brandHeroDescInput')?.value||'').trim()||DEFAULT_BRANDING.heroDesc;
+
+  let nextLogo=branding.logoSrc;
+  if(urlVal){
+    if(urlVal.startsWith('https://')||urlVal.startsWith('http://')){
+      nextLogo=urlVal;
+    }else{
+      toast('Gamitin ang https:// URL para sa logo');
+      return;
+    }
+  }
+
+  branding={
+    appName:nameVal,
+    logoSrc:nextLogo,
+    heroTitle:hTitleVal,
+    heroDesc:hDescVal
+  };
+  try{
+    localStorage.setItem('dvBranding',JSON.stringify(branding));
+  }catch(e){
+    toast('Masyadong malaki ang logo file para sa local storage');
+    return;
+  }
+  applyBrandingUI();
+  toast('Branding & logo saved');
+}
+
+function resetBrandingSettings(){
+  branding={...DEFAULT_BRANDING};
+  localStorage.removeItem('dvBranding');
+  const fInput=document.getElementById('brandLogoFileInput');
+  if(fInput)fInput.value='';
+  applyBrandingUI();
+  toast('Reset to default DramaVerse branding');
+}
+
+function loadSession(){
+  try{
+    const raw=JSON.parse(localStorage.getItem('dvSession')||'null');
+    if(raw&&raw.email){
+      return {email:normalizeGmail(raw.email),name:String(raw.name||'').trim()};
+    }
+  }catch(e){}
+  return null;
+}
+
+let currentSession=loadSession();
+
+function buildWelcomeEmailHTML(email,name){
+  const safeName=escapeHTML(name||email.split('@')[0]||'Viewer');
+  const safeEmail=escapeHTML(email);
+  const appTitle=escapeHTML(branding.appName||'DramaVerse');
+  const roleLabel=isAdminGmail(email)?'Admin Creator':'Viewer';
+  return `
+    <div style="border-left:3px solid #ff4b78;padding-left:10px">
+      <strong>Subject:</strong> Welcome to ${appTitle}, ${safeName}! ✦<br>
+      <strong>To:</strong> ${safeEmail}<br>
+      <strong>Account Type:</strong> ${roleLabel}<br>
+      <p style="margin:8px 0 0;color:#d6ceda">Hi ${safeName}, salamat sa pag-sign in sa <strong>${appTitle}</strong> gamit ang <strong>${safeEmail}</strong>.</p>
+    </div>
+  `;
+}
+
+async function sendAccountWelcomeEmail(email,name){
+  const box=document.getElementById('welcomeEmailBox');
+  if(box){
+    box.innerHTML=buildWelcomeEmailHTML(email,name)+`<div style="margin-top:8px;color:#9e95a6">Status: ${EMAIL_WEBHOOK_URL?'Sending email…':'Welcome template ready (add backend/EmailJS URL in EMAIL_WEBHOOK_URL to send real inbox emails).'}</div>`;
+  }
+  if(!EMAIL_WEBHOOK_URL)return;
+  try{
+    await fetch(EMAIL_WEBHOOK_URL,{
+      method:'POST',
+      headers:{'Content-Type':'application/json'},
+      body:JSON.stringify({to_email:email,display_name:name||email.split('@')[0],app_name:branding.appName||'DramaVerse'})
+    });
+    if(box){
+      box.innerHTML=buildWelcomeEmailHTML(email,name)+`<div style="margin-top:8px;color:#7be0a6">Status: Welcome email sent to ${escapeHTML(email)}.</div>`;
+    }
+  }catch(e){
+    if(box){
+      box.innerHTML=buildWelcomeEmailHTML(email,name)+`<div style="margin-top:8px;color:#ff9bb2">Status: Could not reach email endpoint.</div>`;
+    }
+  }
+}
+
+function applyAuthUI(){
+  const adminNav=document.getElementById('navAdmin');
+  const adminScreen=document.getElementById('admin');
+  const badge=document.getElementById('headerRoleBadge');
+  const roleTag=document.getElementById('accountRoleTag');
+  const pName=document.getElementById('profileName');
+  const pEmail=document.getElementById('profileEmailText');
+  const adminEmailEl=document.getElementById('adminSessionEmail');
+  const nameInput=document.getElementById('loginDisplayName');
+  const emailInput=document.getElementById('loginGmailInput');
+  const appLabel=branding.appName||'DramaVerse';
+
+  if(currentSession&&currentSession.email){
+    const admin=isAdminGmail(currentSession.email);
+    const labelName=currentSession.name||(admin?appLabel+' Admin':appLabel+' Viewer');
+    if(adminNav)adminNav.style.display=admin?'block':'none';
+    if(!admin&&adminScreen&&adminScreen.classList.contains('active')){
+      showScreen('home',document.getElementById('navHome'));
+    }
+    if(badge){
+      badge.textContent=admin?'⚙ Admin':'◉ Viewer';
+      badge.className='role-pill'+(admin?' admin':'');
+    }
+    if(roleTag)roleTag.textContent=admin?'ADMIN AUTO-DETECTED':'VIEWER ACCOUNT';
+    if(pName)pName.textContent=labelName;
+    if(pEmail)pEmail.textContent=currentSession.email;
+    if(adminEmailEl)adminEmailEl.textContent=currentSession.email;
+    if(nameInput&&!nameInput.value)nameInput.value=currentSession.name||'';
+    if(emailInput&&!emailInput.value)emailInput.value=currentSession.email;
+  }else{
+    if(adminNav)adminNav.style.display='none';
+    if(adminScreen&&adminScreen.classList.contains('active')){
+      showScreen('home',document.getElementById('navHome'));
+    }
+    if(badge){
+      badge.textContent='Sign in';
+      badge.className='role-pill';
+    }
+    if(roleTag)roleTag.textContent='GUEST';
+    if(pName)pName.textContent=appLabel+' Guest';
+    if(pEmail)pEmail.textContent='Not signed in yet · Enter your Gmail below';
+    if(adminEmailEl)adminEmailEl.textContent='ADMIN ONLY';
+  }
+}
+
+function handleGmailSignIn(){
+  const rawEmail=document.getElementById('loginGmailInput')?.value||'';
+  const name=document.getElementById('loginDisplayName')?.value.trim()||'';
+  const email=normalizeGmail(rawEmail);
+  if(!email||!email.includes('@')){
+    toast('Ilagay muna ang tamang Gmail address');
+    return;
+  }
+  currentSession={email,name};
+  localStorage.setItem('dvSession',JSON.stringify(currentSession));
+  applyAuthUI();
+  sendAccountWelcomeEmail(email,name);
+
+  if(isAdminGmail(email)){
+    toast('Admin Gmail detected — Admin Panel unlocked');
+    showScreen('admin',document.getElementById('navAdmin'));
+  }else{
+    toast('Signed in · Welcome!');
+    showScreen('home',document.getElementById('navHome'));
+  }
+}
+
+function handleSignOut(){
+  currentSession=null;
+  localStorage.removeItem('dvSession');
+  const nameInput=document.getElementById('loginDisplayName');
+  const emailInput=document.getElementById('loginGmailInput');
+  if(nameInput)nameInput.value='';
+  if(emailInput)emailInput.value='';
+  applyAuthUI();
+  toast('Signed out');
+}
+
 const dramas=[
 {title:'My Contract With The CEO',genre:'Romance',eps:24,desc:'A fake marriage becomes a real love story.',cls:'',badge:'HOT'},
 {title:'Reborn To Take Revenge',genre:'Revenge',eps:30,desc:'She returns with a plan to expose them all.',cls:'p2',badge:'NEW'},
@@ -115,8 +472,7 @@ let currentFilter='All',saved=JSON.parse(localStorage.getItem('dvSaved')||'[]');
 try { const stored=JSON.parse(localStorage.getItem('dvDramas')||'null'); if(Array.isArray(stored)&&stored.length) dramas.splice(0,dramas.length,...stored); } catch(e){}
 dramas.forEach((d,i)=>{if(!d.id)d.id='dv_legacy_'+i+'_'+Math.random().toString(36).slice(2,7);});
 
-// Advertisement Settings & Demo Earnings State
-const DEFAULT_AD_SETTINGS={enabled:true,type:'both',frequency:3};
+const DEFAULT_AD_SETTINGS={enabled:true,type:'both',frequency:3,appId:'',unitId:''};
 const DEFAULT_AD_STATS={completedVideos:0,adImpressions:0,demoEstimatedPhp:0,cycleCompleted:0,bothToggleIndex:0};
 const DEMO_RATE_PER_IMPRESSION_PHP=0.45;
 
@@ -131,7 +487,13 @@ function loadAdSettings(){
     if(raw&&typeof raw==='object'){
       const freq=[3,5,10].includes(Number(raw.frequency))?Number(raw.frequency):3;
       const type=['fullscreen','video','both'].includes(raw.type)?raw.type:'both';
-      return {enabled:Boolean(raw.enabled),type,frequency:freq};
+      return {
+        enabled:Boolean(raw.enabled),
+        type,
+        frequency:freq,
+        appId:String(raw.appId||'').trim(),
+        unitId:String(raw.unitId||'').trim()
+      };
     }
   }catch(e){}
   return {...DEFAULT_AD_SETTINGS};
@@ -153,14 +515,26 @@ function loadAdStats(){
   return {...DEFAULT_AD_STATS};
 }
 
+function persistAdSettingsOnly(){
+  localStorage.setItem('dvAdSettings',JSON.stringify(adSettings));
+  renderAdAdminUI();
+}
+
 function saveAdSettings(){
   const enabled=Boolean(document.getElementById('adEnabledToggle')?.checked);
   const type=document.getElementById('adTypeSelect')?.value||'both';
   const frequency=[3,5,10].includes(Number(document.getElementById('adFrequencySelect')?.value))?Number(document.getElementById('adFrequencySelect').value):3;
-  adSettings={enabled,type,frequency};
-  localStorage.setItem('dvAdSettings',JSON.stringify(adSettings));
-  renderAdAdminUI();
-  toast('Advertisement settings saved');
+  adSettings={...adSettings,enabled,type,frequency};
+  persistAdSettingsOnly();
+  toast('Ads setup saved');
+}
+
+function saveAdMobIds(){
+  const appId=(document.getElementById('admobAppIdInput')?.value||'').trim();
+  const unitId=(document.getElementById('admobRewardedIdInput')?.value||'').trim();
+  adSettings={...adSettings,appId,unitId};
+  persistAdSettingsOnly();
+  toast('AdMob IDs saved');
 }
 
 function resetAdStats(){
@@ -180,9 +554,14 @@ function renderAdAdminUI(){
   const toggle=document.getElementById('adEnabledToggle');
   const typeSel=document.getElementById('adTypeSelect');
   const freqSel=document.getElementById('adFrequencySelect');
+  const appIdIn=document.getElementById('admobAppIdInput');
+  const unitIdIn=document.getElementById('admobRewardedIdInput');
+
   if(toggle)toggle.checked=adSettings.enabled;
   if(typeSel)typeSel.value=adSettings.type;
   if(freqSel)freqSel.value=String(adSettings.frequency);
+  if(appIdIn&&document.activeElement!==appIdIn)appIdIn.value=adSettings.appId||'';
+  if(unitIdIn&&document.activeElement!==unitIdIn)unitIdIn.value=adSettings.unitId||'';
 
   const cEl=document.getElementById('statCompletedVideos');
   const iEl=document.getElementById('statAdImpressions');
@@ -193,21 +572,15 @@ function renderAdAdminUI(){
   if(cEl)cEl.textContent=String(adStats.completedVideos);
   if(iEl)iEl.textContent=String(adStats.adImpressions);
   if(pEl)pEl.textContent='₱'+Number(adStats.demoEstimatedPhp||0).toFixed(2);
-  if(sEl)sEl.textContent='Demo Mode · No Real Payout';
+  if(sEl)sEl.textContent=adSettings.appId?'AdMob ID Saved · Demo Preview':'Demo Mode · No Real Payout';
   if(oEl){
-    oEl.textContent=`Status: ${adSettings.enabled?'Enabled':'Disabled'} · Format: ${formatAdTypeLabel(adSettings.type)} · Trigger: Every ${adSettings.frequency} completed videos (${adStats.cycleCompleted}/${adSettings.frequency} in current cycle).`;
+    oEl.textContent=`Status: ${adSettings.enabled?'Enabled':'Disabled'} · Format: ${formatAdTypeLabel(adSettings.type)} · Trigger: Every ${adSettings.frequency} completed videos (${adStats.cycleCompleted}/${adSettings.frequency} in cycle).`;
   }
 }
 
-/*
- * Future Real Ad Network Hook (e.g., Google AdMob in Android APK / Capacitor / WebView bridge):
- * Replace triggerAdImpression() bridge call when packaging for Android with a native plugin
- * (such as Capacitor AdMob) and fetch verified revenue/payouts from your AdMob/AdSense account
- * dashboard—never store bank account numbers in client HTML/JS/APK code.
- */
 function requestRealAdNetworkIfAvailable(formatToShow){
   if(window.DramaVerseNativeAds && typeof window.DramaVerseNativeAds.showAd === 'function'){
-    window.DramaVerseNativeAds.showAd(formatToShow);
+    window.DramaVerseNativeAds.showAd(formatToShow,adSettings.unitId||'');
   }
 }
 
@@ -241,7 +614,7 @@ function showAdModal(formatToShow,onContinue){
     if(adv)adv.play().catch(()=>{});
   }else{
     tag.textContent='DEMO FULL-SCREEN AD';
-    title.textContent='DramaVerse Featured Sponsor';
+    title.textContent=(branding.appName||'DramaVerse')+' Featured Sponsor';
     desc.textContent='Simulated full-screen interstitial placement after completing '+adSettings.frequency+' videos.';
     box.innerHTML=`<div style="font-size:34px">✦</div><strong style="margin-top:6px;font-size:15px">Demo Full-Screen Placement</strong><small style="color:#9e95a6;margin-top:6px">No real money is charged or earned in browser demo mode.</small>`;
   }
@@ -293,7 +666,6 @@ function handleVideoCompleted(){
   }
 }
 
-// Fixed persistDramas() structure (cleanly closed before IndexedDB helpers)
 function persistDramas(){
   localStorage.setItem('dvDramas',JSON.stringify(dramas));
   render();
@@ -301,7 +673,6 @@ function persistDramas(){
   refreshUploadDrama();
 }
 
-// Episode video storage: IndexedDB keeps video files as blobs on this device.
 const DB_NAME='DramaVerseVideos', DB_VERSION=1;
 function openVideoDB(){return new Promise((resolve,reject)=>{const req=indexedDB.open(DB_NAME,DB_VERSION);req.onupgradeneeded=()=>{if(!req.result.objectStoreNames.contains('episodes'))req.result.createObjectStore('episodes',{keyPath:'key'});};req.onsuccess=()=>resolve(req.result);req.onerror=()=>reject(req.error);});}
 async function saveEpisodeVideo(dramaId,episode,record){const db=await openVideoDB();return new Promise((resolve,reject)=>{const tx=db.transaction('episodes','readwrite');tx.objectStore('episodes').put({key:String(dramaId)+'_'+episode,dramaId,episode,...record});tx.oncomplete=()=>resolve();tx.onerror=()=>reject(tx.error);});}
@@ -320,7 +691,19 @@ function render(q=''){
   document.getElementById('searchGrid').innerHTML=dramas.map((d,i)=>({d,i})).filter(x=>!q||x.d.title.toLowerCase().includes(q.toLowerCase())||x.d.genre.toLowerCase().includes(q.toLowerCase())).map(x=>card(x.d,x.i)).join('');
 }
 function filterGenre(g,el){currentFilter=g;document.querySelectorAll('.chip').forEach(c=>c.classList.remove('active'));el.classList.add('active');render()}
-function showScreen(id,el){document.querySelectorAll('.screen').forEach(s=>s.classList.remove('active'));document.getElementById(id).classList.add('active');document.querySelectorAll('.navitem').forEach(n=>n.classList.remove('sel'));el.classList.add('sel');if(id==='saved')showSaved();if(id==='admin'){showAdminDramas();renderAdAdminUI();refreshUploadDrama();}}
+function showScreen(id,el){
+  if(id==='admin'&&(!currentSession||!isAdminGmail(currentSession.email))){
+    toast('Admin Gmail required');
+    id='profile';
+    el=document.getElementById('navProfile');
+  }
+  document.querySelectorAll('.screen').forEach(s=>s.classList.remove('active'));
+  document.getElementById(id).classList.add('active');
+  document.querySelectorAll('.navitem').forEach(n=>n.classList.remove('sel'));
+  if(el)el.classList.add('sel');
+  if(id==='saved')showSaved();
+  if(id==='admin'){showAdminDramas();renderAdAdminUI();applyBrandingUI();refreshUploadDrama();}
+}
 
 let activeDrama=0,activeEpisode=1;
 function openDrama(i){
@@ -374,7 +757,7 @@ function adminAddDrama(){
  const poster=document.getElementById('adminPoster').value.trim();
  const eps=Math.max(1,Math.min(500,Number(document.getElementById('adminEpisodes').value)||1));
  if(!title){toast('Please enter a drama title');return;}
- dramas.unshift({id:'dv_'+Date.now()+'_'+Math.random().toString(36).slice(2,8),title,genre,eps,desc:desc||'A new drama on DramaVerse.',cls:'',badge:'NEW',poster});
+ dramas.unshift({id:'dv_'+Date.now()+'_'+Math.random().toString(36).slice(2,8),title,genre,eps,desc:desc||'A new drama on '+(branding.appName||'DramaVerse')+'.',cls:'',badge:'NEW',poster});
  persistDramas();
  ['adminTitle','adminGenre','adminDesc','adminPoster'].forEach(id=>document.getElementById(id).value='');
  document.getElementById('adminEpisodes').value=12;toast('Drama added to this device');
@@ -384,7 +767,6 @@ function showAdminDramas(){
  document.getElementById('adminCount').textContent=dramas.length+' titles';
  list.innerHTML=dramas.map((d,i)=>`<div class="admin-row"><div><strong>${escapeHTML(d.title)}</strong><small>${escapeHTML(d.genre)} · ${d.eps} episodes</small></div><div class="admin-actions"><button onclick="adminEditDrama(${i})">Edit</button><button class="danger" onclick="adminDeleteDrama(${i})">Delete</button></div></div>`).join('');
 }
-function escapeHTML(s){return String(s||'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));}
 function adminEditDrama(i){
  const d=dramas[i],title=prompt('Drama title:',d.title);if(title===null)return;
  const genre=prompt('Genre:',d.genre);if(genre===null)return;
@@ -399,5 +781,6 @@ function adminDeleteDrama(i){
  localStorage.setItem('dvSaved',JSON.stringify(saved));persistDramas();toast('Drama deleted');
 }
 
-render();showAdminDramas();refreshUploadDrama();renderAdAdminUI();
+applyBrandingUI();render();showAdminDramas();refreshUploadDrama();renderAdAdminUI();applyAuthUI();
+if(currentSession&&currentSession.email){sendAccountWelcomeEmail(currentSession.email,currentSession.name);}
 </script></body></html>
