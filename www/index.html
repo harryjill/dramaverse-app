@@ -165,7 +165,7 @@
 
     <div class="email-preview" id="welcomeEmailBox">
       <strong>Welcome / Account Email Template</strong><br>
-      Kapag nag-login o nag-create ng account gamit ang Gmail, dito makikita ang welcome confirmation summary. Para makarating ang totoong email sa Gmail inbox ng user, ikonekta ang backend/EmailJS endpoint sa <code>EMAIL_WEBHOOK_URL</code>.
+      Kapag nag-login o nag-create ng account gamit ang Gmail, dito makikita ang welcome confirmation summary.
     </div>
   </div>
 
@@ -197,7 +197,13 @@
 <div class="toast" id="toast"></div>
 <script>
 const ADMIN_GMAILS=['harryequibal0@gmail.com'];
-const EMAIL_WEBHOOK_URL='';
+
+const EMAILJS_CONFIG={
+  enabled:true,
+  publicKey:'YOUR_EMAILJS_PUBLIC_KEY',
+  serviceId:'service_nil4tns',
+  templateId:'template_o2vgp5v'
+};
 
 const DEFAULT_BRANDING={
   appName:'DramaVerse',
@@ -361,24 +367,58 @@ function buildWelcomeEmailHTML(email,name){
 }
 
 async function sendAccountWelcomeEmail(email,name){
+  const cleanEmail=normalizeGmail(email);
+  const displayName=(name||cleanEmail.split('@')[0]||'Viewer').trim();
+  const appTitle=branding.appName||'DramaVerse';
+  const accountRole=isAdminGmail(cleanEmail)?'Admin Creator':'Viewer';
   const box=document.getElementById('welcomeEmailBox');
+
   if(box){
-    box.innerHTML=buildWelcomeEmailHTML(email,name)+`<div style="margin-top:8px;color:#9e95a6">Status: ${EMAIL_WEBHOOK_URL?'Sending email…':'Welcome template ready (add backend/EmailJS URL in EMAIL_WEBHOOK_URL to send real inbox emails).'}</div>`;
+    box.innerHTML=buildWelcomeEmailHTML(cleanEmail,displayName)+`<div style="margin-top:8px;color:#9e95a6">Status: Sending email to ${escapeHTML(cleanEmail)}…</div>`;
   }
-  if(!EMAIL_WEBHOOK_URL)return;
+
+  const ready=Boolean(
+    EMAILJS_CONFIG.enabled &&
+    EMAILJS_CONFIG.publicKey && !EMAILJS_CONFIG.publicKey.startsWith('YOUR_') &&
+    EMAILJS_CONFIG.serviceId && !EMAILJS_CONFIG.serviceId.startsWith('YOUR_') &&
+    EMAILJS_CONFIG.templateId && !EMAILJS_CONFIG.templateId.startsWith('YOUR_')
+  );
+
+  if(!ready){
+    if(box){
+      box.innerHTML=buildWelcomeEmailHTML(cleanEmail,displayName)+`<div style="margin-top:8px;color:#ffb6c9">Status: Preview only — ilagay ang Public Key sa EMAILJS_CONFIG.</div>`;
+    }
+    return;
+  }
+
   try{
-    await fetch(EMAIL_WEBHOOK_URL,{
+    const res=await fetch('https://api.emailjs.com/api/v1.0/email/send',{
       method:'POST',
       headers:{'Content-Type':'application/json'},
-      body:JSON.stringify({to_email:email,display_name:name||email.split('@')[0],app_name:branding.appName||'DramaVerse'})
+      body:JSON.stringify({
+        lib_version:'4.4.1',
+        user_id:EMAILJS_CONFIG.publicKey,
+        service_id:EMAILJS_CONFIG.serviceId,
+        template_id:EMAILJS_CONFIG.templateId,
+        template_params:{
+          email:cleanEmail,
+          to_email:cleanEmail,
+          display_name:displayName,
+          app_name:appTitle,
+          account_role:accountRole
+        }
+      })
     });
+    if(!res.ok)throw new Error('EmailJS failed ('+res.status+')');
     if(box){
-      box.innerHTML=buildWelcomeEmailHTML(email,name)+`<div style="margin-top:8px;color:#7be0a6">Status: Welcome email sent to ${escapeHTML(email)}.</div>`;
+      box.innerHTML=buildWelcomeEmailHTML(cleanEmail,displayName)+`<div style="margin-top:8px;color:#7be0a6">Status: Welcome email sent to ${escapeHTML(cleanEmail)}.</div>`;
     }
+    toast('Welcome email sent to '+cleanEmail);
   }catch(e){
     if(box){
-      box.innerHTML=buildWelcomeEmailHTML(email,name)+`<div style="margin-top:8px;color:#ff9bb2">Status: Could not reach email endpoint.</div>`;
+      box.innerHTML=buildWelcomeEmailHTML(cleanEmail,displayName)+`<div style="margin-top:8px;color:#ff9bb2">Status: Hindi naipadala ang email. I-check ang Public Key at Template ID.</div>`;
     }
+    toast('Email send failed');
   }
 }
 
