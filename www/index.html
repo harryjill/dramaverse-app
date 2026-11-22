@@ -612,7 +612,7 @@ async function resetBrandingSettings() {
 }
 
 /* ============================================================
-   SOCIAL AUTHENTICATION (GOOGLE NATIVE / FIREBASE OAUTH)
+   SOCIAL AUTHENTICATION (GOOGLE NATIVE SAFE + FIREBASE OAUTH)
 ============================================================ */
 function loadSession() {
   try {
@@ -749,17 +749,21 @@ async function signInWithGoogle() {
   try {
     const capFirebaseAuth = window.Capacitor?.Plugins?.FirebaseAuthentication;
     if (capFirebaseAuth && typeof capFirebaseAuth.signInWithGoogle === 'function') {
-      const nativeRes = await capFirebaseAuth.signInWithGoogle();
-      const idToken = nativeRes?.credential?.idToken;
-      if (idToken) {
-        const credential = firebase.auth.GoogleAuthProvider.credential(idToken);
-        const userCred = await auth.signInWithCredential(credential);
-        await syncFirebaseUserToSession(userCred.user, 'Google', true);
-        return;
-      }
-      if (nativeRes?.user?.email) {
-        await syncFirebaseUserToSession(nativeRes.user, 'Google', true);
-        return;
+      try {
+        const nativeRes = await capFirebaseAuth.signInWithGoogle();
+        const idToken = nativeRes?.credential?.idToken;
+        if (idToken) {
+          const credential = firebase.auth.GoogleAuthProvider.credential(idToken);
+          const userCred = await auth.signInWithCredential(credential);
+          await syncFirebaseUserToSession(userCred.user, 'Google', true);
+          return;
+        }
+        if (nativeRes?.user?.email) {
+          await syncFirebaseUserToSession(nativeRes.user, 'Google', true);
+          return;
+        }
+      } catch (nativeErr) {
+        console.warn('Native FirebaseAuth unavailable or uninitialized, using web OAuth:', nativeErr);
       }
     }
 
@@ -776,7 +780,8 @@ async function signInWithGoogle() {
         popupErr &&
         (popupErr.code === 'auth/popup-blocked' ||
          popupErr.code === 'auth/operation-not-supported-in-this-environment' ||
-         popupErr.code === 'auth/cancelled-popup-request')
+         popupErr.code === 'auth/cancelled-popup-request' ||
+         popupErr.code === 'auth/web-storage-unsupported')
       ) {
         await auth.signInWithRedirect(provider);
       } else {
@@ -871,9 +876,7 @@ function initFirebaseAuthListener() {
     if (res && res.user) {
       syncFirebaseUserToSession(res.user, 'Google', true);
     }
-  }).catch(err => {
-    if (err && err.message) toast('Google Sign-In: ' + err.message);
-  });
+  }).catch(() => {});
 
   auth.onAuthStateChanged(fbUser => {
     if (fbUser && fbUser.email) {
