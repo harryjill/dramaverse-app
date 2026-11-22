@@ -84,7 +84,7 @@ header{padding:16px 18px 12px;display:flex;justify-content:space-between;align-i
 .stat-box strong{display:block;font-size:17px;margin-top:4px;color:#fff}
 .demo-banner{background:#2b1924;border:1px solid #75344b;color:#ffb6c9;border-radius:12px;padding:10px 12px;font-size:12px;line-height:1.5;margin:10px 0}
 .sync-banner{background:#152822;border:1px solid #2d6a54;color:#8ef0c8;border-radius:12px;padding:10px 12px;font-size:12px;line-height:1.5;margin:10px 0}
-.email-preview{background:#141117;border:1px solid #32293a;border-radius:14px;padding:14px;margin-top:12px;font-size:12px;line-height:1.6}
+.email-preview{background:#141117;border:1px solid #32293a;border-radius:14px;padding:14px;margin-top:14px;font-size:12px;line-height:1.6}
 .email-preview strong{color:#ff8ea9}
 .logo-preview-box{display:flex;align-items:center;gap:12px;background:#141117;border:1px solid #2e2733;border-radius:12px;padding:10px 12px;margin-top:8px}
 .logo-preview-box img{width:46px;height:46px;border-radius:11px;object-fit:cover;border:1px solid #453b48;display:none}
@@ -94,16 +94,34 @@ header{padding:16px 18px 12px;display:flex;justify-content:space-between;align-i
 .ad-badge{display:inline-block;background:#ff4b7826;color:#ff7998;border:1px solid #ff4b7866;font-size:10px;font-weight:800;letter-spacing:1px;padding:4px 10px;border-radius:99px}
 .ad-visual{margin:14px 0;background:#0d0b10;border:1px dashed #473b50;border-radius:14px;padding:14px;min-height:150px;display:flex;flex-direction:column;align-items:center;justify-content:center}
 .ad-visual video{width:100%;max-height:240px;border-radius:10px;background:#000}
-.auth-tabs{display:flex;gap:8px;margin:14px 0 6px}
-.auth-tab{flex:1;padding:10px 12px;border-radius:12px;border:1px solid #39313e;background:#16131a;color:#bdb4c4;font-weight:800;font-size:12px;cursor:pointer}
+.note-muted{color:#9d94a6;font-size:12px;line-height:1.5}
+
+.auth-card-screen{position:relative;overflow:hidden;background:#0a090d;border:1px solid #241f2c;border-radius:22px;padding:18px;margin-top:10px}
+.auth-top-accent{position:absolute;top:-54px;left:-24px;width:190px;height:110px;background:#f4c414;border-radius:999px;transform:rotate(-8deg);pointer-events:none;opacity:.92}
+.auth-top-accent-right{position:absolute;top:-44px;right:-36px;width:110px;height:110px;background:#7c5cff;border-radius:999px;pointer-events:none;opacity:.85}
+.auth-content-layer{position:relative;z-index:1}
+.auth-header-row{display:flex;align-items:center;justify-content:space-between;gap:10px;margin-bottom:6px}
+.auth-back-btn{background:#18151d;border:1px solid #2c2635;color:#f8f5fa;width:36px;height:36px;border-radius:50%;font-size:20px;cursor:pointer;display:grid;place-items:center;line-height:1}
+.auth-heading{margin:10px 0 6px;font-size:28px;font-weight:800;letter-spacing:-.5px}
+.auth-sub{margin:0 0 20px;color:#9d94a6;font-size:13px;line-height:1.45}
+.auth-stack{display:flex;flex-direction:column;gap:12px}
+.auth-provider-btn{width:100%;display:flex;align-items:center;justify-content:space-between;background:#19171e;border:1px solid #2a2633;color:#f8f5fa;border-radius:14px;padding:14px 16px;font-size:15px;font-weight:600;cursor:pointer;transition:.15s}
+.auth-provider-btn:hover{background:#211e28;border-color:#3d3649}
+.auth-provider-btn.active-provider{border-color:#ff4b78;background:#221822}
+.auth-provider-left{display:flex;align-items:center;gap:12px}
+.auth-provider-icon{width:24px;height:24px;border-radius:50%;display:grid;place-items:center;font-weight:900;font-size:13px;flex-shrink:0}
+.icon-g{background:#fff;color:#ea4335}
+.icon-f{background:#1877f2;color:#fff}
+.icon-t{background:#09080c;color:#fff;border:1px solid #3c3645}
+.auth-provider-arrow{color:#8c8296;font-size:20px;line-height:1}
+.auth-drawer{margin-top:16px;background:#131117;border:1px solid #282330;border-radius:16px;padding:14px}
+.auth-tabs{display:flex;gap:8px;margin:8px 0 10px}
+.auth-tab{flex:1;padding:10px 12px;border-radius:12px;border:1px solid #352e3d;background:#19161e;color:#bdb4c4;font-weight:800;font-size:12px;cursor:pointer}
 .auth-tab.active{background:#ff4b7824;border-color:#ff4b78;color:#fff}
 .auth-pane{display:none}
 .auth-pane.active{display:block}
-.divider{display:flex;align-items:center;gap:10px;color:#8e8497;font-size:11px;margin:14px 0 10px}
-.divider:before,.divider:after{content:"";flex:1;height:1px;background:#2e2733}
-.gmail-auth-box{background:#151219;border:1px solid #362c3d;border-radius:14px;padding:12px;margin-top:8px}
-.gmail-btn{width:100%;background:#ffffff;color:#141117;border:0;border-radius:12px;padding:11px 14px;font-weight:800;font-size:13px;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:8px;margin-top:8px}
-.note-muted{color:#aaa;font-size:12px;line-height:1.5}
+.auth-legal-note{margin-top:20px;color:#8a8094;font-size:11px;line-height:1.5;text-align:left}
+.auth-legal-note a{color:#c9c0d2;text-decoration:underline}
 </style>
 <script src="https://www.gstatic.com/firebasejs/10.14.1/firebase-app-compat.js"></script>
 <script src="https://www.gstatic.com/firebasejs/10.14.1/firebase-firestore-compat.js"></script>
@@ -273,74 +291,106 @@ header{padding:16px 18px 12px;display:flex;justify-content:space-between;align-i
 </div>
 
 <div id="profile" class="screen">
-  <div class="section-head"><h2>Account, Register &amp; Sign-In</h2><span class="see" id="accountRoleTag">GUEST</span></div>
-  <div class="card" style="padding:20px;margin-top:12px;cursor:default">
-    <div style="display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap">
-      <div style="display:flex;align-items:center;gap:12px">
-        <div style="font-size:38px">👤</div>
-        <div>
-          <h3 id="profileName" style="margin:0">DramaVerse Guest</h3>
-          <p id="profileEmailText" style="color:#aaa;font-size:12px;margin:4px 0 0">Not signed in yet · Register, login with password, or use Gmail</p>
+  <div class="auth-card-screen">
+    <div class="auth-top-accent"></div>
+    <div class="auth-top-accent-right"></div>
+    <div class="auth-content-layer">
+      <div class="auth-header-row">
+        <button class="auth-back-btn" onclick="showScreen('home', document.getElementById('navHome'))" aria-label="Back">‹</button>
+        <span class="see" id="accountRoleTag">GUEST</span>
+      </div>
+
+      <h2 class="auth-heading">Log in / Sign up</h2>
+      <p class="auth-sub" id="profileEmailText">Manage your account, check notifications, and save your watchlist.</p>
+
+      <div class="auth-stack">
+        <button class="auth-provider-btn active-provider" id="provBtnGoogle" onclick="selectProvider('Google', this)">
+          <span class="auth-provider-left">
+            <span class="auth-provider-icon icon-g">G</span>
+            <span>Continue with Google</span>
+          </span>
+          <span class="auth-provider-arrow">›</span>
+        </button>
+
+        <button class="auth-provider-btn" id="provBtnFacebook" onclick="selectProvider('Facebook', this)">
+          <span class="auth-provider-left">
+            <span class="auth-provider-icon icon-f">f</span>
+            <span>Continue with Facebook</span>
+          </span>
+          <span class="auth-provider-arrow">›</span>
+        </button>
+
+        <button class="auth-provider-btn" id="provBtnTikTok" onclick="selectProvider('TikTok', this)">
+          <span class="auth-provider-left">
+            <span class="auth-provider-icon icon-t">♪</span>
+            <span>Continue with TikTok</span>
+          </span>
+          <span class="auth-provider-arrow">›</span>
+        </button>
+      </div>
+
+      <div class="auth-drawer" id="authDrawer">
+        <div style="display:flex;align-items:center;justify-content:space-between;gap:10px;flex-wrap:wrap;margin-bottom:6px">
+          <div>
+            <strong id="profileName" style="font-size:14px">DramaVerse Guest</strong>
+            <div class="note-muted" id="providerHintText" style="margin:2px 0 0">Authorize Google / Gmail or use Sign In / Create Account below:</div>
+          </div>
+          <button class="btn secondary" style="margin-left:0;padding:8px 13px;font-size:12px" onclick="handleSignOut()">Sign out</button>
+        </div>
+
+        <div class="auth-tabs">
+          <button class="auth-tab active" id="tabBtnProvider" onclick="switchAuthTab('provider')">Quick Authorize</button>
+          <button class="auth-tab" id="tabBtnLogin" onclick="switchAuthTab('login')">Sign In</button>
+          <button class="auth-tab" id="tabBtnRegister" onclick="switchAuthTab('register')">Create Account</button>
+        </div>
+
+        <div class="auth-pane active" id="authPaneProvider">
+          <label class="ad-label" for="loginDisplayName">Username / Display Name (optional)</label>
+          <input class="searchbox" id="loginDisplayName" placeholder="e.g. Your Username">
+
+          <label class="ad-label" for="loginGmailInput">Email / Gmail Address to Authorize</label>
+          <input class="searchbox" id="loginGmailInput" type="email" placeholder="name@gmail.com">
+
+          <button class="btn primary" style="width:100%;margin-top:8px" id="providerContinueBtn" onclick="handleProviderAuthorize()">Authorize &amp; Continue with Google</button>
+        </div>
+
+        <div class="auth-pane" id="authPaneLogin">
+          <label class="ad-label" for="loginIdentifierInput">Email or Username</label>
+          <input class="searchbox" id="loginIdentifierInput" placeholder="name@gmail.com or username">
+
+          <label class="ad-label" for="loginPasswordInput">Password</label>
+          <input class="searchbox" id="loginPasswordInput" type="password" placeholder="Enter your password">
+
+          <button class="btn primary" style="width:100%;margin-top:8px" onclick="handlePasswordLogin()">Sign In with Password</button>
+        </div>
+
+        <div class="auth-pane" id="authPaneRegister">
+          <label class="ad-label" for="regUsernameInput">Username</label>
+          <input class="searchbox" id="regUsernameInput" placeholder="e.g. drama_fan01">
+
+          <label class="ad-label" for="regEmailInput">Email / Gmail Address</label>
+          <input class="searchbox" id="regEmailInput" type="email" placeholder="name@gmail.com">
+
+          <label class="ad-label" for="regPasswordInput">Create Password (min. 6 characters)</label>
+          <input class="searchbox" id="regPasswordInput" type="password" placeholder="Create a password">
+
+          <button class="btn primary" style="width:100%;margin-top:8px" onclick="handleRegisterAccount()">✦ Create Account &amp; Sign In</button>
+        </div>
+
+        <div class="email-preview" id="welcomeEmailBox">
+          <strong>Account Summary</strong><br>
+          Mag-authorize gamit ang Google/Facebook/TikTok, o mag-Sign In / Create Account gamit ang password.
         </div>
       </div>
-      <button class="btn secondary" style="margin-left:0;padding:9px 14px;font-size:12px" onclick="handleSignOut()">Sign out</button>
-    </div>
 
-    <div class="auth-tabs">
-      <button class="auth-tab active" id="tabBtnLogin" onclick="switchAuthTab('login')">Sign In</button>
-      <button class="auth-tab" id="tabBtnRegister" onclick="switchAuthTab('register')">Create Account</button>
-    </div>
-
-    <!-- SIGN IN WITH EMAIL/USERNAME + PASSWORD -->
-    <div class="auth-pane active" id="authPaneLogin">
-      <label class="ad-label" for="loginIdentifierInput">Email or Username</label>
-      <input class="searchbox" id="loginIdentifierInput" placeholder="name@gmail.com or username">
-
-      <label class="ad-label" for="loginPasswordInput">Password</label>
-      <input class="searchbox" id="loginPasswordInput" type="password" placeholder="Enter your password">
-
-      <button class="btn primary" style="width:100%;margin-top:8px" onclick="handlePasswordLogin()">Sign In with Password</button>
-    </div>
-
-    <!-- REGISTER NEW ACCOUNT WITH USERNAME, EMAIL & PASSWORD -->
-    <div class="auth-pane" id="authPaneRegister">
-      <label class="ad-label" for="regUsernameInput">Username</label>
-      <input class="searchbox" id="regUsernameInput" placeholder="e.g. drama_fan01">
-
-      <label class="ad-label" for="regEmailInput">Email / Gmail Address</label>
-      <input class="searchbox" id="regEmailInput" type="email" placeholder="name@gmail.com">
-
-      <label class="ad-label" for="regPasswordInput">Create Password (min. 6 characters)</label>
-      <input class="searchbox" id="regPasswordInput" type="password" placeholder="Create a password">
-
-      <button class="btn primary" style="width:100%;margin-top:8px" onclick="handleRegisterAccount()">✦ Create Account &amp; Sign In</button>
-    </div>
-
-    <div class="divider">OR AUTHORIZE GMAIL LOGIN</div>
-
-    <!-- AUTHORIZE GMAIL LOGIN -->
-    <div class="gmail-auth-box">
-      <p class="note-muted" style="margin:0">Mabilis na pag-authorize gamit ang Gmail account mo (hindi magbubukas ng external Gmail app).</p>
-      <label class="ad-label" for="loginDisplayName">Username / Display Name (optional)</label>
-      <input class="searchbox" id="loginDisplayName" placeholder="e.g. Your Username">
-
-      <label class="ad-label" for="loginGmailInput">Gmail Address to Authorize</label>
-      <input class="searchbox" id="loginGmailInput" type="email" placeholder="name@gmail.com">
-
-      <button class="gmail-btn" onclick="handleGmailAuthorizeLogin()">
-        <span>G</span>
-        <span>Authorize &amp; Continue with Gmail</span>
-      </button>
-    </div>
-
-    <div class="email-preview" id="welcomeEmailBox">
-      <strong>Account &amp; Welcome Summary</strong><br>
-      Kapag nag-register, nag-login gamit ang password, o nag-authorize ng Gmail, dito lalabas ang detalye ng account mo.
+      <p class="auth-legal-note">
+        By continuing, you agree to <a href="#terms" onclick="toast('Terms of Service');return false;">Terms of Service</a> and confirm that you have read <a href="#privacy" onclick="toast('Privacy Policy');return false;">Privacy Policy</a>.
+      </p>
     </div>
   </div>
 
   <div class="section-head"><h2>App info</h2></div>
-  <p id="appInfoSummary" style="color:#aaa;font-size:13px;line-height:1.7">DramaVerse is an AI mini-drama streaming app. Create an account, sign in with password, or authorize Gmail to watch and save dramas.</p>
+  <p id="appInfoSummary" style="color:#aaa;font-size:13px;line-height:1.7">DramaVerse is an AI mini-drama streaming app. Create an account, sign in with password, or authorize an account to watch and save dramas.</p>
 </div>
 </main>
 
@@ -414,7 +464,7 @@ const EMAILJS_CONFIG = {
 
 const DEFAULT_BRANDING = {
   appName: 'DramaVerse',
-  logoSrc: '',
+  logoSrc: './logo.png',
   heroTitle: 'My Contract\nWith The CEO',
   heroDesc: 'One contract. Two secrets. A love neither of them planned.'
 };
@@ -440,7 +490,7 @@ function loadBranding() {
     if (raw && typeof raw === 'object') {
       return {
         appName: String(raw.appName || DEFAULT_BRANDING.appName).trim() || DEFAULT_BRANDING.appName,
-        logoSrc: typeof raw.logoSrc === 'string' ? raw.logoSrc : '',
+        logoSrc: typeof raw.logoSrc === 'string' && raw.logoSrc.trim() ? raw.logoSrc.trim() : DEFAULT_BRANDING.logoSrc,
         heroTitle: typeof raw.heroTitle === 'string' && raw.heroTitle.trim() ? raw.heroTitle : DEFAULT_BRANDING.heroTitle,
         heroDesc: typeof raw.heroDesc === 'string' && raw.heroDesc.trim() ? raw.heroDesc : DEFAULT_BRANDING.heroDesc
       };
@@ -470,15 +520,29 @@ function applyBrandingUI() {
   const hasValidLogo = Boolean(branding.logoSrc && (
     branding.logoSrc.startsWith('data:image/') ||
     branding.logoSrc.startsWith('https://') ||
-    branding.logoSrc.startsWith('http://')
+    branding.logoSrc.startsWith('http://') ||
+    branding.logoSrc.startsWith('./') ||
+    branding.logoSrc.startsWith('/')
   ));
 
   if (hasValidLogo) {
-    if (hLogo) { hLogo.src = branding.logoSrc; hLogo.style.display = 'block'; }
-    if (avImg) { avImg.src = branding.logoSrc; avImg.style.display = 'block'; }
+    if (hLogo) {
+      hLogo.onerror = () => { hLogo.style.display = 'none'; };
+      hLogo.src = branding.logoSrc;
+      hLogo.style.display = 'block';
+    }
+    if (avImg) {
+      avImg.onerror = () => { avImg.style.display = 'none'; if (avEmoji) avEmoji.style.display = 'block'; };
+      avImg.src = branding.logoSrc;
+      avImg.style.display = 'block';
+    }
     if (avEmoji) { avEmoji.style.display = 'none'; }
-    if (prevImg) { prevImg.src = branding.logoSrc; prevImg.style.display = 'block'; }
-    if (prevText) { prevText.textContent = 'Custom logo active (Synced in Cloud)'; }
+    if (prevImg) {
+      prevImg.onerror = () => { prevImg.style.display = 'none'; };
+      prevImg.src = branding.logoSrc;
+      prevImg.style.display = 'block';
+    }
+    if (prevText) { prevText.textContent = 'Custom logo active (' + branding.logoSrc + ')'; }
   } else {
     if (hLogo) { hLogo.removeAttribute('src'); hLogo.style.display = 'none'; }
     if (avImg) { avImg.removeAttribute('src'); avImg.style.display = 'none'; }
@@ -493,7 +557,7 @@ function applyBrandingUI() {
   if (heroP) heroP.textContent = branding.heroDesc;
 
   const infoEl = document.getElementById('appInfoSummary');
-  if (infoEl) infoEl.textContent = `${cleanName} is an AI mini-drama streaming app. Create an account, sign in with password, or authorize Gmail to watch and save dramas.`;
+  if (infoEl) infoEl.textContent = `${cleanName} is an AI mini-drama streaming app. Create an account, sign in with password, or authorize an account to watch and save dramas.`;
 
   const nameInput = document.getElementById('brandAppNameInput');
   const urlInput = document.getElementById('brandLogoUrlInput');
@@ -535,7 +599,7 @@ async function saveBrandingSettings() {
   const hTitleVal = (document.getElementById('brandHeroTitleInput')?.value || '').trim() || DEFAULT_BRANDING.heroTitle;
   const hDescVal = (document.getElementById('brandHeroDescInput')?.value || '').trim() || DEFAULT_BRANDING.heroDesc;
 
-  let nextLogo = branding.logoSrc;
+  let nextLogo = branding.logoSrc || DEFAULT_BRANDING.logoSrc;
   if (urlVal) {
     if (urlVal.startsWith('https://') || urlVal.startsWith('http://')) {
       nextLogo = urlVal;
@@ -578,12 +642,25 @@ async function resetBrandingSettings() {
       });
     } catch (e) {}
   }
-  toast('Reset to default DramaVerse branding');
+  toast('Reset to ./logo.png branding');
 }
 
 /* ============================================================
-   USER ACCOUNTS: REGISTER, PASSWORD LOGIN & GMAIL AUTHORIZE
+   USER ACCOUNTS: PROVIDER AUTHORIZE, REGISTER & PASSWORD LOGIN
 ============================================================ */
+let activeAuthProvider = 'Google';
+
+function selectProvider(providerName, btnEl) {
+  activeAuthProvider = providerName;
+  document.querySelectorAll('.auth-provider-btn').forEach(b => b.classList.remove('active-provider'));
+  if (btnEl) btnEl.classList.add('active-provider');
+  switchAuthTab('provider');
+  const hint = document.getElementById('providerHintText');
+  const contBtn = document.getElementById('providerContinueBtn');
+  if (hint) hint.textContent = `Continue with ${providerName}: ilagay ang iyong email/username sa ibaba.`;
+  if (contBtn) contBtn.textContent = `Authorize & Continue with ${providerName}`;
+}
+
 function loadUsersList() {
   try {
     const arr = JSON.parse(localStorage.getItem('dvUsers') || '[]');
@@ -605,7 +682,8 @@ function loadSession() {
         email: normalizeEmail(raw.email || ''),
         username: normalizeUsername(raw.username || ''),
         name: String(raw.name || '').trim(),
-        method: String(raw.method || 'account')
+        method: String(raw.method || 'account'),
+        provider: String(raw.provider || 'Google')
       };
     }
   } catch (e) {}
@@ -615,11 +693,13 @@ function loadSession() {
 let currentSession = loadSession();
 
 function switchAuthTab(tabName) {
-  const isLogin = tabName === 'login';
-  document.getElementById('tabBtnLogin')?.classList.toggle('active', isLogin);
-  document.getElementById('tabBtnRegister')?.classList.toggle('active', !isLogin);
-  document.getElementById('authPaneLogin')?.classList.toggle('active', isLogin);
-  document.getElementById('authPaneRegister')?.classList.toggle('active', !isLogin);
+  document.getElementById('tabBtnProvider')?.classList.toggle('active', tabName === 'provider');
+  document.getElementById('tabBtnLogin')?.classList.toggle('active', tabName === 'login');
+  document.getElementById('tabBtnRegister')?.classList.toggle('active', tabName === 'register');
+
+  document.getElementById('authPaneProvider')?.classList.toggle('active', tabName === 'provider');
+  document.getElementById('authPaneLogin')?.classList.toggle('active', tabName === 'login');
+  document.getElementById('authPaneRegister')?.classList.toggle('active', tabName === 'register');
 }
 
 function buildAccountSummaryHTML(sessionObj) {
@@ -628,7 +708,9 @@ function buildAccountSummaryHTML(sessionObj) {
   const safeUser = escapeHTML(sessionObj.username || '—');
   const appTitle = escapeHTML(branding.appName || 'DramaVerse');
   const roleLabel = isAdminGmail(sessionObj.email) ? 'Admin Creator' : 'Viewer';
-  const methodLabel = sessionObj.method === 'gmail_authorized' ? 'Authorized Gmail' : (sessionObj.method === 'registered' ? 'Registered Password Account' : 'Password Login');
+  const methodLabel = sessionObj.method === 'provider_authorized'
+    ? `Authorized (${escapeHTML(sessionObj.provider || 'Google')})`
+    : (sessionObj.method === 'registered' ? 'Registered Password Account' : 'Password Login');
   return `
     <div style="border-left:3px solid #ff4b78;padding-left:10px">
       <strong>Active Account:</strong> ${safeName} (@${safeUser})<br>
@@ -690,7 +772,7 @@ function completeSessionLogin(sessionObj, showWelcomeMail = false) {
     sendAccountWelcomeEmail(currentSession.email, currentSession.name || currentSession.username);
   }
   if (isAdminGmail(currentSession.email)) {
-    toast('Admin Gmail authorized — Admin Panel unlocked');
+    toast('Admin account authorized — Admin Panel unlocked');
     showScreen('admin', document.getElementById('navAdmin'));
   } else {
     toast('Signed in as ' + (currentSession.name || currentSession.username || currentSession.email));
@@ -743,7 +825,7 @@ async function handleRegisterAccount() {
   }
 
   document.getElementById('regPasswordInput').value = '';
-  completeSessionLogin({ email, username, name: username, method: 'registered' }, true);
+  completeSessionLogin({ email, username, name: username, method: 'registered', provider: activeAuthProvider }, true);
 }
 
 function handlePasswordLogin() {
@@ -776,17 +858,18 @@ function handlePasswordLogin() {
     email: normalizeEmail(found.email),
     username: normalizeUsername(found.username),
     name: found.username,
-    method: 'password'
+    method: 'password',
+    provider: activeAuthProvider
   }, false);
 }
 
-function handleGmailAuthorizeLogin() {
+function handleProviderAuthorize() {
   const rawEmail = document.getElementById('loginGmailInput')?.value || '';
   const rawDisplay = (document.getElementById('loginDisplayName')?.value || '').trim();
   const email = normalizeEmail(rawEmail);
 
   if (!email || !email.includes('@')) {
-    toast('Ilagay muna ang Gmail address na ia-authorize');
+    toast('Ilagay muna ang email o Gmail address na ia-authorize');
     return;
   }
 
@@ -797,7 +880,8 @@ function handleGmailAuthorizeLogin() {
     email,
     username: fallbackUser,
     name: displayName,
-    method: 'gmail_authorized'
+    method: 'provider_authorized',
+    provider: activeAuthProvider
   }, true);
 }
 
@@ -809,7 +893,7 @@ function handleSignOut() {
   applyAuthUI();
   const box = document.getElementById('welcomeEmailBox');
   if (box) {
-    box.innerHTML = '<strong>Account &amp; Welcome Summary</strong><br>Naka-sign out ka na. Pwede kang mag-Sign In, mag-Create Account, o mag-Authorize ng Gmail.';
+    box.innerHTML = '<strong>Account Summary</strong><br>Naka-sign out ka na. Pwede kang mag-Authorize, mag-Sign In, o mag-Create Account.';
   }
   toast('Signed out');
 }
@@ -841,7 +925,7 @@ function applyAuthUI() {
       const subParts = [];
       if (currentSession.username) subParts.push('@' + currentSession.username);
       if (currentSession.email) subParts.push(currentSession.email);
-      pEmail.textContent = subParts.join(' · ');
+      pEmail.textContent = subParts.join(' · ') || 'Signed in';
     }
     if (adminEmailEl) adminEmailEl.textContent = currentSession.email || currentSession.username;
     const box = document.getElementById('welcomeEmailBox');
@@ -857,7 +941,7 @@ function applyAuthUI() {
     }
     if (roleTag) roleTag.textContent = 'GUEST';
     if (pName) pName.textContent = appLabel + ' Guest';
-    if (pEmail) pEmail.textContent = 'Not signed in yet · Register, login with password, or use Gmail';
+    if (pEmail) pEmail.textContent = 'Manage your account, check notifications, and save your watchlist.';
     if (adminEmailEl) adminEmailEl.textContent = 'ADMIN ONLY';
   }
 }
@@ -896,7 +980,7 @@ function initRealtimeCloudSync() {
       const data = doc.data();
       branding = {
         appName: data.appName || DEFAULT_BRANDING.appName,
-        logoSrc: data.logoSrc || '',
+        logoSrc: (typeof data.logoSrc === 'string' && data.logoSrc.trim()) ? data.logoSrc.trim() : DEFAULT_BRANDING.logoSrc,
         heroTitle: data.heroTitle || DEFAULT_BRANDING.heroTitle,
         heroDesc: data.heroDesc || DEFAULT_BRANDING.heroDesc
       };
@@ -1172,7 +1256,6 @@ function refreshUploadDrama() {
 function normalizeDirectVideoUrl(rawUrl) {
   const u = String(rawUrl || '').trim();
   if (!u) return '';
-  // Convert GitHub blob URL to raw URL automatically if pasted
   if (u.includes('github.com/') && u.includes('/blob/')) {
     return u.replace('github.com/', 'raw.githubusercontent.com/').replace('/blob/', '/');
   }
@@ -1193,7 +1276,6 @@ async function uploadEpisode() {
   let videoUrl = normalizeDirectVideoUrl(rawDirect);
 
   try {
-    // Unahin ang Direct MP4 Video URL; gamitin lang ang Cloudinary file kung walang Direct URL pero may file
     if (!videoUrl && file) {
       const cloudName = (document.getElementById('cloudinaryCloudName')?.value || '').trim();
       const uploadPreset = (document.getElementById('cloudinaryUploadPreset')?.value || '').trim();
