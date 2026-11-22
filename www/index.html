@@ -604,7 +604,7 @@ async function resetBrandingSettings() {
 }
 
 /* ============================================================
-   SOCIAL AUTHENTICATION (EXPERT CAPACITOR + FIREBASE POPUP/NATIVE)
+   SOCIAL AUTHENTICATION (NO REDIRECT LOOP IN ANDROID WEBVIEW)
 ============================================================ */
 function loadSession() {
   try {
@@ -723,28 +723,22 @@ async function signInWithGoogle() {
   toast('Opening Google Sign-In…');
 
   try {
-    // 1. Subukan muna ang native Capacitor FirebaseAuthentication plugin kung available sa APK
     const capFirebaseAuth = window.Capacitor?.Plugins?.FirebaseAuthentication;
     if (capFirebaseAuth && typeof capFirebaseAuth.signInWithGoogle === 'function') {
-      try {
-        const nativeRes = await capFirebaseAuth.signInWithGoogle();
-        const idToken = nativeRes?.credential?.idToken;
-        if (idToken) {
-          const credential = firebase.auth.GoogleAuthProvider.credential(idToken);
-          const userCred = await auth.signInWithCredential(credential);
-          await syncFirebaseUserToSession(userCred.user, 'Google', true);
-          return;
-        }
-        if (nativeRes?.user?.email) {
-          await syncFirebaseUserToSession(nativeRes.user, 'Google', true);
-          return;
-        }
-      } catch (nativeErr) {
-        console.warn('Native FirebaseAuthentication fallback to Popup:', nativeErr);
+      const nativeRes = await capFirebaseAuth.signInWithGoogle();
+      const idToken = nativeRes?.credential?.idToken;
+      if (idToken) {
+        const credential = firebase.auth.GoogleAuthProvider.credential(idToken);
+        const userCred = await auth.signInWithCredential(credential);
+        await syncFirebaseUserToSession(userCred.user, 'Google', true);
+        return;
+      }
+      if (nativeRes?.user?.email) {
+        await syncFirebaseUserToSession(nativeRes.user, 'Google', true);
+        return;
       }
     }
 
-    // 2. Gumamit ng signInWithPopup (hindi signInWithRedirect para iwas "missing initial state" sa WebView)
     const provider = new firebase.auth.GoogleAuthProvider();
     provider.setCustomParameters({ prompt: 'select_account' });
     const result = await auth.signInWithPopup(provider);
