@@ -1,9 +1,80 @@
 <!DOCTYPE html>
-<html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1"><meta name="theme-color" content="#111014"><title>DramaVerse — AI Mini Dramas</title>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#111014">
+<title>DramaVerse — AI Mini Dramas</title>
 <style>
-*{box-sizing:border-box}body{margin:0;background:#100f13;color:#f8f5fa;font-family:Inter,system-ui,Arial,sans-serif}header{padding:16px 18px 12px;display:flex;justify-content:space-between;align-items:center;gap:10px;position:sticky;top:0;background:#100f13ee;backdrop-filter:blur(10px);z-index:3}.brand-wrap{display:flex;align-items:center;gap:9px;min-width:0}.brand-logo-img{width:30px;height:30px;border-radius:9px;object-fit:cover;border:1px solid #453b48;display:none;flex-shrink:0}.logo{font-size:20px;font-weight:900;letter-spacing:-.6px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.logo span{color:#ff4b78}.header-right{display:flex;align-items:center;gap:8px;flex-shrink:0}.role-pill{font-size:11px;font-weight:800;padding:5px 10px;border-radius:99px;background:#241e2a;border:1px solid #44384f;color:#e7dfe7;cursor:pointer;white-space:nowrap}.role-pill.admin{background:#ff4b7826;border-color:#ff4b7888;color:#ff8ea9}.avatar{background:#28232c;border:1px solid #453b48;border-radius:50%;width:36px;height:36px;display:grid;place-items:center;cursor:pointer;flex-shrink:0;overflow:hidden}.avatar img{width:100%;height:100%;object-fit:cover;display:none}.wrap{max-width:900px;margin:auto;padding:0 16px 95px}.hero{height:400px;border-radius:22px;overflow:hidden;position:relative;background:linear-gradient(0deg,#100f13 2%,transparent 65%),linear-gradient(115deg,#52233e,#d45868 45%,#2a314e);margin:8px 0 24px;padding:22px;display:flex;align-items:flex-end}.hero:before{content:"✦";position:absolute;right:15%;top:18%;font-size:100px;color:#ffe7ef88}.hero-content{position:relative;z-index:1;max-width:440px}.eyebrow{color:#ff7998;font-size:11px;font-weight:800;letter-spacing:2px}.hero h1{font-size:36px;line-height:1.02;margin:9px 0}.hero p{color:#e7dfe7;font-size:14px;max-width:350px}.btn{border:0;border-radius:30px;padding:12px 18px;font-weight:800;cursor:pointer}.primary{background:#ff4b78;color:white}.secondary{background:#302b34;color:#fff;border:1px solid #554a57;margin-left:8px}.section-head{display:flex;justify-content:space-between;align-items:center;margin:24px 0 12px}.section-head h2{font-size:18px;margin:0}.see{font-size:12px;color:#ff7896}.chips{display:flex;gap:8px;overflow:auto;padding-bottom:7px}.chip{border:1px solid #3a333e;background:#1c1920;color:#ccc;border-radius:25px;padding:8px 14px;white-space:nowrap;font-size:12px}.chip.active{background:#ff4b78;border-color:#ff4b78;color:#fff}.grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}.card{background:#1a171e;border:1px solid #2a242e;border-radius:15px;overflow:hidden;cursor:pointer}.poster{height:190px;position:relative;display:flex;align-items:flex-end;padding:12px;background:linear-gradient(145deg,#55253f,#c85d76);background-size:cover;background-position:center}.poster:after{content:"✧";position:absolute;top:10px;right:14px;font-size:60px;color:#ffffff55}.p2{background:linear-gradient(145deg,#172d48,#4c86a4)}.p3{background:linear-gradient(145deg,#332447,#a35d8b)}.p4{background:linear-gradient(145deg,#49261f,#b36e43)}.p5{background:linear-gradient(145deg,#1f3d35,#5b977a)}.p6{background:linear-gradient(145deg,#30313e,#777a9b)}.tag{position:relative;z-index:1;background:#100f13b8;padding:5px 8px;border-radius:7px;font-size:10px}.card-info{padding:11px}.card-info h3{margin:0 0 5px;font-size:14px}.card-info p{margin:0;color:#a9a1ad;font-size:11px}.bottom{position:fixed;bottom:0;left:0;right:0;background:#151218f2;border-top:1px solid #2e2831;display:flex;justify-content:space-around;padding:12px 8px 18px;z-index:4}.navitem{font-size:11px;color:#aaa;text-align:center;cursor:pointer}.navitem b{display:block;font-size:18px;margin-bottom:3px}.navitem.sel{color:#ff4b78}.screen{display:none}.screen.active{display:block}.searchbox{width:100%;padding:13px 15px;background:#201c24;border:1px solid #39313e;border-radius:14px;color:white;margin:10px 0}.empty{color:#aaa;text-align:center;padding:40px 10px}.modal{position:fixed;inset:0;background:#09080beF;z-index:8;display:none;overflow:auto}.modal.open{display:block}.modal-inner{max-width:700px;margin:auto;padding:20px}.close{background:#29232e;color:white;border:0;border-radius:50%;width:38px;height:38px;font-size:20px;cursor:pointer}.playerbox{min-height:220px;background:#09080b;border-radius:18px;overflow:hidden;margin-top:18px;color:#f9e9f0;position:relative}.playerbox video{width:100%;max-height:70vh;aspect-ratio:9/16;object-fit:contain;background:#050505;display:block}.player-controls{display:flex;gap:8px;margin:12px 0}.player-controls button{flex:1;border:1px solid #39313e;border-radius:12px;padding:12px;background:#211d25;color:#fff;font-weight:700;cursor:pointer}.player-controls button:disabled{opacity:.35}.episode{width:100%;padding:14px;margin:7px 0;text-align:left;background:#211d25;color:white;border:1px solid #39313e;border-radius:12px;cursor:pointer}.episode small{display:block;color:#a9a0ad;margin-top:4px}.toast{position:fixed;bottom:85px;left:50%;transform:translateX(-50%);background:#39313e;padding:10px 15px;border-radius:20px;display:none;z-index:12;font-size:12px;max-width:90vw;text-align:center}
+*{box-sizing:border-box}
+body{margin:0;background:#100f13;color:#f8f5fa;font-family:Inter,system-ui,Arial,sans-serif}
+header{padding:16px 18px 12px;display:flex;justify-content:space-between;align-items:center;gap:10px;position:sticky;top:0;background:#100f13ee;backdrop-filter:blur(10px);z-index:3}
+.brand-wrap{display:flex;align-items:center;gap:9px;min-width:0}
+.brand-logo-img{width:30px;height:30px;border-radius:9px;object-fit:cover;border:1px solid #453b48;display:none;flex-shrink:0}
+.logo{font-size:20px;font-weight:900;letter-spacing:-.6px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.logo span{color:#ff4b78}
+.header-right{display:flex;align-items:center;gap:8px;flex-shrink:0}
+.role-pill{font-size:11px;font-weight:800;padding:5px 10px;border-radius:99px;background:#241e2a;border:1px solid #44384f;color:#e7dfe7;cursor:pointer;white-space:nowrap}
+.role-pill.admin{background:#ff4b7826;border-color:#ff4b7888;color:#ff8ea9}
+.avatar{background:#28232c;border:1px solid #453b48;border-radius:50%;width:36px;height:36px;display:grid;place-items:center;cursor:pointer;flex-shrink:0;overflow:hidden}
+.avatar img{width:100%;height:100%;object-fit:cover;display:none}
+.wrap{max-width:900px;margin:auto;padding:0 16px 95px}
+.hero{height:400px;border-radius:22px;overflow:hidden;position:relative;background:linear-gradient(0deg,#100f13 2%,transparent 65%),linear-gradient(115deg,#52233e,#d45868 45%,#2a314e);margin:8px 0 24px;padding:22px;display:flex;align-items:flex-end}
+.hero:before{content:"✦";position:absolute;right:15%;top:18%;font-size:100px;color:#ffe7ef88}
+.hero-content{position:relative;z-index:1;max-width:440px}
+.eyebrow{color:#ff7998;font-size:11px;font-weight:800;letter-spacing:2px}
+.hero h1{font-size:36px;line-height:1.02;margin:9px 0}
+.hero p{color:#e7dfe7;font-size:14px;max-width:350px}
+.btn{border:0;border-radius:30px;padding:12px 18px;font-weight:800;cursor:pointer;transition:.15s}
+.btn:active{transform:scale(.98)}
+.primary{background:#ff4b78;color:white}
+.secondary{background:#302b34;color:#fff;border:1px solid #554a57;margin-left:8px}
+.section-head{display:flex;justify-content:space-between;align-items:center;margin:24px 0 12px}
+.section-head h2{font-size:18px;margin:0}
+.see{font-size:12px;color:#ff7896}
+.chips{display:flex;gap:8px;overflow:auto;padding-bottom:7px}
+.chip{border:1px solid #3a333e;background:#1c1920;color:#ccc;border-radius:25px;padding:8px 14px;white-space:nowrap;font-size:12px;cursor:pointer}
+.chip.active{background:#ff4b78;border-color:#ff4b78;color:#fff}
+.grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
+.card{background:#1a171e;border:1px solid #2a242e;border-radius:15px;overflow:hidden;cursor:pointer}
+.poster{height:190px;position:relative;display:flex;align-items:flex-end;padding:12px;background:linear-gradient(145deg,#55253f,#c85d76);background-size:cover;background-position:center}
+.poster:after{content:"✧";position:absolute;top:10px;right:14px;font-size:60px;color:#ffffff55}
+.p2{background:linear-gradient(145deg,#172d48,#4c86a4)}
+.p3{background:linear-gradient(145deg,#332447,#a35d8b)}
+.p4{background:linear-gradient(145deg,#49261f,#b36e43)}
+.p5{background:linear-gradient(145deg,#1f3d35,#5b977a)}
+.p6{background:linear-gradient(145deg,#30313e,#777a9b)}
+.tag{position:relative;z-index:1;background:#100f13b8;padding:5px 8px;border-radius:7px;font-size:10px}
+.card-info{padding:11px}
+.card-info h3{margin:0 0 5px;font-size:14px}
+.card-info p{margin:0;color:#a9a1ad;font-size:11px}
+.bottom{position:fixed;bottom:0;left:0;right:0;background:#151218f2;border-top:1px solid #2e2831;display:flex;justify-content:space-around;padding:12px 8px 18px;z-index:4}
+.navitem{font-size:11px;color:#aaa;text-align:center;cursor:pointer}
+.navitem b{display:block;font-size:18px;margin-bottom:3px}
+.navitem.sel{color:#ff4b78}
+.screen{display:none}
+.screen.active{display:block}
+.searchbox{width:100%;padding:13px 15px;background:#201c24;border:1px solid #39313e;border-radius:14px;color:white;margin:8px 0}
+.empty{color:#aaa;text-align:center;padding:40px 10px}
+.modal{position:fixed;inset:0;background:#09080beF;z-index:8;display:none;overflow:auto}
+.modal.open{display:block}
+.modal-inner{max-width:700px;margin:auto;padding:20px}
+.close{background:#29232e;color:white;border:0;border-radius:50%;width:38px;height:38px;font-size:20px;cursor:pointer}
+.playerbox{min-height:220px;background:#09080b;border-radius:18px;overflow:hidden;margin-top:18px;color:#f9e9f0;position:relative}
+.playerbox video{width:100%;max-height:70vh;aspect-ratio:9/16;object-fit:contain;background:#050505;display:block}
+.player-controls{display:flex;gap:8px;margin:12px 0}
+.player-controls button{flex:1;border:1px solid #39313e;border-radius:12px;padding:12px;background:#211d25;color:#fff;font-weight:700;cursor:pointer}
+.player-controls button:disabled{opacity:.35}
+.episode{width:100%;padding:14px;margin:7px 0;text-align:left;background:#211d25;color:white;border:1px solid #39313e;border-radius:12px;cursor:pointer}
+.episode small{display:block;color:#a9a0ad;margin-top:4px}
+.toast{position:fixed;bottom:85px;left:50%;transform:translateX(-50%);background:#39313e;padding:10px 15px;border-radius:20px;display:none;z-index:12;font-size:12px;max-width:90vw;text-align:center}
 @media(min-width:700px){.grid{grid-template-columns:repeat(3,minmax(0,1fr))}.poster{height:230px}.hero{height:440px}}
-.admin-row{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:12px;margin:8px 0;background:#1a171e;border:1px solid #302934;border-radius:12px}.admin-row strong{font-size:13px}.admin-row small{display:block;color:#aaa;margin-top:4px}.admin-actions{display:flex;gap:6px}.admin-actions button{border:1px solid #554a57;background:#302b34;color:#fff;border-radius:9px;padding:8px 10px;cursor:pointer}.admin-actions .danger{border-color:#8a344b;color:#ff9bb2}
+.admin-row{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:12px;margin:8px 0;background:#1a171e;border:1px solid #302934;border-radius:12px}
+.admin-row strong{font-size:13px}
+.admin-row small{display:block;color:#aaa;margin-top:4px}
+.admin-actions{display:flex;gap:6px}
+.admin-actions button{border:1px solid #554a57;background:#302b34;color:#fff;border-radius:9px;padding:8px 10px;cursor:pointer}
+.admin-actions .danger{border-color:#8a344b;color:#ff9bb2}
 .ad-label{display:block;font-size:12px;color:#d6ceda;margin-top:10px;font-weight:700}
 .ad-toggle{display:flex;align-items:center;gap:10px;margin:12px 0;font-size:13px;font-weight:700;cursor:pointer}
 .ad-toggle input{width:18px;height:18px;accent-color:#ff4b78}
@@ -23,10 +94,21 @@
 .ad-badge{display:inline-block;background:#ff4b7826;color:#ff7998;border:1px solid #ff4b7866;font-size:10px;font-weight:800;letter-spacing:1px;padding:4px 10px;border-radius:99px}
 .ad-visual{margin:14px 0;background:#0d0b10;border:1px dashed #473b50;border-radius:14px;padding:14px;min-height:150px;display:flex;flex-direction:column;align-items:center;justify-content:center}
 .ad-visual video{width:100%;max-height:240px;border-radius:10px;background:#000}
+.auth-tabs{display:flex;gap:8px;margin:14px 0 6px}
+.auth-tab{flex:1;padding:10px 12px;border-radius:12px;border:1px solid #39313e;background:#16131a;color:#bdb4c4;font-weight:800;font-size:12px;cursor:pointer}
+.auth-tab.active{background:#ff4b7824;border-color:#ff4b78;color:#fff}
+.auth-pane{display:none}
+.auth-pane.active{display:block}
+.divider{display:flex;align-items:center;gap:10px;color:#8e8497;font-size:11px;margin:14px 0 10px}
+.divider:before,.divider:after{content:"";flex:1;height:1px;background:#2e2733}
+.gmail-auth-box{background:#151219;border:1px solid #362c3d;border-radius:14px;padding:12px;margin-top:8px}
+.gmail-btn{width:100%;background:#ffffff;color:#141117;border:0;border-radius:12px;padding:11px 14px;font-weight:800;font-size:13px;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:8px;margin-top:8px}
+.note-muted{color:#aaa;font-size:12px;line-height:1.5}
 </style>
 <script src="https://www.gstatic.com/firebasejs/10.14.1/firebase-app-compat.js"></script>
 <script src="https://www.gstatic.com/firebasejs/10.14.1/firebase-firestore-compat.js"></script>
-</head><body>
+</head>
+<body>
 <header>
   <div class="brand-wrap">
     <img id="headerBrandLogo" class="brand-logo-img" alt="App Logo">
@@ -34,18 +116,47 @@
   </div>
   <div class="header-right">
     <button class="role-pill" id="headerRoleBadge" onclick="showScreen('profile', document.getElementById('navProfile'))">Sign in</button>
-    <div class="avatar" onclick="showScreen('profile', document.getElementById('navProfile'))" title="Account &amp; Gmail Login">
+    <div class="avatar" onclick="showScreen('profile', document.getElementById('navProfile'))" title="Account &amp; Sign-In">
       <span id="headerAvatarEmoji">👤</span>
       <img id="headerAvatarImg" alt="Profile Logo">
     </div>
   </div>
 </header>
+
 <main class="wrap">
-<div id="home" class="screen active"><section class="hero"><div class="hero-content"><div class="eyebrow">EXCLUSIVE MINI DRAMA</div><h1 id="heroBrandHeadline">My Contract<br>With The CEO</h1><p id="heroBrandSubtext">One contract. Two secrets. A love neither of them planned.</p><button class="btn primary" onclick="openDrama(0)">▶ Watch now</button><button class="btn secondary" onclick="saveDrama(0)">♡ Save</button></div></section>
-<div class="section-head"><h2>Browse by genre</h2></div><div class="chips" id="genres"><button class="chip active" onclick="filterGenre('All',this)">All</button><button class="chip" onclick="filterGenre('Romance',this)">Romance</button><button class="chip" onclick="filterGenre('Revenge',this)">Revenge</button><button class="chip" onclick="filterGenre('Fantasy',this)">Fantasy</button><button class="chip" onclick="filterGenre('Thriller',this)">Thriller</button></div>
-<div class="section-head"><h2>Trending dramas</h2><span class="see" id="cloudLiveTag">● Live Cloud Sync</span></div><div class="grid" id="dramaGrid"></div></div>
-<div id="search" class="screen"><div class="section-head"><h2>Search dramas</h2></div><input class="searchbox" id="searchInput" placeholder="Search title or genre…" oninput="render(this.value)"><div class="grid" id="searchGrid"></div></div>
-<div id="saved" class="screen"><div class="section-head"><h2>My watchlist</h2></div><div class="grid" id="savedGrid"></div><div class="empty" id="savedEmpty">Saved dramas will appear here.</div></div>
+<div id="home" class="screen active">
+  <section class="hero">
+    <div class="hero-content">
+      <div class="eyebrow">EXCLUSIVE MINI DRAMA</div>
+      <h1 id="heroBrandHeadline">My Contract<br>With The CEO</h1>
+      <p id="heroBrandSubtext">One contract. Two secrets. A love neither of them planned.</p>
+      <button class="btn primary" onclick="openDrama(0)">▶ Watch now</button>
+      <button class="btn secondary" onclick="saveDrama(0)">♡ Save</button>
+    </div>
+  </section>
+  <div class="section-head"><h2>Browse by genre</h2></div>
+  <div class="chips" id="genres">
+    <button class="chip active" onclick="filterGenre('All',this)">All</button>
+    <button class="chip" onclick="filterGenre('Romance',this)">Romance</button>
+    <button class="chip" onclick="filterGenre('Revenge',this)">Revenge</button>
+    <button class="chip" onclick="filterGenre('Fantasy',this)">Fantasy</button>
+    <button class="chip" onclick="filterGenre('Thriller',this)">Thriller</button>
+  </div>
+  <div class="section-head"><h2>Trending dramas</h2><span class="see" id="cloudLiveTag">● Live Cloud Sync</span></div>
+  <div class="grid" id="dramaGrid"></div>
+</div>
+
+<div id="search" class="screen">
+  <div class="section-head"><h2>Search dramas</h2></div>
+  <input class="searchbox" id="searchInput" placeholder="Search title or genre…" oninput="render(this.value)">
+  <div class="grid" id="searchGrid"></div>
+</div>
+
+<div id="saved" class="screen">
+  <div class="section-head"><h2>My watchlist</h2></div>
+  <div class="grid" id="savedGrid"></div>
+  <div class="empty" id="savedEmpty">Saved dramas will appear here.</div>
+</div>
 
 <div id="admin" class="screen">
   <div class="section-head"><h2>Admin Panel</h2><span class="see" id="adminSessionEmail">ADMIN ONLY</span></div>
@@ -53,7 +164,7 @@
 
   <div class="card" style="padding:16px;margin-bottom:14px;cursor:default">
     <h3 style="margin-top:0">App Logo &amp; Branding Setup (Global Sync)</h3>
-    <p style="color:#aaa;font-size:12px;line-height:1.5;margin-top:0">Naka-save ito sa Firebase Cloud. Mag-u-update ito sa lahat ng users at hindi mabubura kahit i-uninstall ang APK.</p>
+    <p class="note-muted" style="margin-top:0">Naka-save ito sa Firebase Cloud. Mag-u-update ito sa lahat ng users at hindi mabubura kahit i-uninstall ang APK.</p>
 
     <label class="ad-label" for="brandAppNameInput">App Name</label>
     <input class="searchbox" id="brandAppNameInput" placeholder="e.g. DramaVerse">
@@ -92,24 +203,27 @@
   </div>
 
   <div class="card" style="padding:16px;margin:14px 0;cursor:default">
-    <h3 style="margin-top:0">Upload / Link an Episode (Global Sync)</h3>
-    <p style="color:#aaa;font-size:12px;line-height:1.5">Para mapanood ng <strong>lahat ng users</strong>, maglagay ng direct MP4 Video URL o i-set up ang libreng Cloudinary Cloud Name &amp; Unsigned Preset para direkta kang makapag-upload ng MP4 file mula sa CP.</p>
+    <h3 style="margin-top:0">Publish Episode via Direct Video Link (Global Sync)</h3>
+    <p class="note-muted">I-paste lang dito ang direct <code>.mp4</code> link mo mula sa GitHub o iba pang video host para mabilis at mapanatili ang HD quality. Opsyonal lang ang Cloudinary upload sa ibaba.</p>
     <select class="searchbox" id="uploadDrama"></select>
     <input class="searchbox" id="uploadEpisodeNo" type="number" min="1" value="1" placeholder="Episode number">
     <input class="searchbox" id="uploadEpisodeTitle" placeholder="Episode title (optional)">
-    
-    <label class="ad-label" for="uploadEpisodeUrl">Option A: Direct MP4 Video URL (Recommended)</label>
+
+    <label class="ad-label" for="uploadEpisodeUrl">Direct MP4 Video URL (Primary · Copy-Paste Link)</label>
     <input class="searchbox" id="uploadEpisodeUrl" placeholder="https://.../episode1.mp4">
 
-    <label class="ad-label" for="episodeVideoFile">Option B: Upload MP4 File via Cloudinary (Free 25GB)</label>
-    <input class="searchbox" id="episodeVideoFile" type="file" accept="video/*">
-    <div style="display:flex;gap:8px;flex-wrap:wrap">
-      <input class="searchbox" style="flex:1;min-width:130px" id="cloudinaryCloudName" placeholder="Cloudinary Cloud Name (optional)">
-      <input class="searchbox" style="flex:1;min-width:130px" id="cloudinaryUploadPreset" placeholder="Unsigned Upload Preset">
-    </div>
+    <details style="margin-top:10px">
+      <summary style="cursor:pointer;font-size:12px;color:#d6ceda;font-weight:700">Optional: Upload MP4 File via Cloudinary (Fallback)</summary>
+      <label class="ad-label" for="episodeVideoFile">Video File (.mp4)</label>
+      <input class="searchbox" id="episodeVideoFile" type="file" accept="video/*">
+      <div style="display:flex;gap:8px;flex-wrap:wrap">
+        <input class="searchbox" style="flex:1;min-width:130px" id="cloudinaryCloudName" placeholder="Cloudinary Cloud Name">
+        <input class="searchbox" style="flex:1;min-width:130px" id="cloudinaryUploadPreset" placeholder="Unsigned Upload Preset">
+      </div>
+    </details>
 
-    <button class="btn primary" style="width:100%" onclick="uploadEpisode()">☁️ Save &amp; Publish Episode</button>
-    <p id="uploadStatus" style="color:#aaa;font-size:12px;line-height:1.5">Ang episode video link ay mase-save sa Firebase Cloud at agad lalabas sa lahat ng users.</p>
+    <button class="btn primary" style="width:100%;margin-top:12px" onclick="uploadEpisode()">☁️ Save &amp; Publish Episode</button>
+    <p id="uploadStatus" class="note-muted">Ilagay ang direct MP4 URL sa itaas at i-tap ang Save &amp; Publish Episode.</p>
   </div>
 
   <div class="section-head"><h2>Manage dramas</h2><span class="see" id="adminCount"></span></div>
@@ -117,7 +231,7 @@
 
   <div class="card" style="padding:16px;margin:14px 0;cursor:default">
     <h3 style="margin-top:0">Ads Setup</h3>
-    <p style="color:#aaa;font-size:12px;line-height:1.5;margin-top:0">Configure automatic ad triggers after completed videos and store your AdMob reference IDs inside Admin Panel.</p>
+    <p class="note-muted" style="margin-top:0">Configure automatic ad triggers after completed videos and store your AdMob reference IDs inside Admin Panel.</p>
     <label class="ad-toggle">
       <input type="checkbox" id="adEnabledToggle" onchange="saveAdSettings()">
       <span>Enable / Disable Advertisements</span>
@@ -159,35 +273,74 @@
 </div>
 
 <div id="profile" class="screen">
-  <div class="section-head"><h2>Account &amp; Gmail Sign-In</h2><span class="see" id="accountRoleTag">VIEWER</span></div>
+  <div class="section-head"><h2>Account, Register &amp; Sign-In</h2><span class="see" id="accountRoleTag">GUEST</span></div>
   <div class="card" style="padding:20px;margin-top:12px;cursor:default">
-    <div style="display:flex;align-items:center;gap:12px">
-      <div style="font-size:38px">👤</div>
-      <div>
-        <h3 id="profileName" style="margin:0">DramaVerse Guest</h3>
-        <p id="profileEmailText" style="color:#aaa;font-size:12px;margin:4px 0 0">Not signed in yet · Enter your Gmail below</p>
+    <div style="display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap">
+      <div style="display:flex;align-items:center;gap:12px">
+        <div style="font-size:38px">👤</div>
+        <div>
+          <h3 id="profileName" style="margin:0">DramaVerse Guest</h3>
+          <p id="profileEmailText" style="color:#aaa;font-size:12px;margin:4px 0 0">Not signed in yet · Register, login with password, or use Gmail</p>
+        </div>
       </div>
+      <button class="btn secondary" style="margin-left:0;padding:9px 14px;font-size:12px" onclick="handleSignOut()">Sign out</button>
     </div>
 
-    <label class="ad-label" for="loginDisplayName">Display Name (optional)</label>
-    <input class="searchbox" id="loginDisplayName" placeholder="e.g. Viewer Name">
+    <div class="auth-tabs">
+      <button class="auth-tab active" id="tabBtnLogin" onclick="switchAuthTab('login')">Sign In</button>
+      <button class="auth-tab" id="tabBtnRegister" onclick="switchAuthTab('register')">Create Account</button>
+    </div>
 
-    <label class="ad-label" for="loginGmailInput">Gmail Address</label>
-    <input class="searchbox" id="loginGmailInput" type="email" placeholder="name@gmail.com">
+    <!-- SIGN IN WITH EMAIL/USERNAME + PASSWORD -->
+    <div class="auth-pane active" id="authPaneLogin">
+      <label class="ad-label" for="loginIdentifierInput">Email or Username</label>
+      <input class="searchbox" id="loginIdentifierInput" placeholder="name@gmail.com or username">
 
-    <div style="display:flex;gap:8px;flex-wrap:wrap;margin-top:6px">
-      <button class="btn primary" style="flex:1;min-width:160px" onclick="handleGmailSignIn()">✦ Continue with Gmail</button>
-      <button class="btn secondary" style="margin-left:0" onclick="handleSignOut()">Sign out</button>
+      <label class="ad-label" for="loginPasswordInput">Password</label>
+      <input class="searchbox" id="loginPasswordInput" type="password" placeholder="Enter your password">
+
+      <button class="btn primary" style="width:100%;margin-top:8px" onclick="handlePasswordLogin()">Sign In with Password</button>
+    </div>
+
+    <!-- REGISTER NEW ACCOUNT WITH USERNAME, EMAIL & PASSWORD -->
+    <div class="auth-pane" id="authPaneRegister">
+      <label class="ad-label" for="regUsernameInput">Username</label>
+      <input class="searchbox" id="regUsernameInput" placeholder="e.g. drama_fan01">
+
+      <label class="ad-label" for="regEmailInput">Email / Gmail Address</label>
+      <input class="searchbox" id="regEmailInput" type="email" placeholder="name@gmail.com">
+
+      <label class="ad-label" for="regPasswordInput">Create Password (min. 6 characters)</label>
+      <input class="searchbox" id="regPasswordInput" type="password" placeholder="Create a password">
+
+      <button class="btn primary" style="width:100%;margin-top:8px" onclick="handleRegisterAccount()">✦ Create Account &amp; Sign In</button>
+    </div>
+
+    <div class="divider">OR AUTHORIZE GMAIL LOGIN</div>
+
+    <!-- AUTHORIZE GMAIL LOGIN -->
+    <div class="gmail-auth-box">
+      <p class="note-muted" style="margin:0">Mabilis na pag-authorize gamit ang Gmail account mo (hindi magbubukas ng external Gmail app).</p>
+      <label class="ad-label" for="loginDisplayName">Username / Display Name (optional)</label>
+      <input class="searchbox" id="loginDisplayName" placeholder="e.g. Your Username">
+
+      <label class="ad-label" for="loginGmailInput">Gmail Address to Authorize</label>
+      <input class="searchbox" id="loginGmailInput" type="email" placeholder="name@gmail.com">
+
+      <button class="gmail-btn" onclick="handleGmailAuthorizeLogin()">
+        <span>G</span>
+        <span>Authorize &amp; Continue with Gmail</span>
+      </button>
     </div>
 
     <div class="email-preview" id="welcomeEmailBox">
-      <strong>Welcome / Account Email Template</strong><br>
-      Kapag nag-login o nag-create ng account gamit ang Gmail, dito makikita ang welcome confirmation summary.
+      <strong>Account &amp; Welcome Summary</strong><br>
+      Kapag nag-register, nag-login gamit ang password, o nag-authorize ng Gmail, dito lalabas ang detalye ng account mo.
     </div>
   </div>
 
   <div class="section-head"><h2>App info</h2></div>
-  <p id="appInfoSummary" style="color:#aaa;font-size:13px;line-height:1.7">DramaVerse is an AI mini-drama streaming app. Sign in with your Gmail to watch and manage your watchlist.</p>
+  <p id="appInfoSummary" style="color:#aaa;font-size:13px;line-height:1.7">DramaVerse is an AI mini-drama streaming app. Create an account, sign in with password, or authorize Gmail to watch and save dramas.</p>
 </div>
 </main>
 
@@ -199,7 +352,25 @@
   <div class="navitem" id="navAdmin" style="display:none" onclick="showScreen('admin',this)"><b>⚙</b>Admin</div>
 </nav>
 
-<div class="modal" id="player"><div class="modal-inner"><button class="close" onclick="closePlayer()">×</button><div class="playerbox"><video id="videoPlayer" controls playsinline preload="metadata"><source src="https://storage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4" type="video/mp4">Your browser does not support video playback.</video></div><div class="player-controls"><button onclick="previousEpisode()">⏮ Previous</button><button onclick="togglePlay()">▶ / ⏸ Play</button><button onclick="nextEpisode()">Next ⏭</button></div><h2 id="playerTitle">Drama title</h2><p style="color:#aaa;font-size:13px" id="episodeLabel">Select an episode</p><div id="episodeList"></div></div></div>
+<div class="modal" id="player">
+  <div class="modal-inner">
+    <button class="close" onclick="closePlayer()">×</button>
+    <div class="playerbox">
+      <video id="videoPlayer" controls playsinline preload="metadata">
+        <source src="https://storage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4" type="video/mp4">
+        Your browser does not support video playback.
+      </video>
+    </div>
+    <div class="player-controls">
+      <button onclick="previousEpisode()">⏮ Previous</button>
+      <button onclick="togglePlay()">▶ / ⏸ Play</button>
+      <button onclick="nextEpisode()">Next ⏭</button>
+    </div>
+    <h2 id="playerTitle">Drama title</h2>
+    <p style="color:#aaa;font-size:13px" id="episodeLabel">Select an episode</p>
+    <div id="episodeList"></div>
+  </div>
+</div>
 
 <div class="ad-modal" id="adModal" role="dialog" aria-modal="true" aria-labelledby="adModalTitle">
   <div class="ad-card">
@@ -212,6 +383,7 @@
 </div>
 
 <div class="toast" id="toast"></div>
+
 <script>
 const firebaseConfig = {
   apiKey: "AIzaSyBZ8cKzY7Wh6uJMI5SopkwQIzDOTCmUNQw",
@@ -223,857 +395,1122 @@ const firebaseConfig = {
   measurementId: "G-3M2D1DH3D1"
 };
 
-let db=null;
-try{
+let db = null;
+try {
   firebase.initializeApp(firebaseConfig);
-  db=firebase.firestore();
-}catch(e){
-  console.error('Firebase init error:',e);
+  db = firebase.firestore();
+} catch (e) {
+  console.error('Firebase init error:', e);
 }
 
-const ADMIN_GMAILS=['harryequibal0@gmail.com'];
+const ADMIN_GMAILS = ['harryequibal0@gmail.com'];
 
-const EMAILJS_CONFIG={
-  enabled:true,
-  publicKey:'YOUR_EMAILJS_PUBLIC_KEY',
-  serviceId:'service_nil4tns',
-  templateId:'template_o2vgp5v'
+const EMAILJS_CONFIG = {
+  enabled: true,
+  publicKey: 'YOUR_EMAILJS_PUBLIC_KEY',
+  serviceId: 'service_nil4tns',
+  templateId: 'template_o2vgp5v'
 };
 
-const DEFAULT_BRANDING={
-  appName:'DramaVerse',
-  logoSrc:'',
-  heroTitle:'My Contract\nWith The CEO',
-  heroDesc:'One contract. Two secrets. A love neither of them planned.'
+const DEFAULT_BRANDING = {
+  appName: 'DramaVerse',
+  logoSrc: '',
+  heroTitle: 'My Contract\nWith The CEO',
+  heroDesc: 'One contract. Two secrets. A love neither of them planned.'
 };
 
-function normalizeGmail(email){return String(email||'').trim().toLowerCase();}
-function isAdminGmail(email){return ADMIN_GMAILS.includes(normalizeGmail(email));}
-function escapeHTML(s){return String(s||'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));}
+function normalizeEmail(email) {
+  return String(email || '').trim().toLowerCase();
+}
+function normalizeUsername(u) {
+  return String(u || '').trim().toLowerCase().replace(/[^a-z0-9_.-]/g, '');
+}
+function isAdminGmail(email) {
+  return ADMIN_GMAILS.includes(normalizeEmail(email));
+}
+function escapeHTML(s) {
+  return String(s || '').replace(/[&<>"']/g, c => ({
+    '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;'
+  }[c]));
+}
 
-function loadBranding(){
-  try{
-    const raw=JSON.parse(localStorage.getItem('dvBranding')||'null');
-    if(raw&&typeof raw==='object'){
+function loadBranding() {
+  try {
+    const raw = JSON.parse(localStorage.getItem('dvBranding') || 'null');
+    if (raw && typeof raw === 'object') {
       return {
-        appName:String(raw.appName||DEFAULT_BRANDING.appName).trim()||DEFAULT_BRANDING.appName,
-        logoSrc:typeof raw.logoSrc==='string'?raw.logoSrc:'',
-        heroTitle:typeof raw.heroTitle==='string'&&raw.heroTitle.trim()?raw.heroTitle:DEFAULT_BRANDING.heroTitle,
-        heroDesc:typeof raw.heroDesc==='string'&&raw.heroDesc.trim()?raw.heroDesc:DEFAULT_BRANDING.heroDesc
+        appName: String(raw.appName || DEFAULT_BRANDING.appName).trim() || DEFAULT_BRANDING.appName,
+        logoSrc: typeof raw.logoSrc === 'string' ? raw.logoSrc : '',
+        heroTitle: typeof raw.heroTitle === 'string' && raw.heroTitle.trim() ? raw.heroTitle : DEFAULT_BRANDING.heroTitle,
+        heroDesc: typeof raw.heroDesc === 'string' && raw.heroDesc.trim() ? raw.heroDesc : DEFAULT_BRANDING.heroDesc
       };
     }
-  }catch(e){}
-  return {...DEFAULT_BRANDING};
+  } catch (e) {}
+  return { ...DEFAULT_BRANDING };
 }
 
-let branding=loadBranding();
+let branding = loadBranding();
 
-function applyBrandingUI(){
-  const cleanName=branding.appName||'DramaVerse';
-  document.title=cleanName+' — AI Mini Dramas';
+function applyBrandingUI() {
+  const cleanName = branding.appName || 'DramaVerse';
+  document.title = cleanName + ' — AI Mini Dramas';
 
-  const headerTitleEl=document.getElementById('headerBrandTitle');
-  if(headerTitleEl){
-    const half=Math.ceil(cleanName.length/2);
-    const firstPart=cleanName.slice(0,half);
-    const secondPart=cleanName.slice(half);
-    headerTitleEl.innerHTML=`${escapeHTML(firstPart)}<span>${escapeHTML(secondPart)}</span> ✦`;
+  const headerTitleEl = document.getElementById('headerBrandTitle');
+  if (headerTitleEl) {
+    const half = Math.ceil(cleanName.length / 2);
+    headerTitleEl.innerHTML = `${escapeHTML(cleanName.slice(0, half))}<span>${escapeHTML(cleanName.slice(half))}</span> ✦`;
   }
 
-  const hLogo=document.getElementById('headerBrandLogo');
-  const avImg=document.getElementById('headerAvatarImg');
-  const avEmoji=document.getElementById('headerAvatarEmoji');
-  const prevImg=document.getElementById('adminLogoPreviewImg');
-  const prevText=document.getElementById('adminLogoPreviewText');
+  const hLogo = document.getElementById('headerBrandLogo');
+  const avImg = document.getElementById('headerAvatarImg');
+  const avEmoji = document.getElementById('headerAvatarEmoji');
+  const prevImg = document.getElementById('adminLogoPreviewImg');
+  const prevText = document.getElementById('adminLogoPreviewText');
 
-  const hasValidLogo=Boolean(branding.logoSrc && (branding.logoSrc.startsWith('data:image/') || branding.logoSrc.startsWith('https://') || branding.logoSrc.startsWith('http://')));
-  if(hasValidLogo){
-    if(hLogo){hLogo.src=branding.logoSrc;hLogo.style.display='block';}
-    if(avImg){avImg.src=branding.logoSrc;avImg.style.display='block';}
-    if(avEmoji){avEmoji.style.display='none';}
-    if(prevImg){prevImg.src=branding.logoSrc;prevImg.style.display='block';}
-    if(prevText){prevText.textContent='Custom logo active (Synced in Cloud)';}
-  }else{
-    if(hLogo){hLogo.removeAttribute('src');hLogo.style.display='none';}
-    if(avImg){avImg.removeAttribute('src');avImg.style.display='none';}
-    if(avEmoji){avEmoji.style.display='block';}
-    if(prevImg){prevImg.removeAttribute('src');prevImg.style.display='none';}
-    if(prevText){prevText.textContent='No custom logo active (default mark shown)';}
+  const hasValidLogo = Boolean(branding.logoSrc && (
+    branding.logoSrc.startsWith('data:image/') ||
+    branding.logoSrc.startsWith('https://') ||
+    branding.logoSrc.startsWith('http://')
+  ));
+
+  if (hasValidLogo) {
+    if (hLogo) { hLogo.src = branding.logoSrc; hLogo.style.display = 'block'; }
+    if (avImg) { avImg.src = branding.logoSrc; avImg.style.display = 'block'; }
+    if (avEmoji) { avEmoji.style.display = 'none'; }
+    if (prevImg) { prevImg.src = branding.logoSrc; prevImg.style.display = 'block'; }
+    if (prevText) { prevText.textContent = 'Custom logo active (Synced in Cloud)'; }
+  } else {
+    if (hLogo) { hLogo.removeAttribute('src'); hLogo.style.display = 'none'; }
+    if (avImg) { avImg.removeAttribute('src'); avImg.style.display = 'none'; }
+    if (avEmoji) { avEmoji.style.display = 'block'; }
+    if (prevImg) { prevImg.removeAttribute('src'); prevImg.style.display = 'none'; }
+    if (prevText) { prevText.textContent = 'No custom logo active (default mark shown)'; }
   }
 
-  const heroH1=document.getElementById('heroBrandHeadline');
-  const heroP=document.getElementById('heroBrandSubtext');
-  if(heroH1)heroH1.innerHTML=escapeHTML(branding.heroTitle).replace(/\n/g,'<br>');
-  if(heroP)heroP.textContent=branding.heroDesc;
+  const heroH1 = document.getElementById('heroBrandHeadline');
+  const heroP = document.getElementById('heroBrandSubtext');
+  if (heroH1) heroH1.innerHTML = escapeHTML(branding.heroTitle).replace(/\n/g, '<br>');
+  if (heroP) heroP.textContent = branding.heroDesc;
 
-  const infoEl=document.getElementById('appInfoSummary');
-  if(infoEl)infoEl.textContent=`${cleanName} is an AI mini-drama streaming app. Sign in with your Gmail to watch and manage your watchlist.`;
+  const infoEl = document.getElementById('appInfoSummary');
+  if (infoEl) infoEl.textContent = `${cleanName} is an AI mini-drama streaming app. Create an account, sign in with password, or authorize Gmail to watch and save dramas.`;
 
-  const nameInput=document.getElementById('brandAppNameInput');
-  const urlInput=document.getElementById('brandLogoUrlInput');
-  const hTitleInput=document.getElementById('brandHeroTitleInput');
-  const hDescInput=document.getElementById('brandHeroDescInput');
-  if(nameInput&&document.activeElement!==nameInput)nameInput.value=cleanName;
-  if(urlInput&&document.activeElement!==urlInput)urlInput.value=branding.logoSrc.startsWith('http')?branding.logoSrc:'';
-  if(hTitleInput&&document.activeElement!==hTitleInput)hTitleInput.value=branding.heroTitle.replace(/\n/g,' ');
-  if(hDescInput&&document.activeElement!==hDescInput)hDescInput.value=branding.heroDesc;
+  const nameInput = document.getElementById('brandAppNameInput');
+  const urlInput = document.getElementById('brandLogoUrlInput');
+  const hTitleInput = document.getElementById('brandHeroTitleInput');
+  const hDescInput = document.getElementById('brandHeroDescInput');
+  if (nameInput && document.activeElement !== nameInput) nameInput.value = cleanName;
+  if (urlInput && document.activeElement !== urlInput) urlInput.value = branding.logoSrc.startsWith('http') ? branding.logoSrc : '';
+  if (hTitleInput && document.activeElement !== hTitleInput) hTitleInput.value = branding.heroTitle.replace(/\n/g, ' ');
+  if (hDescInput && document.activeElement !== hDescInput) hDescInput.value = branding.heroDesc;
 }
 
-function handleLogoFileUpload(inputEl){
-  const file=inputEl?.files?.[0];
-  if(!file)return;
-  if(!file.type.startsWith('image/')){toast('Pumili ng image file (PNG/JPG)');return;}
-  const reader=new FileReader();
-  reader.onload=()=>{
-    const img=new Image();
-    img.onload=()=>{
-      const canvas=document.createElement('canvas');
-      const maxDim=220;
-      let w=img.width,h=img.height;
-      if(w>h&&w>maxDim){h=Math.round(h*(maxDim/w));w=maxDim;}
-      else if(h>maxDim){w=Math.round(w*(maxDim/h));h=maxDim;}
-      canvas.width=w;canvas.height=h;
-      const ctx=canvas.getContext('2d');
-      ctx.drawImage(img,0,0,w,h);
-      branding.logoSrc=canvas.toDataURL('image/webp',0.82);
+function handleLogoFileUpload(inputEl) {
+  const file = inputEl?.files?.[0];
+  if (!file) return;
+  if (!file.type.startsWith('image/')) { toast('Pumili ng image file (PNG/JPG)'); return; }
+  const reader = new FileReader();
+  reader.onload = () => {
+    const img = new Image();
+    img.onload = () => {
+      const canvas = document.createElement('canvas');
+      const maxDim = 220;
+      let w = img.width, h = img.height;
+      if (w > h && w > maxDim) { h = Math.round(h * (maxDim / w)); w = maxDim; }
+      else if (h > maxDim) { w = Math.round(w * (maxDim / h)); h = maxDim; }
+      canvas.width = w; canvas.height = h;
+      canvas.getContext('2d').drawImage(img, 0, 0, w, h);
+      branding.logoSrc = canvas.toDataURL('image/webp', 0.82);
       applyBrandingUI();
       toast('Logo ready — tap Save & Publish Branding');
     };
-    img.src=String(reader.result||'');
+    img.src = String(reader.result || '');
   };
   reader.readAsDataURL(file);
 }
 
-async function saveBrandingSettings(){
-  const nameVal=(document.getElementById('brandAppNameInput')?.value||'').trim()||DEFAULT_BRANDING.appName;
-  const urlVal=(document.getElementById('brandLogoUrlInput')?.value||'').trim();
-  const hTitleVal=(document.getElementById('brandHeroTitleInput')?.value||'').trim()||DEFAULT_BRANDING.heroTitle;
-  const hDescVal=(document.getElementById('brandHeroDescInput')?.value||'').trim()||DEFAULT_BRANDING.heroDesc;
+async function saveBrandingSettings() {
+  const nameVal = (document.getElementById('brandAppNameInput')?.value || '').trim() || DEFAULT_BRANDING.appName;
+  const urlVal = (document.getElementById('brandLogoUrlInput')?.value || '').trim();
+  const hTitleVal = (document.getElementById('brandHeroTitleInput')?.value || '').trim() || DEFAULT_BRANDING.heroTitle;
+  const hDescVal = (document.getElementById('brandHeroDescInput')?.value || '').trim() || DEFAULT_BRANDING.heroDesc;
 
-  let nextLogo=branding.logoSrc;
-  if(urlVal){
-    if(urlVal.startsWith('https://')||urlVal.startsWith('http://')){
-      nextLogo=urlVal;
-    }else{
+  let nextLogo = branding.logoSrc;
+  if (urlVal) {
+    if (urlVal.startsWith('https://') || urlVal.startsWith('http://')) {
+      nextLogo = urlVal;
+    } else {
       toast('Gamitin ang https:// URL para sa logo');
       return;
     }
   }
 
-  branding={
-    appName:nameVal,
-    logoSrc:nextLogo,
-    heroTitle:hTitleVal,
-    heroDesc:hDescVal
-  };
-  try{localStorage.setItem('dvBranding',JSON.stringify(branding));}catch(e){}
+  branding = { appName: nameVal, logoSrc: nextLogo, heroTitle: hTitleVal, heroDesc: hDescVal };
+  try { localStorage.setItem('dvBranding', JSON.stringify(branding)); } catch (e) {}
   applyBrandingUI();
 
-  if(db){
-    try{
+  if (db) {
+    try {
       await db.collection('appConfig').doc('branding').set({
         ...branding,
-        updatedAt:firebase.firestore.FieldValue.serverTimestamp()
+        updatedAt: firebase.firestore.FieldValue.serverTimestamp()
       });
       toast('Branding & logo published to ALL users!');
-    }catch(err){
-      toast('Cloud save error: '+err.message);
+    } catch (err) {
+      toast('Cloud save error: ' + err.message);
     }
-  }else{
+  } else {
     toast('Saved locally (Offline)');
   }
 }
 
-async function resetBrandingSettings(){
-  branding={...DEFAULT_BRANDING};
+async function resetBrandingSettings() {
+  branding = { ...DEFAULT_BRANDING };
   localStorage.removeItem('dvBranding');
-  const fInput=document.getElementById('brandLogoFileInput');
-  if(fInput)fInput.value='';
+  const fInput = document.getElementById('brandLogoFileInput');
+  if (fInput) fInput.value = '';
   applyBrandingUI();
-  if(db){
-    try{
+  if (db) {
+    try {
       await db.collection('appConfig').doc('branding').set({
         ...branding,
-        updatedAt:firebase.firestore.FieldValue.serverTimestamp()
+        updatedAt: firebase.firestore.FieldValue.serverTimestamp()
       });
-    }catch(e){}
+    } catch (e) {}
   }
   toast('Reset to default DramaVerse branding');
 }
 
-function loadSession(){
-  try{
-    const raw=JSON.parse(localStorage.getItem('dvSession')||'null');
-    if(raw&&raw.email){
-      return {email:normalizeGmail(raw.email),name:String(raw.name||'').trim()};
+/* ============================================================
+   USER ACCOUNTS: REGISTER, PASSWORD LOGIN & GMAIL AUTHORIZE
+============================================================ */
+function loadUsersList() {
+  try {
+    const arr = JSON.parse(localStorage.getItem('dvUsers') || '[]');
+    return Array.isArray(arr) ? arr : [];
+  } catch (e) {
+    return [];
+  }
+}
+
+function saveUsersList(list) {
+  localStorage.setItem('dvUsers', JSON.stringify(list));
+}
+
+function loadSession() {
+  try {
+    const raw = JSON.parse(localStorage.getItem('dvSession') || 'null');
+    if (raw && (raw.email || raw.username)) {
+      return {
+        email: normalizeEmail(raw.email || ''),
+        username: normalizeUsername(raw.username || ''),
+        name: String(raw.name || '').trim(),
+        method: String(raw.method || 'account')
+      };
     }
-  }catch(e){}
+  } catch (e) {}
   return null;
 }
 
-let currentSession=loadSession();
+let currentSession = loadSession();
 
-function buildWelcomeEmailHTML(email,name){
-  const safeName=escapeHTML(name||email.split('@')[0]||'Viewer');
-  const safeEmail=escapeHTML(email);
-  const appTitle=escapeHTML(branding.appName||'DramaVerse');
-  const roleLabel=isAdminGmail(email)?'Admin Creator':'Viewer';
+function switchAuthTab(tabName) {
+  const isLogin = tabName === 'login';
+  document.getElementById('tabBtnLogin')?.classList.toggle('active', isLogin);
+  document.getElementById('tabBtnRegister')?.classList.toggle('active', !isLogin);
+  document.getElementById('authPaneLogin')?.classList.toggle('active', isLogin);
+  document.getElementById('authPaneRegister')?.classList.toggle('active', !isLogin);
+}
+
+function buildAccountSummaryHTML(sessionObj) {
+  const safeName = escapeHTML(sessionObj.name || sessionObj.username || (sessionObj.email ? sessionObj.email.split('@')[0] : 'Viewer'));
+  const safeEmail = escapeHTML(sessionObj.email || 'Not set');
+  const safeUser = escapeHTML(sessionObj.username || '—');
+  const appTitle = escapeHTML(branding.appName || 'DramaVerse');
+  const roleLabel = isAdminGmail(sessionObj.email) ? 'Admin Creator' : 'Viewer';
+  const methodLabel = sessionObj.method === 'gmail_authorized' ? 'Authorized Gmail' : (sessionObj.method === 'registered' ? 'Registered Password Account' : 'Password Login');
   return `
     <div style="border-left:3px solid #ff4b78;padding-left:10px">
-      <strong>Subject:</strong> Welcome to ${appTitle}, ${safeName}! ✦<br>
-      <strong>To:</strong> ${safeEmail}<br>
-      <strong>Account Type:</strong> ${roleLabel}<br>
-      <p style="margin:8px 0 0;color:#d6ceda">Hi ${safeName}, salamat sa pag-sign in sa <strong>${appTitle}</strong> gamit ang <strong>${safeEmail}</strong>.</p>
+      <strong>Active Account:</strong> ${safeName} (@${safeUser})<br>
+      <strong>Email:</strong> ${safeEmail}<br>
+      <strong>Sign-In Method:</strong> ${methodLabel} · <strong>Role:</strong> ${roleLabel}<br>
+      <p style="margin:8px 0 0;color:#d6ceda">Naka-sign in ka na sa <strong>${appTitle}</strong>.</p>
     </div>
   `;
 }
 
-async function sendAccountWelcomeEmail(email,name){
-  const cleanEmail=normalizeGmail(email);
-  const displayName=(name||cleanEmail.split('@')[0]||'Viewer').trim();
-  const appTitle=branding.appName||'DramaVerse';
-  const accountRole=isAdminGmail(cleanEmail)?'Admin Creator':'Viewer';
-  const box=document.getElementById('welcomeEmailBox');
+async function sendAccountWelcomeEmail(email, name) {
+  const cleanEmail = normalizeEmail(email);
+  if (!cleanEmail || !cleanEmail.includes('@')) return;
+  const displayName = (name || cleanEmail.split('@')[0] || 'Viewer').trim();
+  const appTitle = branding.appName || 'DramaVerse';
+  const accountRole = isAdminGmail(cleanEmail) ? 'Admin Creator' : 'Viewer';
+  const box = document.getElementById('welcomeEmailBox');
 
-  if(box){
-    box.innerHTML=buildWelcomeEmailHTML(cleanEmail,displayName)+`<div style="margin-top:8px;color:#9e95a6">Status: Sending email to ${escapeHTML(cleanEmail)}…</div>`;
-  }
-
-  const ready=Boolean(
+  const ready = Boolean(
     EMAILJS_CONFIG.enabled &&
     EMAILJS_CONFIG.publicKey && !EMAILJS_CONFIG.publicKey.startsWith('YOUR_') &&
     EMAILJS_CONFIG.serviceId && !EMAILJS_CONFIG.serviceId.startsWith('YOUR_') &&
     EMAILJS_CONFIG.templateId && !EMAILJS_CONFIG.templateId.startsWith('YOUR_')
   );
 
-  if(!ready){
-    if(box){
-      box.innerHTML=buildWelcomeEmailHTML(cleanEmail,displayName)+`<div style="margin-top:8px;color:#ffb6c9">Status: Preview only — ilagay ang Public Key sa EMAILJS_CONFIG.</div>`;
-    }
-    return;
-  }
+  if (!ready) return;
 
-  try{
-    const res=await fetch('https://api.emailjs.com/api/v1.0/email/send',{
-      method:'POST',
-      headers:{'Content-Type':'application/json'},
-      body:JSON.stringify({
-        lib_version:'4.4.1',
-        user_id:EMAILJS_CONFIG.publicKey,
-        service_id:EMAILJS_CONFIG.serviceId,
-        template_id:EMAILJS_CONFIG.templateId,
-        template_params:{
-          email:cleanEmail,
-          to_email:cleanEmail,
-          display_name:displayName,
-          app_name:appTitle,
-          account_role:accountRole
+  try {
+    const res = await fetch('https://api.emailjs.com/api/v1.0/email/send', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        lib_version: '4.4.1',
+        user_id: EMAILJS_CONFIG.publicKey,
+        service_id: EMAILJS_CONFIG.serviceId,
+        template_id: EMAILJS_CONFIG.templateId,
+        template_params: {
+          email: cleanEmail,
+          to_email: cleanEmail,
+          display_name: displayName,
+          app_name: appTitle,
+          account_role: accountRole
         }
       })
     });
-    if(!res.ok)throw new Error('EmailJS failed ('+res.status+')');
-    if(box){
-      box.innerHTML=buildWelcomeEmailHTML(cleanEmail,displayName)+`<div style="margin-top:8px;color:#7be0a6">Status: Welcome email sent to ${escapeHTML(cleanEmail)}.</div>`;
+    if (res.ok && box) {
+      box.innerHTML += `<div style="margin-top:6px;color:#7be0a6">Welcome email sent to ${escapeHTML(cleanEmail)}.</div>`;
     }
-    toast('Welcome email sent to '+cleanEmail);
-  }catch(e){
-    if(box){
-      box.innerHTML=buildWelcomeEmailHTML(cleanEmail,displayName)+`<div style="margin-top:8px;color:#ff9bb2">Status: Hindi naipadala ang email. I-check ang Public Key at Template ID.</div>`;
-    }
+  } catch (e) {}
+}
+
+function completeSessionLogin(sessionObj, showWelcomeMail = false) {
+  currentSession = sessionObj;
+  localStorage.setItem('dvSession', JSON.stringify(currentSession));
+  applyAuthUI();
+  const box = document.getElementById('welcomeEmailBox');
+  if (box) box.innerHTML = buildAccountSummaryHTML(currentSession);
+  if (showWelcomeMail && currentSession.email) {
+    sendAccountWelcomeEmail(currentSession.email, currentSession.name || currentSession.username);
+  }
+  if (isAdminGmail(currentSession.email)) {
+    toast('Admin Gmail authorized — Admin Panel unlocked');
+    showScreen('admin', document.getElementById('navAdmin'));
+  } else {
+    toast('Signed in as ' + (currentSession.name || currentSession.username || currentSession.email));
+    showScreen('home', document.getElementById('navHome'));
   }
 }
 
-function applyAuthUI(){
-  const adminNav=document.getElementById('navAdmin');
-  const adminScreen=document.getElementById('admin');
-  const badge=document.getElementById('headerRoleBadge');
-  const roleTag=document.getElementById('accountRoleTag');
-  const pName=document.getElementById('profileName');
-  const pEmail=document.getElementById('profileEmailText');
-  const adminEmailEl=document.getElementById('adminSessionEmail');
-  const nameInput=document.getElementById('loginDisplayName');
-  const emailInput=document.getElementById('loginGmailInput');
-  const appLabel=branding.appName||'DramaVerse';
+async function handleRegisterAccount() {
+  const rawUser = document.getElementById('regUsernameInput')?.value || '';
+  const rawEmail = document.getElementById('regEmailInput')?.value || '';
+  const password = document.getElementById('regPasswordInput')?.value || '';
 
-  if(currentSession&&currentSession.email){
-    const admin=isAdminGmail(currentSession.email);
-    const labelName=currentSession.name||(admin?appLabel+' Admin':appLabel+' Viewer');
-    if(adminNav)adminNav.style.display=admin?'block':'none';
-    if(!admin&&adminScreen&&adminScreen.classList.contains('active')){
-      showScreen('home',document.getElementById('navHome'));
-    }
-    if(badge){
-      badge.textContent=admin?'⚙ Admin':'◉ Viewer';
-      badge.className='role-pill'+(admin?' admin':'');
-    }
-    if(roleTag)roleTag.textContent=admin?'ADMIN AUTO-DETECTED':'VIEWER ACCOUNT';
-    if(pName)pName.textContent=labelName;
-    if(pEmail)pEmail.textContent=currentSession.email;
-    if(adminEmailEl)adminEmailEl.textContent=currentSession.email;
-    if(nameInput&&!nameInput.value)nameInput.value=currentSession.name||'';
-    if(emailInput&&!emailInput.value)emailInput.value=currentSession.email;
-  }else{
-    if(adminNav)adminNav.style.display='none';
-    if(adminScreen&&adminScreen.classList.contains('active')){
-      showScreen('home',document.getElementById('navHome'));
-    }
-    if(badge){
-      badge.textContent='Sign in';
-      badge.className='role-pill';
-    }
-    if(roleTag)roleTag.textContent='GUEST';
-    if(pName)pName.textContent=appLabel+' Guest';
-    if(pEmail)pEmail.textContent='Not signed in yet · Enter your Gmail below';
-    if(adminEmailEl)adminEmailEl.textContent='ADMIN ONLY';
-  }
-}
+  const username = normalizeUsername(rawUser);
+  const email = normalizeEmail(rawEmail);
 
-function handleGmailSignIn(){
-  const rawEmail=document.getElementById('loginGmailInput')?.value||'';
-  const name=document.getElementById('loginDisplayName')?.value.trim()||'';
-  const email=normalizeGmail(rawEmail);
-  if(!email||!email.includes('@')){
-    toast('Ilagay muna ang tamang Gmail address');
+  if (!username || username.length < 3) {
+    toast('Gumawa ng username (at least 3 letters/numbers)');
     return;
   }
-  currentSession={email,name};
-  localStorage.setItem('dvSession',JSON.stringify(currentSession));
-  applyAuthUI();
-  sendAccountWelcomeEmail(email,name);
-
-  if(isAdminGmail(email)){
-    toast('Admin Gmail detected — Admin Panel unlocked');
-    showScreen('admin',document.getElementById('navAdmin'));
-  }else{
-    toast('Signed in · Welcome!');
-    showScreen('home',document.getElementById('navHome'));
+  if (!email || !email.includes('@')) {
+    toast('Ilagay ang valid na email o Gmail address');
+    return;
   }
+  if (!password || password.length < 6) {
+    toast('Gumawa ng password na hindi bababa sa 6 characters');
+    return;
+  }
+
+  const users = loadUsersList();
+  const exists = users.find(u => normalizeEmail(u.email) === email || normalizeUsername(u.username) === username);
+  if (exists) {
+    toast('May account na gamit ang email o username na iyan. Mag-Sign In ka na.');
+    switchAuthTab('login');
+    document.getElementById('loginIdentifierInput').value = email;
+    return;
+  }
+
+  const newUser = { username, email, password, createdAt: Date.now() };
+  users.push(newUser);
+  saveUsersList(users);
+
+  if (db) {
+    try {
+      await db.collection('users').doc(username).set({
+        username,
+        email,
+        createdAt: firebase.firestore.FieldValue.serverTimestamp()
+      }, { merge: true });
+    } catch (e) {}
+  }
+
+  document.getElementById('regPasswordInput').value = '';
+  completeSessionLogin({ email, username, name: username, method: 'registered' }, true);
 }
 
-function handleSignOut(){
-  currentSession=null;
+function handlePasswordLogin() {
+  const identifier = (document.getElementById('loginIdentifierInput')?.value || '').trim();
+  const password = document.getElementById('loginPasswordInput')?.value || '';
+
+  if (!identifier) {
+    toast('Ilagay ang iyong email o username');
+    return;
+  }
+  if (!password) {
+    toast('Ilagay ang iyong password');
+    return;
+  }
+
+  const cleanIdLower = identifier.toLowerCase();
+  const users = loadUsersList();
+  const found = users.find(u =>
+    (normalizeEmail(u.email) === cleanIdLower || normalizeUsername(u.username) === normalizeUsername(cleanIdLower)) &&
+    u.password === password
+  );
+
+  if (!found) {
+    toast('Mali ang email/username o password. Kung bago ka, i-tap ang Create Account.');
+    return;
+  }
+
+  document.getElementById('loginPasswordInput').value = '';
+  completeSessionLogin({
+    email: normalizeEmail(found.email),
+    username: normalizeUsername(found.username),
+    name: found.username,
+    method: 'password'
+  }, false);
+}
+
+function handleGmailAuthorizeLogin() {
+  const rawEmail = document.getElementById('loginGmailInput')?.value || '';
+  const rawDisplay = (document.getElementById('loginDisplayName')?.value || '').trim();
+  const email = normalizeEmail(rawEmail);
+
+  if (!email || !email.includes('@')) {
+    toast('Ilagay muna ang Gmail address na ia-authorize');
+    return;
+  }
+
+  const fallbackUser = normalizeUsername(rawDisplay || email.split('@')[0] || 'viewer');
+  const displayName = rawDisplay || fallbackUser;
+
+  completeSessionLogin({
+    email,
+    username: fallbackUser,
+    name: displayName,
+    method: 'gmail_authorized'
+  }, true);
+}
+
+function handleSignOut() {
+  currentSession = null;
   localStorage.removeItem('dvSession');
-  const nameInput=document.getElementById('loginDisplayName');
-  const emailInput=document.getElementById('loginGmailInput');
-  if(nameInput)nameInput.value='';
-  if(emailInput)emailInput.value='';
+  const passIn = document.getElementById('loginPasswordInput');
+  if (passIn) passIn.value = '';
   applyAuthUI();
+  const box = document.getElementById('welcomeEmailBox');
+  if (box) {
+    box.innerHTML = '<strong>Account &amp; Welcome Summary</strong><br>Naka-sign out ka na. Pwede kang mag-Sign In, mag-Create Account, o mag-Authorize ng Gmail.';
+  }
   toast('Signed out');
 }
 
-const DEFAULT_DRAMAS=[
-{id:'dv_default_1',title:'My Contract With The CEO',genre:'Romance',eps:24,desc:'A fake marriage becomes a real love story.',cls:'',badge:'HOT',episodes:{}},
-{id:'dv_default_2',title:'Reborn To Take Revenge',genre:'Revenge',eps:30,desc:'She returns with a plan to expose them all.',cls:'p2',badge:'NEW',episodes:{}},
-{id:'dv_default_3',title:'The Moon’s Secret',genre:'Fantasy',eps:18,desc:'An ordinary girl discovers an extraordinary fate.',cls:'p3',badge:'FANTASY',episodes:{}},
-{id:'dv_default_4',title:'Love After Midnight',genre:'Romance',eps:20,desc:'Two strangers meet when the city sleeps.',cls:'p4',badge:'ROMANCE',episodes:{}},
-{id:'dv_default_5',title:'The Last Witness',genre:'Thriller',eps:16,desc:'A witness. A mystery. A dangerous truth.',cls:'p5',badge:'MYSTERY',episodes:{}},
-{id:'dv_default_6',title:'CEO’s Hidden Heir',genre:'Romance',eps:22,desc:'A secret child changes the fate of two families.',cls:'p6',badge:'TRENDING',episodes:{}}];
+function applyAuthUI() {
+  const adminNav = document.getElementById('navAdmin');
+  const adminScreen = document.getElementById('admin');
+  const badge = document.getElementById('headerRoleBadge');
+  const roleTag = document.getElementById('accountRoleTag');
+  const pName = document.getElementById('profileName');
+  const pEmail = document.getElementById('profileEmailText');
+  const adminEmailEl = document.getElementById('adminSessionEmail');
+  const appLabel = branding.appName || 'DramaVerse';
 
-const dramas=[...DEFAULT_DRAMAS];
-let currentFilter='All',saved=JSON.parse(localStorage.getItem('dvSaved')||'[]');
-try { const stored=JSON.parse(localStorage.getItem('dvDramas')||'null'); if(Array.isArray(stored)&&stored.length) dramas.splice(0,dramas.length,...stored); } catch(e){}
-dramas.forEach((d,i)=>{if(!d.id)d.id='dv_legacy_'+i;if(!d.episodes)d.episodes={};});
+  if (currentSession && (currentSession.email || currentSession.username)) {
+    const admin = isAdminGmail(currentSession.email);
+    const labelName = currentSession.name || currentSession.username || (admin ? appLabel + ' Admin' : appLabel + ' Viewer');
+    if (adminNav) adminNav.style.display = admin ? 'block' : 'none';
+    if (!admin && adminScreen && adminScreen.classList.contains('active')) {
+      showScreen('home', document.getElementById('navHome'));
+    }
+    if (badge) {
+      badge.textContent = admin ? '⚙ Admin' : '◉ ' + (currentSession.username || 'Member');
+      badge.className = 'role-pill' + (admin ? ' admin' : '');
+    }
+    if (roleTag) roleTag.textContent = admin ? 'ADMIN AUTO-DETECTED' : 'SIGNED IN';
+    if (pName) pName.textContent = labelName;
+    if (pEmail) {
+      const subParts = [];
+      if (currentSession.username) subParts.push('@' + currentSession.username);
+      if (currentSession.email) subParts.push(currentSession.email);
+      pEmail.textContent = subParts.join(' · ');
+    }
+    if (adminEmailEl) adminEmailEl.textContent = currentSession.email || currentSession.username;
+    const box = document.getElementById('welcomeEmailBox');
+    if (box) box.innerHTML = buildAccountSummaryHTML(currentSession);
+  } else {
+    if (adminNav) adminNav.style.display = 'none';
+    if (adminScreen && adminScreen.classList.contains('active')) {
+      showScreen('home', document.getElementById('navHome'));
+    }
+    if (badge) {
+      badge.textContent = 'Sign in';
+      badge.className = 'role-pill';
+    }
+    if (roleTag) roleTag.textContent = 'GUEST';
+    if (pName) pName.textContent = appLabel + ' Guest';
+    if (pEmail) pEmail.textContent = 'Not signed in yet · Register, login with password, or use Gmail';
+    if (adminEmailEl) adminEmailEl.textContent = 'ADMIN ONLY';
+  }
+}
 
-function initRealtimeCloudSync(){
-  const statusBanner=document.getElementById('cloudSyncStatus');
-  const liveTag=document.getElementById('cloudLiveTag');
-  if(!db){
-    if(statusBanner)statusBanner.textContent='⚠️ Offline mode — hindi nakakonekta sa Firebase.';
+/* ============================================================
+   DRAMAS & REAL-TIME FIRESTORE SYNC
+============================================================ */
+const DEFAULT_DRAMAS = [
+  { id: 'dv_default_1', title: 'My Contract With The CEO', genre: 'Romance', eps: 24, desc: 'A fake marriage becomes a real love story.', cls: '', badge: 'HOT', episodes: {} },
+  { id: 'dv_default_2', title: 'Reborn To Take Revenge', genre: 'Revenge', eps: 30, desc: 'She returns with a plan to expose them all.', cls: 'p2', badge: 'NEW', episodes: {} },
+  { id: 'dv_default_3', title: 'The Moon’s Secret', genre: 'Fantasy', eps: 18, desc: 'An ordinary girl discovers an extraordinary fate.', cls: 'p3', badge: 'FANTASY', episodes: {} },
+  { id: 'dv_default_4', title: 'Love After Midnight', genre: 'Romance', eps: 20, desc: 'Two strangers meet when the city sleeps.', cls: 'p4', badge: 'ROMANCE', episodes: {} },
+  { id: 'dv_default_5', title: 'The Last Witness', genre: 'Thriller', eps: 16, desc: 'A witness. A mystery. A dangerous truth.', cls: 'p5', badge: 'MYSTERY', episodes: {} },
+  { id: 'dv_default_6', title: 'CEO’s Hidden Heir', genre: 'Romance', eps: 22, desc: 'A secret child changes the fate of two families.', cls: 'p6', badge: 'TRENDING', episodes: {} }
+];
+
+const dramas = [...DEFAULT_DRAMAS];
+let currentFilter = 'All';
+let saved = JSON.parse(localStorage.getItem('dvSaved') || '[]');
+try {
+  const stored = JSON.parse(localStorage.getItem('dvDramas') || 'null');
+  if (Array.isArray(stored) && stored.length) dramas.splice(0, dramas.length, ...stored);
+} catch (e) {}
+dramas.forEach((d, i) => { if (!d.id) d.id = 'dv_legacy_' + i; if (!d.episodes) d.episodes = {}; });
+
+function initRealtimeCloudSync() {
+  const statusBanner = document.getElementById('cloudSyncStatus');
+  const liveTag = document.getElementById('cloudLiveTag');
+  if (!db) {
+    if (statusBanner) statusBanner.textContent = '⚠️ Offline mode — hindi nakakonekta sa Firebase.';
     return;
   }
 
-  // 1. Real-time Branding & Logo Listener
-  db.collection('appConfig').doc('branding').onSnapshot(doc=>{
-    if(doc.exists){
-      const data=doc.data();
-      branding={
-        appName:data.appName||DEFAULT_BRANDING.appName,
-        logoSrc:data.logoSrc||'',
-        heroTitle:data.heroTitle||DEFAULT_BRANDING.heroTitle,
-        heroDesc:data.heroDesc||DEFAULT_BRANDING.heroDesc
+  db.collection('appConfig').doc('branding').onSnapshot(doc => {
+    if (doc.exists) {
+      const data = doc.data();
+      branding = {
+        appName: data.appName || DEFAULT_BRANDING.appName,
+        logoSrc: data.logoSrc || '',
+        heroTitle: data.heroTitle || DEFAULT_BRANDING.heroTitle,
+        heroDesc: data.heroDesc || DEFAULT_BRANDING.heroDesc
       };
-      try{localStorage.setItem('dvBranding',JSON.stringify(branding));}catch(e){}
+      try { localStorage.setItem('dvBranding', JSON.stringify(branding)); } catch (e) {}
       applyBrandingUI();
     }
-  },err=>{
-    console.warn('Branding sync error:',err);
-  });
+  }, err => console.warn('Branding sync error:', err));
 
-  // 2. Real-time Dramas & Episodes Listener (Updates ALL users instantly)
-  db.collection('dramas').orderBy('orderIndex','asc').onSnapshot(async snapshot=>{
-    if(snapshot.empty){
-      // Seed default dramas to Firestore on first run so all users see them
-      const batch=db.batch();
-      DEFAULT_DRAMAS.forEach((d,idx)=>{
-        const ref=db.collection('dramas').doc(d.id);
-        batch.set(ref,{...d,orderIndex:idx});
+  db.collection('dramas').orderBy('orderIndex', 'asc').onSnapshot(async snapshot => {
+    if (snapshot.empty) {
+      const batch = db.batch();
+      DEFAULT_DRAMAS.forEach((d, idx) => {
+        const ref = db.collection('dramas').doc(d.id);
+        batch.set(ref, { ...d, orderIndex: idx });
       });
       await batch.commit();
       return;
     }
 
-    const cloudList=[];
-    snapshot.forEach(doc=>{
-      const data=doc.data();
+    const cloudList = [];
+    snapshot.forEach(doc => {
+      const data = doc.data();
       cloudList.push({
-        id:doc.id,
-        title:data.title||'Untitled Drama',
-        genre:data.genre||'Drama',
-        eps:Number(data.eps)||1,
-        desc:data.desc||'',
-        cls:data.cls||'',
-        badge:data.badge||'NEW',
-        poster:data.poster||'',
-        episodes:data.episodes||{},
-        orderIndex:typeof data.orderIndex==='number'?data.orderIndex:999
+        id: doc.id,
+        title: data.title || 'Untitled Drama',
+        genre: data.genre || 'Drama',
+        eps: Number(data.eps) || 1,
+        desc: data.desc || '',
+        cls: data.cls || '',
+        badge: data.badge || 'NEW',
+        poster: data.poster || '',
+        episodes: data.episodes || {},
+        orderIndex: typeof data.orderIndex === 'number' ? data.orderIndex : 999
       });
     });
 
-    dramas.splice(0,dramas.length,...cloudList);
-    try{localStorage.setItem('dvDramas',JSON.stringify(dramas));}catch(e){}
-    render(document.getElementById('searchInput')?.value||'');
+    dramas.splice(0, dramas.length, ...cloudList);
+    try { localStorage.setItem('dvDramas', JSON.stringify(dramas)); } catch (e) {}
+    render(document.getElementById('searchInput')?.value || '');
     showAdminDramas();
     refreshUploadDrama();
-    if(document.getElementById('player')?.classList.contains('open')){
+    if (document.getElementById('player')?.classList.contains('open')) {
       loadEpisode();
     }
-    if(statusBanner)statusBanner.textContent='✅ Connected to Firebase Cloud (dramaverse-8c233) · All updates sync live to every user.';
-    if(liveTag)liveTag.textContent='● Live Synced';
-  },err=>{
-    if(statusBanner)statusBanner.textContent='⚠️ Firestore Sync Error: '+err.message+' (Siguraduhing naka-Test Mode ang Firestore Rules)';
+    if (statusBanner) statusBanner.textContent = '✅ Connected to Firebase Cloud (dramaverse-8c233) · All updates sync live to every user.';
+    if (liveTag) liveTag.textContent = '● Live Synced';
+  }, err => {
+    if (statusBanner) statusBanner.textContent = '⚠️ Firestore Sync Error: ' + err.message + ' (Siguraduhing naka-Test Mode ang Firestore Rules)';
   });
 }
 
-const DEFAULT_AD_SETTINGS={enabled:true,type:'both',frequency:3,appId:'',unitId:''};
-const DEFAULT_AD_STATS={completedVideos:0,adImpressions:0,demoEstimatedPhp:0,cycleCompleted:0,bothToggleIndex:0};
-const DEMO_RATE_PER_IMPRESSION_PHP=0.45;
+/* ============================================================
+   ADS & EARNINGS DEMO
+============================================================ */
+const DEFAULT_AD_SETTINGS = { enabled: true, type: 'both', frequency: 3, appId: '', unitId: '' };
+const DEFAULT_AD_STATS = { completedVideos: 0, adImpressions: 0, demoEstimatedPhp: 0, cycleCompleted: 0, bothToggleIndex: 0 };
+const DEMO_RATE_PER_IMPRESSION_PHP = 0.45;
 
-let adSettings=loadAdSettings();
-let adStats=loadAdStats();
-let currentVideoCompletedInSession=false;
-let pendingAfterAdAction=null;
+let adSettings = loadAdSettings();
+let adStats = loadAdStats();
+let currentVideoCompletedInSession = false;
+let pendingAfterAdAction = null;
 
-function loadAdSettings(){
-  try{
-    const raw=JSON.parse(localStorage.getItem('dvAdSettings')||'null');
-    if(raw&&typeof raw==='object'){
-      const freq=[3,5,10].includes(Number(raw.frequency))?Number(raw.frequency):3;
-      const type=['fullscreen','video','both'].includes(raw.type)?raw.type:'both';
+function loadAdSettings() {
+  try {
+    const raw = JSON.parse(localStorage.getItem('dvAdSettings') || 'null');
+    if (raw && typeof raw === 'object') {
+      const freq = [3, 5, 10].includes(Number(raw.frequency)) ? Number(raw.frequency) : 3;
+      const type = ['fullscreen', 'video', 'both'].includes(raw.type) ? raw.type : 'both';
       return {
-        enabled:Boolean(raw.enabled),
+        enabled: Boolean(raw.enabled),
         type,
-        frequency:freq,
-        appId:String(raw.appId||'').trim(),
-        unitId:String(raw.unitId||'').trim()
+        frequency: freq,
+        appId: String(raw.appId || '').trim(),
+        unitId: String(raw.unitId || '').trim()
       };
     }
-  }catch(e){}
-  return {...DEFAULT_AD_SETTINGS};
+  } catch (e) {}
+  return { ...DEFAULT_AD_SETTINGS };
 }
 
-function loadAdStats(){
-  try{
-    const raw=JSON.parse(localStorage.getItem('dvAdStats')||'null');
-    if(raw&&typeof raw==='object'){
+function loadAdStats() {
+  try {
+    const raw = JSON.parse(localStorage.getItem('dvAdStats') || 'null');
+    if (raw && typeof raw === 'object') {
       return {
-        completedVideos:Math.max(0,Number(raw.completedVideos)||0),
-        adImpressions:Math.max(0,Number(raw.adImpressions)||0),
-        demoEstimatedPhp:Math.max(0,Number(raw.demoEstimatedPhp)||0),
-        cycleCompleted:Math.max(0,Number(raw.cycleCompleted)||0),
-        bothToggleIndex:Math.max(0,Number(raw.bothToggleIndex)||0)
+        completedVideos: Math.max(0, Number(raw.completedVideos) || 0),
+        adImpressions: Math.max(0, Number(raw.adImpressions) || 0),
+        demoEstimatedPhp: Math.max(0, Number(raw.demoEstimatedPhp) || 0),
+        cycleCompleted: Math.max(0, Number(raw.cycleCompleted) || 0),
+        bothToggleIndex: Math.max(0, Number(raw.bothToggleIndex) || 0)
       };
     }
-  }catch(e){}
-  return {...DEFAULT_AD_STATS};
+  } catch (e) {}
+  return { ...DEFAULT_AD_STATS };
 }
 
-function persistAdSettingsOnly(){
-  localStorage.setItem('dvAdSettings',JSON.stringify(adSettings));
+function persistAdSettingsOnly() {
+  localStorage.setItem('dvAdSettings', JSON.stringify(adSettings));
   renderAdAdminUI();
 }
 
-function saveAdSettings(){
-  const enabled=Boolean(document.getElementById('adEnabledToggle')?.checked);
-  const type=document.getElementById('adTypeSelect')?.value||'both';
-  const frequency=[3,5,10].includes(Number(document.getElementById('adFrequencySelect')?.value))?Number(document.getElementById('adFrequencySelect').value):3;
-  adSettings={...adSettings,enabled,type,frequency};
+function saveAdSettings() {
+  const enabled = Boolean(document.getElementById('adEnabledToggle')?.checked);
+  const type = document.getElementById('adTypeSelect')?.value || 'both';
+  const frequency = [3, 5, 10].includes(Number(document.getElementById('adFrequencySelect')?.value)) ? Number(document.getElementById('adFrequencySelect').value) : 3;
+  adSettings = { ...adSettings, enabled, type, frequency };
   persistAdSettingsOnly();
   toast('Ads setup saved');
 }
 
-function saveAdMobIds(){
-  const appId=(document.getElementById('admobAppIdInput')?.value||'').trim();
-  const unitId=(document.getElementById('admobRewardedIdInput')?.value||'').trim();
-  adSettings={...adSettings,appId,unitId};
+function saveAdMobIds() {
+  const appId = (document.getElementById('admobAppIdInput')?.value || '').trim();
+  const unitId = (document.getElementById('admobRewardedIdInput')?.value || '').trim();
+  adSettings = { ...adSettings, appId, unitId };
   persistAdSettingsOnly();
   toast('AdMob IDs saved');
 }
 
-function resetAdStats(){
-  adStats={...DEFAULT_AD_STATS};
-  localStorage.setItem('dvAdStats',JSON.stringify(adStats));
+function resetAdStats() {
+  adStats = { ...DEFAULT_AD_STATS };
+  localStorage.setItem('dvAdStats', JSON.stringify(adStats));
   renderAdAdminUI();
   toast('Demo statistics reset');
 }
 
-function formatAdTypeLabel(type){
-  if(type==='fullscreen')return 'Full-screen Advertisements';
-  if(type==='video')return 'Video Advertisements';
+function formatAdTypeLabel(type) {
+  if (type === 'fullscreen') return 'Full-screen Advertisements';
+  if (type === 'video') return 'Video Advertisements';
   return 'Both Advertisement Types';
 }
 
-function renderAdAdminUI(){
-  const toggle=document.getElementById('adEnabledToggle');
-  const typeSel=document.getElementById('adTypeSelect');
-  const freqSel=document.getElementById('adFrequencySelect');
-  const appIdIn=document.getElementById('admobAppIdInput');
-  const unitIdIn=document.getElementById('admobRewardedIdInput');
+function renderAdAdminUI() {
+  const toggle = document.getElementById('adEnabledToggle');
+  const typeSel = document.getElementById('adTypeSelect');
+  const freqSel = document.getElementById('adFrequencySelect');
+  const appIdIn = document.getElementById('admobAppIdInput');
+  const unitIdIn = document.getElementById('admobRewardedIdInput');
 
-  if(toggle)toggle.checked=adSettings.enabled;
-  if(typeSel)typeSel.value=adSettings.type;
-  if(freqSel)freqSel.value=String(adSettings.frequency);
-  if(appIdIn&&document.activeElement!==appIdIn)appIdIn.value=adSettings.appId||'';
-  if(unitIdIn&&document.activeElement!==unitIdIn)unitIdIn.value=adSettings.unitId||'';
+  if (toggle) toggle.checked = adSettings.enabled;
+  if (typeSel) typeSel.value = adSettings.type;
+  if (freqSel) freqSel.value = String(adSettings.frequency);
+  if (appIdIn && document.activeElement !== appIdIn) appIdIn.value = adSettings.appId || '';
+  if (unitIdIn && document.activeElement !== unitIdIn) unitIdIn.value = adSettings.unitId || '';
 
-  const cEl=document.getElementById('statCompletedVideos');
-  const iEl=document.getElementById('statAdImpressions');
-  const pEl=document.getElementById('statEstimatedPhp');
-  const sEl=document.getElementById('statPaymentStatus');
-  const oEl=document.getElementById('adSettingsOverview');
+  const cEl = document.getElementById('statCompletedVideos');
+  const iEl = document.getElementById('statAdImpressions');
+  const pEl = document.getElementById('statEstimatedPhp');
+  const sEl = document.getElementById('statPaymentStatus');
+  const oEl = document.getElementById('adSettingsOverview');
 
-  if(cEl)cEl.textContent=String(adStats.completedVideos);
-  if(iEl)iEl.textContent=String(adStats.adImpressions);
-  if(pEl)pEl.textContent='₱'+Number(adStats.demoEstimatedPhp||0).toFixed(2);
-  if(sEl)sEl.textContent=adSettings.appId?'AdMob ID Saved · Demo Preview':'Demo Mode · No Real Payout';
-  if(oEl){
-    oEl.textContent=`Status: ${adSettings.enabled?'Enabled':'Disabled'} · Format: ${formatAdTypeLabel(adSettings.type)} · Trigger: Every ${adSettings.frequency} completed videos (${adStats.cycleCompleted}/${adSettings.frequency} in cycle).`;
+  if (cEl) cEl.textContent = String(adStats.completedVideos);
+  if (iEl) iEl.textContent = String(adStats.adImpressions);
+  if (pEl) pEl.textContent = '₱' + Number(adStats.demoEstimatedPhp || 0).toFixed(2);
+  if (sEl) sEl.textContent = adSettings.appId ? 'AdMob ID Saved · Demo Preview' : 'Demo Mode · No Real Payout';
+  if (oEl) {
+    oEl.textContent = `Status: ${adSettings.enabled ? 'Enabled' : 'Disabled'} · Format: ${formatAdTypeLabel(adSettings.type)} · Trigger: Every ${adSettings.frequency} completed videos (${adStats.cycleCompleted}/${adSettings.frequency} in cycle).`;
   }
 }
 
-function requestRealAdNetworkIfAvailable(formatToShow){
-  if(window.DramaVerseNativeAds && typeof window.DramaVerseNativeAds.showAd === 'function'){
-    window.DramaVerseNativeAds.showAd(formatToShow,adSettings.unitId||'');
+function requestRealAdNetworkIfAvailable(formatToShow) {
+  if (window.DramaVerseNativeAds && typeof window.DramaVerseNativeAds.showAd === 'function') {
+    window.DramaVerseNativeAds.showAd(formatToShow, adSettings.unitId || '');
   }
 }
 
-function resolveAdFormat(){
-  if(adSettings.type==='fullscreen'||adSettings.type==='video')return adSettings.type;
-  const chosen=adStats.bothToggleIndex%2===0?'fullscreen':'video';
-  adStats.bothToggleIndex=(adStats.bothToggleIndex+1)%2;
+function resolveAdFormat() {
+  if (adSettings.type === 'fullscreen' || adSettings.type === 'video') return adSettings.type;
+  const chosen = adStats.bothToggleIndex % 2 === 0 ? 'fullscreen' : 'video';
+  adStats.bothToggleIndex = (adStats.bothToggleIndex + 1) % 2;
   return chosen;
 }
 
-function showAdModal(formatToShow,onContinue){
-  pendingAfterAdAction=typeof onContinue==='function'?onContinue:null;
-  const modal=document.getElementById('adModal');
-  const tag=document.getElementById('adFormatTag');
-  const title=document.getElementById('adModalTitle');
-  const desc=document.getElementById('adModalDesc');
-  const box=document.getElementById('adVisualBox');
+function showAdModal(formatToShow, onContinue) {
+  pendingAfterAdAction = typeof onContinue === 'function' ? onContinue : null;
+  const modal = document.getElementById('adModal');
+  const tag = document.getElementById('adFormatTag');
+  const title = document.getElementById('adModalTitle');
+  const desc = document.getElementById('adModalDesc');
+  const box = document.getElementById('adVisualBox');
 
-  adStats.adImpressions+=1;
-  adStats.demoEstimatedPhp=Number((adStats.adImpressions*DEMO_RATE_PER_IMPRESSION_PHP).toFixed(2));
-  localStorage.setItem('dvAdStats',JSON.stringify(adStats));
+  adStats.adImpressions += 1;
+  adStats.demoEstimatedPhp = Number((adStats.adImpressions * DEMO_RATE_PER_IMPRESSION_PHP).toFixed(2));
+  localStorage.setItem('dvAdStats', JSON.stringify(adStats));
   renderAdAdminUI();
   requestRealAdNetworkIfAvailable(formatToShow);
 
-  if(formatToShow==='video'){
-    tag.textContent='DEMO VIDEO AD';
-    title.textContent='Sponsored Video Preview';
-    desc.textContent='Simulated video ad slot (Demo impression recorded). Tap Continue Watching when ready.';
-    box.innerHTML=`<video id="demoAdVideo" controls playsinline muted preload="metadata" src="https://storage.googleapis.com/gtv-videos-bucket/sample/ForBiggerBlazes.mp4"></video><small style="color:#9e95a6;margin-top:8px">Sample ad clip · Demo only</small>`;
-    const adv=document.getElementById('demoAdVideo');
-    if(adv)adv.play().catch(()=>{});
-  }else{
-    tag.textContent='DEMO FULL-SCREEN AD';
-    title.textContent=(branding.appName||'DramaVerse')+' Featured Sponsor';
-    desc.textContent='Simulated full-screen interstitial placement after completing '+adSettings.frequency+' videos.';
-    box.innerHTML=`<div style="font-size:34px">✦</div><strong style="margin-top:6px;font-size:15px">Demo Full-Screen Placement</strong><small style="color:#9e95a6;margin-top:6px">No real money is charged or earned in browser demo mode.</small>`;
+  if (formatToShow === 'video') {
+    tag.textContent = 'DEMO VIDEO AD';
+    title.textContent = 'Sponsored Video Preview';
+    desc.textContent = 'Simulated video ad slot (Demo impression recorded). Tap Continue Watching when ready.';
+    box.innerHTML = `<video id="demoAdVideo" controls playsinline muted preload="metadata" src="https://storage.googleapis.com/gtv-videos-bucket/sample/ForBiggerBlazes.mp4"></video><small style="color:#9e95a6;margin-top:8px">Sample ad clip · Demo only</small>`;
+    const adv = document.getElementById('demoAdVideo');
+    if (adv) adv.play().catch(() => {});
+  } else {
+    tag.textContent = 'DEMO FULL-SCREEN AD';
+    title.textContent = (branding.appName || 'DramaVerse') + ' Featured Sponsor';
+    desc.textContent = 'Simulated full-screen interstitial placement after completing ' + adSettings.frequency + ' videos.';
+    box.innerHTML = `<div style="font-size:34px">✦</div><strong style="margin-top:6px;font-size:15px">Demo Full-Screen Placement</strong><small style="color:#9e95a6;margin-top:6px">No real money is charged or earned in browser demo mode.</small>`;
   }
   modal.classList.add('open');
 }
 
-function dismissAdAndContinue(){
-  const adv=document.getElementById('demoAdVideo');
-  if(adv&&typeof adv.pause==='function')adv.pause();
+function dismissAdAndContinue() {
+  const adv = document.getElementById('demoAdVideo');
+  if (adv && typeof adv.pause === 'function') adv.pause();
   document.getElementById('adModal').classList.remove('open');
-  const fn=pendingAfterAdAction;
-  pendingAfterAdAction=null;
-  if(fn)fn();
+  const fn = pendingAfterAdAction;
+  pendingAfterAdAction = null;
+  if (fn) fn();
 }
 
-function handleVideoCompleted(){
-  if(currentVideoCompletedInSession)return;
-  currentVideoCompletedInSession=true;
+function handleVideoCompleted() {
+  if (currentVideoCompletedInSession) return;
+  currentVideoCompletedInSession = true;
 
-  adStats.completedVideos+=1;
-  adStats.cycleCompleted+=1;
+  adStats.completedVideos += 1;
+  adStats.cycleCompleted += 1;
 
-  let shouldShowAd=false;
-  if(adSettings.enabled && adStats.cycleCompleted>=adSettings.frequency){
-    shouldShowAd=true;
-    adStats.cycleCompleted=0;
+  let shouldShowAd = false;
+  if (adSettings.enabled && adStats.cycleCompleted >= adSettings.frequency) {
+    shouldShowAd = true;
+    adStats.cycleCompleted = 0;
   }
 
-  localStorage.setItem('dvAdStats',JSON.stringify(adStats));
+  localStorage.setItem('dvAdStats', JSON.stringify(adStats));
   renderAdAdminUI();
 
-  const advanceAfterCompletion=()=>{
-    const d=dramas[activeDrama];
-    if(d && activeEpisode<d.eps){
+  const advanceAfterCompletion = () => {
+    const d = dramas[activeDrama];
+    if (d && activeEpisode < d.eps) {
       activeEpisode++;
       loadEpisode();
       playCurrent();
-    }else{
+    } else {
       toast('Completed final episode! Tap any episode to replay.');
     }
   };
 
-  if(shouldShowAd){
-    const v=document.getElementById('videoPlayer');
-    if(v)v.pause();
-    showAdModal(resolveAdFormat(),advanceAfterCompletion);
-  }else{
+  if (shouldShowAd) {
+    const v = document.getElementById('videoPlayer');
+    if (v) v.pause();
+    showAdModal(resolveAdFormat(), advanceAfterCompletion);
+  } else {
     advanceAfterCompletion();
   }
 }
 
-function episodeMetaLabel(d,episode){
-  const epObj=d?.episodes?.[String(episode)];
-  if(!epObj)return '';
-  const parts=[];
-  if(epObj.title)parts.push(epObj.title);
-  if(epObj.url)parts.push('Cloud Video');
-  return parts.length?' · '+parts.join(' · '):'';
+/* ============================================================
+   EPISODES (DIRECT MP4 URL FIRST + CLOUDINARY FALLBACK)
+============================================================ */
+function episodeMetaLabel(d, episode) {
+  const epObj = d?.episodes?.[String(episode)];
+  if (!epObj) return '';
+  const parts = [];
+  if (epObj.title) parts.push(epObj.title);
+  if (epObj.url) parts.push('HD Stream');
+  return parts.length ? ' · ' + parts.join(' · ') : '';
 }
 
-function refreshUploadDrama(){
-  const sel=document.getElementById('uploadDrama');
-  if(!sel)return;
-  const old=sel.value;
-  sel.innerHTML=dramas.map((d,i)=>`<option value="${i}">${escapeHTML(d.title)}</option>`).join('');
-  if(old!==''&&Number(old)<dramas.length)sel.value=old;
-  const cName=document.getElementById('cloudinaryCloudName');
-  const cPreset=document.getElementById('cloudinaryUploadPreset');
-  if(cName&&!cName.value)cName.value=localStorage.getItem('dvCloudName')||'';
-  if(cPreset&&!cPreset.value)cPreset.value=localStorage.getItem('dvCloudPreset')||'';
+function refreshUploadDrama() {
+  const sel = document.getElementById('uploadDrama');
+  if (!sel) return;
+  const old = sel.value;
+  sel.innerHTML = dramas.map((d, i) => `<option value="${i}">${escapeHTML(d.title)}</option>`).join('');
+  if (old !== '' && Number(old) < dramas.length) sel.value = old;
+  const cName = document.getElementById('cloudinaryCloudName');
+  const cPreset = document.getElementById('cloudinaryUploadPreset');
+  if (cName && !cName.value) cName.value = localStorage.getItem('dvCloudName') || '';
+  if (cPreset && !cPreset.value) cPreset.value = localStorage.getItem('dvCloudPreset') || '';
 }
 
-async function uploadEpisode(){
-  const idx=Number(document.getElementById('uploadDrama').value);
-  const d=dramas[idx];
-  const ep=Math.max(1,Number(document.getElementById('uploadEpisodeNo').value)||1);
-  const epTitle=(document.getElementById('uploadEpisodeTitle')?.value||'').trim();
-  let videoUrl=(document.getElementById('uploadEpisodeUrl')?.value||'').trim();
-  const file=document.getElementById('episodeVideoFile')?.files?.[0];
-  const status=document.getElementById('uploadStatus');
+function normalizeDirectVideoUrl(rawUrl) {
+  const u = String(rawUrl || '').trim();
+  if (!u) return '';
+  // Convert GitHub blob URL to raw URL automatically if pasted
+  if (u.includes('github.com/') && u.includes('/blob/')) {
+    return u.replace('github.com/', 'raw.githubusercontent.com/').replace('/blob/', '/');
+  }
+  return u;
+}
 
-  if(!d){toast('Add a drama first');return;}
-  if(!videoUrl && !file){toast('Ilagay ang MP4 Video URL o pumili ng video file');return;}
+async function uploadEpisode() {
+  const idx = Number(document.getElementById('uploadDrama').value);
+  const d = dramas[idx];
+  const ep = Math.max(1, Number(document.getElementById('uploadEpisodeNo').value) || 1);
+  const epTitle = (document.getElementById('uploadEpisodeTitle')?.value || '').trim();
+  const rawDirect = (document.getElementById('uploadEpisodeUrl')?.value || '').trim();
+  const file = document.getElementById('episodeVideoFile')?.files?.[0];
+  const status = document.getElementById('uploadStatus');
 
-  try{
-    if(file){
-      const cloudName=(document.getElementById('cloudinaryCloudName')?.value||'').trim();
-      const uploadPreset=(document.getElementById('cloudinaryUploadPreset')?.value||'').trim();
-      if(!cloudName||!uploadPreset){
-        toast('Ilagay ang Cloudinary Cloud Name & Preset, o gamitin ang Direct MP4 URL');
+  if (!d) { toast('Add a drama first'); return; }
+
+  let videoUrl = normalizeDirectVideoUrl(rawDirect);
+
+  try {
+    // Unahin ang Direct MP4 Video URL; gamitin lang ang Cloudinary file kung walang Direct URL pero may file
+    if (!videoUrl && file) {
+      const cloudName = (document.getElementById('cloudinaryCloudName')?.value || '').trim();
+      const uploadPreset = (document.getElementById('cloudinaryUploadPreset')?.value || '').trim();
+      if (!cloudName || !uploadPreset) {
+        toast('I-paste ang Direct MP4 Video URL o ilagay ang Cloudinary Cloud Name & Unsigned Preset');
         return;
       }
-      localStorage.setItem('dvCloudName',cloudName);
-      localStorage.setItem('dvCloudPreset',uploadPreset);
-      status.textContent='Uploading MP4 to Cloudinary… huwag isara ang app.';
-      const formData=new FormData();
-      formData.append('file',file);
-      formData.append('upload_preset',uploadPreset);
-      const res=await fetch(`https://api.cloudinary.com/v1_1/${encodeURIComponent(cloudName)}/video/upload`,{
-        method:'POST',
-        body:formData
+      localStorage.setItem('dvCloudName', cloudName);
+      localStorage.setItem('dvCloudPreset', uploadPreset);
+      status.textContent = 'Uploading video to Cloudinary… huwag isara ang app.';
+      const formData = new FormData();
+      formData.append('file', file);
+      formData.append('upload_preset', uploadPreset);
+      const res = await fetch(`https://api.cloudinary.com/v1_1/${encodeURIComponent(cloudName)}/video/upload`, {
+        method: 'POST',
+        body: formData
       });
-      const data=await res.json();
-      if(!res.ok||!data.secure_url)throw new Error(data.error?.message||'Cloudinary upload failed');
-      videoUrl=data.secure_url;
+      const data = await res.json();
+      if (!res.ok || !data.secure_url) throw new Error(data.error?.message || 'Cloudinary upload failed');
+      videoUrl = data.secure_url;
     }
 
-    if(!videoUrl.startsWith('https://')&&!videoUrl.startsWith('http://')){
+    if (!videoUrl) {
+      toast('Ilagay ang Direct MP4 Video URL');
+      return;
+    }
+
+    if (!videoUrl.startsWith('https://') && !videoUrl.startsWith('http://')) {
       toast('Gamitin ang valid https:// video URL');
       return;
     }
 
-    const nextEps=Math.max(d.eps||1,ep);
-    const updatedEpisodes={...(d.episodes||{}),[String(ep)]:{url:videoUrl,title:epTitle}};
+    const nextEps = Math.max(d.eps || 1, ep);
+    const updatedEpisodes = { ...(d.episodes || {}), [String(ep)]: { url: videoUrl, title: epTitle } };
 
-    if(db){
-      status.textContent='Saving episode link to Firebase Cloud…';
+    if (db) {
+      status.textContent = 'Saving episode link to Firebase Cloud…';
       await db.collection('dramas').doc(d.id).set({
-        eps:nextEps,
-        episodes:updatedEpisodes
-      },{merge:true});
+        eps: nextEps,
+        episodes: updatedEpisodes
+      }, { merge: true });
+    } else {
+      d.eps = nextEps;
+      d.episodes = updatedEpisodes;
+      localStorage.setItem('dvDramas', JSON.stringify(dramas));
+      render(document.getElementById('searchInput')?.value || '');
+      showAdminDramas();
     }
 
-    document.getElementById('uploadEpisodeNo').value=ep+1;
-    document.getElementById('uploadEpisodeTitle').value='';
-    document.getElementById('uploadEpisodeUrl').value='';
-    if(document.getElementById('episodeVideoFile'))document.getElementById('episodeVideoFile').value='';
-    status.textContent=`✅ Published Episode ${ep} of "${d.title}" to ALL users!`;
+    document.getElementById('uploadEpisodeNo').value = ep + 1;
+    document.getElementById('uploadEpisodeTitle').value = '';
+    document.getElementById('uploadEpisodeUrl').value = '';
+    if (document.getElementById('episodeVideoFile')) document.getElementById('episodeVideoFile').value = '';
+    status.textContent = `✅ Published Episode ${ep} of "${d.title}" to ALL users!`;
     toast('Episode published to all users!');
-  }catch(err){
-    status.textContent='Error: '+err.message;
+  } catch (err) {
+    status.textContent = 'Error: ' + err.message;
     toast('Episode publish failed');
   }
 }
 
-function card(d,i){
-  const posterStyle=d.poster?`style="background-image:linear-gradient(0deg,#100f13b8,transparent),url('${escapeHTML(d.poster)}')"` : '';
-  return `<div class="card" onclick="openDrama(${i})"><div class="poster ${d.cls||''}" ${posterStyle}><span class="tag">${escapeHTML(d.badge||'DRAMA')}</span></div><div class="card-info"><h3>${escapeHTML(d.title)}</h3><p>${escapeHTML(d.genre)} · ${d.eps} episodes</p></div></div>`;
+/* ============================================================
+   UI RENDERING & PLAYER
+============================================================ */
+function card(d, i) {
+  const posterStyle = d.poster ? `style="background-image:linear-gradient(0deg,#100f13b8,transparent),url('${escapeHTML(d.poster)}')"` : '';
+  return `<div class="card" onclick="openDrama(${i})"><div class="poster ${d.cls || ''}" ${posterStyle}><span class="tag">${escapeHTML(d.badge || 'DRAMA')}</span></div><div class="card-info"><h3>${escapeHTML(d.title)}</h3><p>${escapeHTML(d.genre)} · ${d.eps} episodes</p></div></div>`;
 }
-function render(q=''){
-  let arr=dramas.map((d,i)=>({d,i})).filter(x=>(currentFilter==='All'||x.d.genre===currentFilter)&&(!q||x.d.title.toLowerCase().includes(q.toLowerCase())||x.d.genre.toLowerCase().includes(q.toLowerCase())));
-  document.getElementById('dramaGrid').innerHTML=arr.map(x=>card(x.d,x.i)).join('');
-  document.getElementById('searchGrid').innerHTML=dramas.map((d,i)=>({d,i})).filter(x=>!q||x.d.title.toLowerCase().includes(q.toLowerCase())||x.d.genre.toLowerCase().includes(q.toLowerCase())).map(x=>card(x.d,x.i)).join('');
+
+function render(q = '') {
+  const arr = dramas.map((d, i) => ({ d, i })).filter(x =>
+    (currentFilter === 'All' || x.d.genre === currentFilter) &&
+    (!q || x.d.title.toLowerCase().includes(q.toLowerCase()) || x.d.genre.toLowerCase().includes(q.toLowerCase()))
+  );
+  document.getElementById('dramaGrid').innerHTML = arr.map(x => card(x.d, x.i)).join('');
+  document.getElementById('searchGrid').innerHTML = dramas.map((d, i) => ({ d, i })).filter(x =>
+    !q || x.d.title.toLowerCase().includes(q.toLowerCase()) || x.d.genre.toLowerCase().includes(q.toLowerCase())
+  ).map(x => card(x.d, x.i)).join('');
 }
-function filterGenre(g,el){currentFilter=g;document.querySelectorAll('.chip').forEach(c=>c.classList.remove('active'));el.classList.add('active');render()}
-function showScreen(id,el){
-  if(id==='admin'&&(!currentSession||!isAdminGmail(currentSession.email))){
+
+function filterGenre(g, el) {
+  currentFilter = g;
+  document.querySelectorAll('.chip').forEach(c => c.classList.remove('active'));
+  el.classList.add('active');
+  render(document.getElementById('searchInput')?.value || '');
+}
+
+function showScreen(id, el) {
+  if (id === 'admin' && (!currentSession || !isAdminGmail(currentSession.email))) {
     toast('Admin Gmail required');
-    id='profile';
-    el=document.getElementById('navProfile');
+    id = 'profile';
+    el = document.getElementById('navProfile');
   }
-  document.querySelectorAll('.screen').forEach(s=>s.classList.remove('active'));
+  document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
   document.getElementById(id).classList.add('active');
-  document.querySelectorAll('.navitem').forEach(n=>n.classList.remove('sel'));
-  if(el)el.classList.add('sel');
-  if(id==='saved')showSaved();
-  if(id==='admin'){showAdminDramas();renderAdAdminUI();applyBrandingUI();refreshUploadDrama();}
+  document.querySelectorAll('.navitem').forEach(n => n.classList.remove('sel'));
+  if (el) el.classList.add('sel');
+  if (id === 'saved') showSaved();
+  if (id === 'admin') { showAdminDramas(); renderAdAdminUI(); applyBrandingUI(); refreshUploadDrama(); }
 }
 
-let activeDrama=0,activeEpisode=1;
-function openDrama(i){
-  if(!dramas[i])return;
-  activeDrama=i;activeEpisode=1;loadEpisode();document.getElementById('player').classList.add('open');playCurrent();
-}
-function loadEpisode(){
-  const d=dramas[activeDrama];if(!d)return;
-  document.getElementById('playerTitle').textContent=d.title;
-  document.getElementById('episodeLabel').textContent=`Episode ${activeEpisode} of ${d.eps}`;
-  let list='';
-  for(let e=1;e<=d.eps;e++)list+=`<button class="episode" style="${e===activeEpisode?'border-color:#ff4b78;background:#30232b':''}" onclick="selectEpisode(${e})">Episode ${e}<small>${e===activeEpisode?'Now selected':'Tap to play'}${escapeHTML(episodeMetaLabel(d,e))}</small></button>`;
-  document.getElementById('episodeList').innerHTML=list;
-  document.querySelectorAll('#episodeList .episode')[activeEpisode-1]?.scrollIntoView({block:'nearest'});
-}
-function selectEpisode(e){activeEpisode=e;loadEpisode();playCurrent();}
+let activeDrama = 0, activeEpisode = 1;
 
-async function playCurrent(){
-  currentVideoCompletedInSession=false;
-  const v=document.getElementById('videoPlayer');
+function openDrama(i) {
+  if (!dramas[i]) return;
+  activeDrama = i;
+  activeEpisode = 1;
+  loadEpisode();
+  document.getElementById('player').classList.add('open');
+  playCurrent();
+}
+
+function loadEpisode() {
+  const d = dramas[activeDrama];
+  if (!d) return;
+  document.getElementById('playerTitle').textContent = d.title;
+  document.getElementById('episodeLabel').textContent = `Episode ${activeEpisode} of ${d.eps}`;
+  let list = '';
+  for (let e = 1; e <= d.eps; e++) {
+    list += `<button class="episode" style="${e === activeEpisode ? 'border-color:#ff4b78;background:#30232b' : ''}" onclick="selectEpisode(${e})">Episode ${e}<small>${e === activeEpisode ? 'Now selected' : 'Tap to play'}${escapeHTML(episodeMetaLabel(d, e))}</small></button>`;
+  }
+  document.getElementById('episodeList').innerHTML = list;
+  document.querySelectorAll('#episodeList .episode')[activeEpisode - 1]?.scrollIntoView({ block: 'nearest' });
+}
+
+function selectEpisode(e) {
+  activeEpisode = e;
+  loadEpisode();
+  playCurrent();
+}
+
+async function playCurrent() {
+  currentVideoCompletedInSession = false;
+  const v = document.getElementById('videoPlayer');
   v.pause();
-  const d=dramas[activeDrama];
-  const epRec=d?.episodes?.[String(activeEpisode)];
-  if(epRec&&epRec.url){
-    v.src=epRec.url;
-  }else{
-    v.src='https://storage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4';
+  const d = dramas[activeDrama];
+  const epRec = d?.episodes?.[String(activeEpisode)];
+  if (epRec && epRec.url) {
+    v.src = normalizeDirectVideoUrl(epRec.url);
+  } else {
+    v.src = 'https://storage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4';
   }
   v.load();
-  v.play().catch(()=>toast('Tap Play to start video'));
+  v.play().catch(() => toast('Tap Play to start video'));
 }
 
-function togglePlay(){const v=document.getElementById('videoPlayer');if(v.paused)v.play().catch(()=>{});else v.pause();}
-function nextEpisode(){const d=dramas[activeDrama];if(activeEpisode<d.eps){activeEpisode++;loadEpisode();playCurrent();}else toast('You reached the last episode');}
-function previousEpisode(){if(activeEpisode>1){activeEpisode--;loadEpisode();playCurrent();}else toast('This is the first episode');}
-document.getElementById('videoPlayer').addEventListener('ended',handleVideoCompleted);
-function closePlayer(){document.getElementById('videoPlayer').pause();document.getElementById('player').classList.remove('open');}
-function saveDrama(i){
-  const d=dramas[i];if(!d)return;
-  if(!saved.includes(d.id)){saved.push(d.id);localStorage.setItem('dvSaved',JSON.stringify(saved));toast('Added to your watchlist ♡')}
-  else toast('Already in your watchlist');
-}
-function showSaved(){
-  let el=document.getElementById('savedGrid');
-  const matched=dramas.map((d,i)=>({d,i})).filter(x=>saved.includes(x.d.id)||saved.includes(x.i));
-  el.innerHTML=matched.map(x=>card(x.d,x.i)).join('');
-  document.getElementById('savedEmpty').style.display=matched.length?'none':'block';
-}
-function toast(msg){let t=document.getElementById('toast');t.textContent=msg;t.style.display='block';clearTimeout(window._dvToastTimer);window._dvToastTimer=setTimeout(()=>t.style.display='none',2500)}
-
-async function adminAddDrama(){
- const title=document.getElementById('adminTitle').value.trim();
- const genre=document.getElementById('adminGenre').value.trim()||'Drama';
- const desc=document.getElementById('adminDesc').value.trim();
- const poster=document.getElementById('adminPoster').value.trim();
- const eps=Math.max(1,Math.min(500,Number(document.getElementById('adminEpisodes').value)||1));
- if(!title){toast('Please enter a drama title');return;}
-
- const newId='dv_'+Date.now()+'_'+Math.random().toString(36).slice(2,7);
- const minOrder=dramas.reduce((m,x)=>Math.min(m,typeof x.orderIndex==='number'?x.orderIndex:0),0)-1;
- const newDrama={
-   id:newId,
-   title,
-   genre,
-   eps,
-   desc:desc||'A new drama on '+(branding.appName||'DramaVerse')+'.',
-   cls:'',
-   badge:'NEW',
-   poster,
-   episodes:{},
-   orderIndex:minOrder
- };
-
- if(db){
-   try{
-     await db.collection('dramas').doc(newId).set(newDrama);
-     toast('Drama published to ALL users!');
-   }catch(err){
-     toast('Publish error: '+err.message);
-     return;
-   }
- }
- ['adminTitle','adminGenre','adminDesc','adminPoster'].forEach(id=>document.getElementById(id).value='');
- document.getElementById('adminEpisodes').value=12;
+function togglePlay() {
+  const v = document.getElementById('videoPlayer');
+  if (v.paused) v.play().catch(() => {});
+  else v.pause();
 }
 
-function showAdminDramas(){
- const list=document.getElementById('adminDramaList');if(!list)return;
- document.getElementById('adminCount').textContent=dramas.length+' titles';
- list.innerHTML=dramas.map((d,i)=>`<div class="admin-row"><div><strong>${escapeHTML(d.title)}</strong><small>${escapeHTML(d.genre)} · ${d.eps} episodes</small></div><div class="admin-actions"><button onclick="adminEditDrama(${i})">Edit</button><button class="danger" onclick="adminDeleteDrama(${i})">Delete</button></div></div>`).join('');
+function nextEpisode() {
+  const d = dramas[activeDrama];
+  if (activeEpisode < d.eps) { activeEpisode++; loadEpisode(); playCurrent(); }
+  else toast('You reached the last episode');
 }
 
-async function adminEditDrama(i){
- const d=dramas[i];if(!d)return;
- const title=prompt('Drama title:',d.title);if(title===null)return;
- const genre=prompt('Genre:',d.genre);if(genre===null)return;
- const desc=prompt('Description:',d.desc||'');if(desc===null)return;
- const eps=prompt('Number of episodes:',d.eps);if(eps===null)return;
-
- const updated={
-   title:title.trim()||d.title,
-   genre:genre.trim()||d.genre,
-   desc:desc.trim(),
-   eps:Math.max(1,Math.min(500,Number(eps)||d.eps))
- };
- if(db){
-   try{
-     await db.collection('dramas').doc(d.id).set(updated,{merge:true});
-     toast('Drama updated for all users');
-   }catch(err){
-     toast('Update error: '+err.message);
-   }
- }
+function previousEpisode() {
+  if (activeEpisode > 1) { activeEpisode--; loadEpisode(); playCurrent(); }
+  else toast('This is the first episode');
 }
 
-async function adminDeleteDrama(i){
- const d=dramas[i];if(!d)return;
- if(!confirm('Delete "'+d.title+'" for all users?'))return;
- if(db){
-   try{
-     await db.collection('dramas').doc(d.id).delete();
-     toast('Drama deleted for all users');
-   }catch(err){
-     toast('Delete error: '+err.message);
-   }
- }
+document.getElementById('videoPlayer').addEventListener('ended', handleVideoCompleted);
+
+function closePlayer() {
+  document.getElementById('videoPlayer').pause();
+  document.getElementById('player').classList.remove('open');
 }
 
-applyBrandingUI();render();showAdminDramas();refreshUploadDrama();renderAdAdminUI();applyAuthUI();
+function saveDrama(i) {
+  const d = dramas[i];
+  if (!d) return;
+  if (!saved.includes(d.id)) {
+    saved.push(d.id);
+    localStorage.setItem('dvSaved', JSON.stringify(saved));
+    toast('Added to your watchlist ♡');
+  } else {
+    toast('Already in your watchlist');
+  }
+}
+
+function showSaved() {
+  const el = document.getElementById('savedGrid');
+  const matched = dramas.map((d, i) => ({ d, i })).filter(x => saved.includes(x.d.id) || saved.includes(x.i));
+  el.innerHTML = matched.map(x => card(x.d, x.i)).join('');
+  document.getElementById('savedEmpty').style.display = matched.length ? 'none' : 'block';
+}
+
+function toast(msg) {
+  const t = document.getElementById('toast');
+  t.textContent = msg;
+  t.style.display = 'block';
+  clearTimeout(window._dvToastTimer);
+  window._dvToastTimer = setTimeout(() => { t.style.display = 'none'; }, 2500);
+}
+
+async function adminAddDrama() {
+  const title = document.getElementById('adminTitle').value.trim();
+  const genre = document.getElementById('adminGenre').value.trim() || 'Drama';
+  const desc = document.getElementById('adminDesc').value.trim();
+  const poster = document.getElementById('adminPoster').value.trim();
+  const eps = Math.max(1, Math.min(500, Number(document.getElementById('adminEpisodes').value) || 1));
+  if (!title) { toast('Please enter a drama title'); return; }
+
+  const newId = 'dv_' + Date.now() + '_' + Math.random().toString(36).slice(2, 7);
+  const minOrder = dramas.reduce((m, x) => Math.min(m, typeof x.orderIndex === 'number' ? x.orderIndex : 0), 0) - 1;
+  const newDrama = {
+    id: newId,
+    title,
+    genre,
+    eps,
+    desc: desc || ('A new drama on ' + (branding.appName || 'DramaVerse') + '.'),
+    cls: '',
+    badge: 'NEW',
+    poster,
+    episodes: {},
+    orderIndex: minOrder
+  };
+
+  if (db) {
+    try {
+      await db.collection('dramas').doc(newId).set(newDrama);
+      toast('Drama published to ALL users!');
+    } catch (err) {
+      toast('Publish error: ' + err.message);
+      return;
+    }
+  } else {
+    dramas.unshift(newDrama);
+    localStorage.setItem('dvDramas', JSON.stringify(dramas));
+    render();
+    showAdminDramas();
+    refreshUploadDrama();
+    toast('Drama saved locally');
+  }
+
+  ['adminTitle', 'adminGenre', 'adminDesc', 'adminPoster'].forEach(id => { document.getElementById(id).value = ''; });
+  document.getElementById('adminEpisodes').value = 12;
+}
+
+function showAdminDramas() {
+  const list = document.getElementById('adminDramaList');
+  if (!list) return;
+  document.getElementById('adminCount').textContent = dramas.length + ' titles';
+  list.innerHTML = dramas.map((d, i) => `
+    <div class="admin-row">
+      <div><strong>${escapeHTML(d.title)}</strong><small>${escapeHTML(d.genre)} · ${d.eps} episodes</small></div>
+      <div class="admin-actions">
+        <button onclick="adminEditDrama(${i})">Edit</button>
+        <button class="danger" onclick="adminDeleteDrama(${i})">Delete</button>
+      </div>
+    </div>
+  `).join('');
+}
+
+async function adminEditDrama(i) {
+  const d = dramas[i];
+  if (!d) return;
+  const title = prompt('Drama title:', d.title);
+  if (title === null) return;
+  const genre = prompt('Genre:', d.genre);
+  if (genre === null) return;
+  const desc = prompt('Description:', d.desc || '');
+  if (desc === null) return;
+  const eps = prompt('Number of episodes:', d.eps);
+  if (eps === null) return;
+
+  const updated = {
+    title: title.trim() || d.title,
+    genre: genre.trim() || d.genre,
+    desc: desc.trim(),
+    eps: Math.max(1, Math.min(500, Number(eps) || d.eps))
+  };
+
+  if (db) {
+    try {
+      await db.collection('dramas').doc(d.id).set(updated, { merge: true });
+      toast('Drama updated for all users');
+    } catch (err) {
+      toast('Update error: ' + err.message);
+    }
+  } else {
+    Object.assign(d, updated);
+    localStorage.setItem('dvDramas', JSON.stringify(dramas));
+    render();
+    showAdminDramas();
+  }
+}
+
+async function adminDeleteDrama(i) {
+  const d = dramas[i];
+  if (!d) return;
+  if (!confirm('Delete "' + d.title + '" for all users?')) return;
+  if (db) {
+    try {
+      await db.collection('dramas').doc(d.id).delete();
+      toast('Drama deleted for all users');
+    } catch (err) {
+      toast('Delete error: ' + err.message);
+    }
+  } else {
+    dramas.splice(i, 1);
+    localStorage.setItem('dvDramas', JSON.stringify(dramas));
+    render();
+    showAdminDramas();
+    refreshUploadDrama();
+  }
+}
+
+applyBrandingUI();
+render();
+showAdminDramas();
+refreshUploadDrama();
+renderAdAdminUI();
+applyAuthUI();
 initRealtimeCloudSync();
-if(currentSession&&currentSession.email){sendAccountWelcomeEmail(currentSession.email,currentSession.name);}
-</script></body></html>
+</script>
+</body>
+</html>
