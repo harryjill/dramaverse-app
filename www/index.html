@@ -604,7 +604,7 @@ async function resetBrandingSettings() {
 }
 
 /* ============================================================
-   SOCIAL AUTHENTICATION (GOOGLE NATIVE SAFE + FIREBASE OAUTH)
+   SOCIAL AUTHENTICATION (EXPERT CAPACITOR + FIREBASE POPUP/NATIVE)
 ============================================================ */
 function loadSession() {
   try {
@@ -723,6 +723,7 @@ async function signInWithGoogle() {
   toast('Opening Google Sign-In…');
 
   try {
+    // 1. Subukan muna ang native Capacitor FirebaseAuthentication plugin kung available sa APK
     const capFirebaseAuth = window.Capacitor?.Plugins?.FirebaseAuthentication;
     if (capFirebaseAuth && typeof capFirebaseAuth.signInWithGoogle === 'function') {
       try {
@@ -739,34 +740,24 @@ async function signInWithGoogle() {
           return;
         }
       } catch (nativeErr) {
-        console.warn('Native FirebaseAuth fallback to web OAuth:', nativeErr);
+        console.warn('Native FirebaseAuthentication fallback to Popup:', nativeErr);
       }
     }
 
+    // 2. Gumamit ng signInWithPopup (hindi signInWithRedirect para iwas "missing initial state" sa WebView)
     const provider = new firebase.auth.GoogleAuthProvider();
     provider.setCustomParameters({ prompt: 'select_account' });
-
-    try {
-      const result = await auth.signInWithPopup(provider);
-      if (result && result.user) {
-        await syncFirebaseUserToSession(result.user, 'Google', true);
-      }
-    } catch (popupErr) {
-      if (
-        popupErr &&
-        (popupErr.code === 'auth/popup-blocked' ||
-         popupErr.code === 'auth/operation-not-supported-in-this-environment' ||
-         popupErr.code === 'auth/cancelled-popup-request')
-      ) {
-        await auth.signInWithRedirect(provider);
-      } else {
-        throw popupErr;
-      }
+    const result = await auth.signInWithPopup(provider);
+    if (result && result.user) {
+      await syncFirebaseUserToSession(result.user, 'Google', true);
     }
   } catch (err) {
     console.error('Google Sign-In error:', err);
-    const msg = err?.message || 'Google Sign-In cancelled or failed';
-    toast('Google Sign-In: ' + msg);
+    if (err?.code === 'auth/operation-not-supported-in-this-environment' || err?.code === 'auth/popup-blocked') {
+      toast('Kailangan ng native Google plugin sa APK para bumalik diretso sa app.');
+    } else {
+      toast('Google Sign-In: ' + (err?.message || 'Cancelled or failed'));
+    }
   } finally {
     isSigningIn = false;
     if (gBtn) gBtn.disabled = false;
@@ -837,12 +828,6 @@ function applyAuthUI() {
 
 function initFirebaseAuthListener() {
   if (!auth) return;
-  auth.getRedirectResult().then(res => {
-    if (res && res.user) {
-      syncFirebaseUserToSession(res.user, 'Google', true);
-    }
-  }).catch(() => {});
-
   auth.onAuthStateChanged(fbUser => {
     if (fbUser && fbUser.email) {
       syncFirebaseUserToSession(fbUser, 'Google', false);
