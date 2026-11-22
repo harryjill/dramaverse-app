@@ -20,6 +20,28 @@ jobs:
       - run: npm install
       - run: npx cap add android
       - run: if [ -f google-services.json ]; then cp google-services.json android/app/google-services.json; fi
+      - name: Apply DramaVerse app icon from logo.png
+        run: |
+          if [ -f "logo.png" ]; then
+            sudo apt-get update -qq && sudo apt-get install -y -qq imagemagick
+            RES_DIR="android/app/src/main/res"
+            declare -A ICON_SIZES=(
+              ["mipmap-mdpi"]=48
+              ["mipmap-hdpi"]=72
+              ["mipmap-xhdpi"]=96
+              ["mipmap-xxhdpi"]=144
+              ["mipmap-xxxhdpi"]=192
+            )
+            for folder in "${!ICON_SIZES[@]}"; do
+              px="${ICON_SIZES[$folder]}"
+              mkdir -p "$RES_DIR/$folder"
+              convert "logo.png" -resize "${px}x${px}!" "$RES_DIR/$folder/ic_launcher.png"
+              convert "logo.png" -resize "${px}x${px}!" "$RES_DIR/$folder/ic_launcher_round.png"
+              convert "logo.png" -resize "${px}x${px}!" "$RES_DIR/$folder/ic_launcher_foreground.png"
+            done
+          else
+            echo "logo.png not found in repo root; skipping custom icon generation."
+          fi
       - run: npx cap sync android
       - run: cd android && chmod +x gradlew && ./gradlew assembleDebug
       - uses: actions/upload-artifact@v4
