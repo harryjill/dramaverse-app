@@ -84,8 +84,6 @@ header{padding:16px 18px 12px;display:flex;justify-content:space-between;align-i
 .stat-box strong{display:block;font-size:17px;margin-top:4px;color:#fff}
 .demo-banner{background:#2b1924;border:1px solid #75344b;color:#ffb6c9;border-radius:12px;padding:10px 12px;font-size:12px;line-height:1.5;margin:10px 0}
 .sync-banner{background:#152822;border:1px solid #2d6a54;color:#8ef0c8;border-radius:12px;padding:10px 12px;font-size:12px;line-height:1.5;margin:10px 0}
-.email-preview{background:#141117;border:1px solid #32293a;border-radius:14px;padding:14px;margin-top:14px;font-size:12px;line-height:1.6}
-.email-preview strong{color:#ff8ea9}
 .logo-preview-box{display:flex;align-items:center;gap:12px;background:#141117;border:1px solid #2e2733;border-radius:12px;padding:10px 12px;margin-top:8px}
 .logo-preview-box img{width:46px;height:46px;border-radius:11px;object-fit:cover;border:1px solid #453b48;display:none}
 .ad-modal{position:fixed;inset:0;background:#070609f5;z-index:11;display:none;align-items:center;justify-content:center;padding:18px}
@@ -115,7 +113,8 @@ header{padding:16px 18px 12px;display:flex;justify-content:space-between;align-i
 .icon-f{background:#1877f2;color:#fff}
 .icon-t{background:#09080c;color:#fff;border:1px solid #3c3645}
 .auth-provider-arrow{color:#8c8296;font-size:20px;line-height:1}
-.auth-status-card{margin-top:16px;background:#131117;border:1px solid #282330;border-radius:16px;padding:14px}
+.auth-signed-in-bar{margin-top:16px;background:#131117;border:1px solid #282330;border-radius:16px;padding:12px 14px;display:none;align-items:center;justify-content:space-between;gap:10px;flex-wrap:wrap}
+.auth-signed-in-bar.visible{display:flex}
 .auth-legal-note{margin-top:20px;color:#8a8094;font-size:11px;line-height:1.5;text-align:left}
 .auth-legal-note a{color:#c9c0d2;text-decoration:underline}
 </style>
@@ -326,19 +325,12 @@ header{padding:16px 18px 12px;display:flex;justify-content:space-between;align-i
         </button>
       </div>
 
-      <div class="auth-status-card" id="authStatusCard">
-        <div style="display:flex;align-items:center;justify-content:space-between;gap:10px;flex-wrap:wrap">
-          <div>
-            <strong id="profileName" style="font-size:14px">DramaVerse Guest</strong>
-            <div class="note-muted" id="providerHintText" style="margin:2px 0 0">Tap "Continue with Google" to sign in automatically.</div>
-          </div>
-          <button class="btn secondary" id="signOutBtn" style="margin-left:0;padding:8px 13px;font-size:12px;display:none" onclick="handleSignOut()">Sign out</button>
+      <div class="auth-signed-in-bar" id="authSignedInBar">
+        <div>
+          <strong id="signedInUserLabel" style="font-size:13px">Signed in</strong>
+          <div class="note-muted" id="signedInEmailLabel" style="margin:2px 0 0"></div>
         </div>
-
-        <div class="email-preview" id="welcomeEmailBox">
-          <strong>Account Summary</strong><br>
-          Hindi na kailangang mag-type ng username o password. I-tap ang <strong>Continue with Google</strong> sa itaas para mag-sign in.
-        </div>
+        <button class="btn secondary" id="signOutBtn" style="margin-left:0;padding:8px 13px;font-size:12px" onclick="handleSignOut()">Sign out</button>
       </div>
 
       <p class="auth-legal-note">
@@ -634,22 +626,6 @@ function loadSession() {
 let currentSession = loadSession();
 let isSigningIn = false;
 
-function buildAccountSummaryHTML(sessionObj) {
-  const safeName = escapeHTML(sessionObj.name || sessionObj.username || (sessionObj.email ? sessionObj.email.split('@')[0] : 'Viewer'));
-  const safeEmail = escapeHTML(sessionObj.email || 'Not set');
-  const appTitle = escapeHTML(branding.appName || 'DramaVerse');
-  const roleLabel = isAdminGmail(sessionObj.email) ? 'Admin Creator' : 'Viewer';
-  const providerLabel = escapeHTML(sessionObj.provider || 'Google');
-  return `
-    <div style="border-left:3px solid #ff4b78;padding-left:10px">
-      <strong>Signed In:</strong> ${safeName}<br>
-      <strong>Gmail:</strong> ${safeEmail}<br>
-      <strong>Provider:</strong> ${providerLabel} OAuth · <strong>Role:</strong> ${roleLabel}<br>
-      <p style="margin:8px 0 0;color:#d6ceda">Naka-connect na ang iyong Google account sa <strong>${appTitle}</strong>.</p>
-    </div>
-  `;
-}
-
 async function sendAccountWelcomeEmail(email, name) {
   const cleanEmail = normalizeEmail(email);
   if (!cleanEmail || !cleanEmail.includes('@')) return;
@@ -763,7 +739,7 @@ async function signInWithGoogle() {
           return;
         }
       } catch (nativeErr) {
-        console.warn('Native FirebaseAuth unavailable or uninitialized, using web OAuth:', nativeErr);
+        console.warn('Native FirebaseAuth fallback to web OAuth:', nativeErr);
       }
     }
 
@@ -780,8 +756,7 @@ async function signInWithGoogle() {
         popupErr &&
         (popupErr.code === 'auth/popup-blocked' ||
          popupErr.code === 'auth/operation-not-supported-in-this-environment' ||
-         popupErr.code === 'auth/cancelled-popup-request' ||
-         popupErr.code === 'auth/web-storage-unsupported')
+         popupErr.code === 'auth/cancelled-popup-request')
       ) {
         await auth.signInWithRedirect(provider);
       } else {
@@ -823,12 +798,10 @@ function applyAuthUI() {
   const adminScreen = document.getElementById('admin');
   const badge = document.getElementById('headerRoleBadge');
   const roleTag = document.getElementById('accountRoleTag');
-  const pName = document.getElementById('profileName');
-  const pEmail = document.getElementById('profileEmailText');
-  const hintEl = document.getElementById('providerHintText');
-  const signOutBtn = document.getElementById('signOutBtn');
+  const signedInBar = document.getElementById('authSignedInBar');
+  const signedInUser = document.getElementById('signedInUserLabel');
+  const signedInEmail = document.getElementById('signedInEmailLabel');
   const adminEmailEl = document.getElementById('adminSessionEmail');
-  const box = document.getElementById('welcomeEmailBox');
   const appLabel = branding.appName || 'DramaVerse';
 
   if (currentSession && currentSession.email) {
@@ -843,12 +816,10 @@ function applyAuthUI() {
       badge.className = 'role-pill' + (admin ? ' admin' : '');
     }
     if (roleTag) roleTag.textContent = admin ? 'ADMIN VERIFIED' : 'GOOGLE CONNECTED';
-    if (pName) pName.textContent = labelName;
-    if (pEmail) pEmail.textContent = currentSession.email;
-    if (hintEl) hintEl.textContent = 'Connected via ' + (currentSession.provider || 'Google') + ' OAuth';
-    if (signOutBtn) signOutBtn.style.display = 'inline-block';
+    if (signedInBar) signedInBar.classList.add('visible');
+    if (signedInUser) signedInUser.textContent = labelName;
+    if (signedInEmail) signedInEmail.textContent = currentSession.email;
     if (adminEmailEl) adminEmailEl.textContent = currentSession.email;
-    if (box) box.innerHTML = buildAccountSummaryHTML(currentSession);
   } else {
     if (adminNav) adminNav.style.display = 'none';
     if (adminScreen && adminScreen.classList.contains('active')) {
@@ -859,14 +830,8 @@ function applyAuthUI() {
       badge.className = 'role-pill';
     }
     if (roleTag) roleTag.textContent = 'GUEST';
-    if (pName) pName.textContent = appLabel + ' Guest';
-    if (pEmail) pEmail.textContent = 'One-tap sign in with your social account to sync your watchlist.';
-    if (hintEl) hintEl.textContent = 'Tap "Continue with Google" to sign in automatically.';
-    if (signOutBtn) signOutBtn.style.display = 'none';
+    if (signedInBar) signedInBar.classList.remove('visible');
     if (adminEmailEl) adminEmailEl.textContent = 'ADMIN ONLY';
-    if (box) {
-      box.innerHTML = '<strong>Account Summary</strong><br>Hindi na kailangang mag-type ng username o password. I-tap ang <strong>Continue with Google</strong> sa itaas para mag-sign in.';
-    }
   }
 }
 
