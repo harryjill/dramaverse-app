@@ -12,6 +12,7 @@
 .stat-box span{display:block;font-size:11px;color:#a9a0ad}
 .stat-box strong{display:block;font-size:17px;margin-top:4px;color:#fff}
 .demo-banner{background:#2b1924;border:1px solid #75344b;color:#ffb6c9;border-radius:12px;padding:10px 12px;font-size:12px;line-height:1.5;margin:10px 0}
+.sync-banner{background:#152822;border:1px solid #2d6a54;color:#8ef0c8;border-radius:12px;padding:10px 12px;font-size:12px;line-height:1.5;margin:10px 0}
 .email-preview{background:#141117;border:1px solid #32293a;border-radius:14px;padding:14px;margin-top:12px;font-size:12px;line-height:1.6}
 .email-preview strong{color:#ff8ea9}
 .logo-preview-box{display:flex;align-items:center;gap:12px;background:#141117;border:1px solid #2e2733;border-radius:12px;padding:10px 12px;margin-top:8px}
@@ -22,7 +23,10 @@
 .ad-badge{display:inline-block;background:#ff4b7826;color:#ff7998;border:1px solid #ff4b7866;font-size:10px;font-weight:800;letter-spacing:1px;padding:4px 10px;border-radius:99px}
 .ad-visual{margin:14px 0;background:#0d0b10;border:1px dashed #473b50;border-radius:14px;padding:14px;min-height:150px;display:flex;flex-direction:column;align-items:center;justify-content:center}
 .ad-visual video{width:100%;max-height:240px;border-radius:10px;background:#000}
-</style></head><body>
+</style>
+<script src="https://www.gstatic.com/firebasejs/10.14.1/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.14.1/firebase-firestore-compat.js"></script>
+</head><body>
 <header>
   <div class="brand-wrap">
     <img id="headerBrandLogo" class="brand-logo-img" alt="App Logo">
@@ -39,21 +43,22 @@
 <main class="wrap">
 <div id="home" class="screen active"><section class="hero"><div class="hero-content"><div class="eyebrow">EXCLUSIVE MINI DRAMA</div><h1 id="heroBrandHeadline">My Contract<br>With The CEO</h1><p id="heroBrandSubtext">One contract. Two secrets. A love neither of them planned.</p><button class="btn primary" onclick="openDrama(0)">▶ Watch now</button><button class="btn secondary" onclick="saveDrama(0)">♡ Save</button></div></section>
 <div class="section-head"><h2>Browse by genre</h2></div><div class="chips" id="genres"><button class="chip active" onclick="filterGenre('All',this)">All</button><button class="chip" onclick="filterGenre('Romance',this)">Romance</button><button class="chip" onclick="filterGenre('Revenge',this)">Revenge</button><button class="chip" onclick="filterGenre('Fantasy',this)">Fantasy</button><button class="chip" onclick="filterGenre('Thriller',this)">Thriller</button></div>
-<div class="section-head"><h2>Trending dramas</h2><span class="see">Short episodes · Demo</span></div><div class="grid" id="dramaGrid"></div></div>
+<div class="section-head"><h2>Trending dramas</h2><span class="see" id="cloudLiveTag">● Live Cloud Sync</span></div><div class="grid" id="dramaGrid"></div></div>
 <div id="search" class="screen"><div class="section-head"><h2>Search dramas</h2></div><input class="searchbox" id="searchInput" placeholder="Search title or genre…" oninput="render(this.value)"><div class="grid" id="searchGrid"></div></div>
 <div id="saved" class="screen"><div class="section-head"><h2>My watchlist</h2></div><div class="grid" id="savedGrid"></div><div class="empty" id="savedEmpty">Saved dramas will appear here.</div></div>
 
 <div id="admin" class="screen">
   <div class="section-head"><h2>Admin Panel</h2><span class="see" id="adminSessionEmail">ADMIN ONLY</span></div>
+  <div class="sync-banner" id="cloudSyncStatus">☁️ Connecting to Firebase Cloud (dramaverse-8c233)...</div>
 
   <div class="card" style="padding:16px;margin-bottom:14px;cursor:default">
-    <h3 style="margin-top:0">App Logo &amp; Branding Setup</h3>
-    <p style="color:#aaa;font-size:12px;line-height:1.5;margin-top:0">Ilagay dito ang app name, logo/icon image, at featured banner text. Naka-save sa device mo at hindi nakikita ng normal viewers.</p>
+    <h3 style="margin-top:0">App Logo &amp; Branding Setup (Global Sync)</h3>
+    <p style="color:#aaa;font-size:12px;line-height:1.5;margin-top:0">Naka-save ito sa Firebase Cloud. Mag-u-update ito sa lahat ng users at hindi mabubura kahit i-uninstall ang APK.</p>
 
     <label class="ad-label" for="brandAppNameInput">App Name</label>
     <input class="searchbox" id="brandAppNameInput" placeholder="e.g. DramaVerse">
 
-    <label class="ad-label" for="brandLogoFileInput">Upload Logo / Icon Image (PNG/JPG)</label>
+    <label class="ad-label" for="brandLogoFileInput">Upload Logo / Icon Image (PNG/JPG, auto-compressed para sa Cloud)</label>
     <input class="searchbox" id="brandLogoFileInput" type="file" accept="image/*" onchange="handleLogoFileUpload(this)">
 
     <label class="ad-label" for="brandLogoUrlInput">Logo Image URL (optional)</label>
@@ -71,10 +76,44 @@
     </div>
 
     <div style="display:flex;gap:8px;flex-wrap:wrap;margin-top:12px">
-      <button class="btn primary" style="flex:1;min-width:150px" onclick="saveBrandingSettings()">💾 Save Branding</button>
+      <button class="btn primary" style="flex:1;min-width:150px" onclick="saveBrandingSettings()">☁️ Save &amp; Publish Branding</button>
       <button class="btn secondary" style="margin-left:0" onclick="resetBrandingSettings()">↺ Reset Logo &amp; Name</button>
     </div>
   </div>
+
+  <div class="card" style="padding:16px;margin-bottom:14px;cursor:default">
+    <h3 style="margin-top:0">Add a drama (Global Sync)</h3>
+    <input class="searchbox" id="adminTitle" placeholder="Drama title">
+    <input class="searchbox" id="adminGenre" placeholder="Genre (e.g. Romance)">
+    <input class="searchbox" id="adminDesc" placeholder="Short description">
+    <input class="searchbox" id="adminPoster" placeholder="Poster image URL (optional)">
+    <input class="searchbox" id="adminEpisodes" type="number" min="1" max="500" value="12" placeholder="Number of episodes">
+    <button class="btn primary" style="width:100%" onclick="adminAddDrama()">＋ Publish Drama to All Users</button>
+  </div>
+
+  <div class="card" style="padding:16px;margin:14px 0;cursor:default">
+    <h3 style="margin-top:0">Upload / Link an Episode (Global Sync)</h3>
+    <p style="color:#aaa;font-size:12px;line-height:1.5">Para mapanood ng <strong>lahat ng users</strong>, maglagay ng direct MP4 Video URL o i-set up ang libreng Cloudinary Cloud Name &amp; Unsigned Preset para direkta kang makapag-upload ng MP4 file mula sa CP.</p>
+    <select class="searchbox" id="uploadDrama"></select>
+    <input class="searchbox" id="uploadEpisodeNo" type="number" min="1" value="1" placeholder="Episode number">
+    <input class="searchbox" id="uploadEpisodeTitle" placeholder="Episode title (optional)">
+    
+    <label class="ad-label" for="uploadEpisodeUrl">Option A: Direct MP4 Video URL (Recommended)</label>
+    <input class="searchbox" id="uploadEpisodeUrl" placeholder="https://.../episode1.mp4">
+
+    <label class="ad-label" for="episodeVideoFile">Option B: Upload MP4 File via Cloudinary (Free 25GB)</label>
+    <input class="searchbox" id="episodeVideoFile" type="file" accept="video/*">
+    <div style="display:flex;gap:8px;flex-wrap:wrap">
+      <input class="searchbox" style="flex:1;min-width:130px" id="cloudinaryCloudName" placeholder="Cloudinary Cloud Name (optional)">
+      <input class="searchbox" style="flex:1;min-width:130px" id="cloudinaryUploadPreset" placeholder="Unsigned Upload Preset">
+    </div>
+
+    <button class="btn primary" style="width:100%" onclick="uploadEpisode()">☁️ Save &amp; Publish Episode</button>
+    <p id="uploadStatus" style="color:#aaa;font-size:12px;line-height:1.5">Ang episode video link ay mase-save sa Firebase Cloud at agad lalabas sa lahat ng users.</p>
+  </div>
+
+  <div class="section-head"><h2>Manage dramas</h2><span class="see" id="adminCount"></span></div>
+  <div id="adminDramaList"></div>
 
   <div class="card" style="padding:16px;margin:14px 0;cursor:default">
     <h3 style="margin-top:0">Ads Setup</h3>
@@ -117,28 +156,6 @@
     <p id="adSettingsOverview" style="color:#b8b0be;font-size:12px;line-height:1.5;margin:10px 0"></p>
     <button class="btn secondary" style="margin-left:0;width:100%" onclick="resetAdStats()">↺ Reset Demo Ad &amp; View Stats</button>
   </div>
-
-  <div class="card" style="padding:16px;margin-bottom:14px;cursor:default">
-    <h3 style="margin-top:0">Add a drama</h3>
-    <input class="searchbox" id="adminTitle" placeholder="Drama title">
-    <input class="searchbox" id="adminGenre" placeholder="Genre (e.g. Romance)">
-    <input class="searchbox" id="adminDesc" placeholder="Short description">
-    <input class="searchbox" id="adminPoster" placeholder="Poster image URL (optional)">
-    <input class="searchbox" id="adminEpisodes" type="number" min="1" max="500" value="12" placeholder="Number of episodes">
-    <button class="btn primary" style="width:100%" onclick="adminAddDrama()">＋ Add drama</button>
-  </div>
-  <div class="card" style="padding:16px;margin:14px 0;cursor:default">
-    <h3 style="margin-top:0">Upload an episode</h3>
-    <p style="color:#aaa;font-size:12px;line-height:1.5">Pumili ng drama, episode number, at video file mula sa cellphone mo. MP4 ang pinaka-recommended.</p>
-    <select class="searchbox" id="uploadDrama"></select>
-    <input class="searchbox" id="uploadEpisodeNo" type="number" min="1" value="1" placeholder="Episode number">
-    <input class="searchbox" id="uploadEpisodeTitle" placeholder="Episode title (optional)">
-    <input class="searchbox" id="episodeVideoFile" type="file" accept="video/*">
-    <button class="btn primary" style="width:100%" onclick="uploadEpisode()">⬆ Save episode video</button>
-    <p id="uploadStatus" style="color:#aaa;font-size:12px;line-height:1.5">Videos are stored only in this browser on this device. Large files may use significant phone storage.</p>
-  </div>
-  <div class="section-head"><h2>Manage dramas</h2><span class="see" id="adminCount"></span></div>
-  <div id="adminDramaList"></div>
 </div>
 
 <div id="profile" class="screen">
@@ -196,6 +213,24 @@
 
 <div class="toast" id="toast"></div>
 <script>
+const firebaseConfig = {
+  apiKey: "AIzaSyBZ8cKzY7Wh6uJMI5SopkwQIzDOTCmUNQw",
+  authDomain: "dramaverse-8c233.firebaseapp.com",
+  projectId: "dramaverse-8c233",
+  storageBucket: "dramaverse-8c233.firebasestorage.app",
+  messagingSenderId: "75314098867",
+  appId: "1:75314098867:web:5cd4a257198aa8f92eb6c6",
+  measurementId: "G-3M2D1DH3D1"
+};
+
+let db=null;
+try{
+  firebase.initializeApp(firebaseConfig);
+  db=firebase.firestore();
+}catch(e){
+  console.error('Firebase init error:',e);
+}
+
 const ADMIN_GMAILS=['harryequibal0@gmail.com'];
 
 const EMAILJS_CONFIG={
@@ -257,7 +292,7 @@ function applyBrandingUI(){
     if(avImg){avImg.src=branding.logoSrc;avImg.style.display='block';}
     if(avEmoji){avEmoji.style.display='none';}
     if(prevImg){prevImg.src=branding.logoSrc;prevImg.style.display='block';}
-    if(prevText){prevText.textContent='Custom logo active';}
+    if(prevText){prevText.textContent='Custom logo active (Synced in Cloud)';}
   }else{
     if(hLogo){hLogo.removeAttribute('src');hLogo.style.display='none';}
     if(avImg){avImg.removeAttribute('src');avImg.style.display='none';}
@@ -288,17 +323,28 @@ function handleLogoFileUpload(inputEl){
   const file=inputEl?.files?.[0];
   if(!file)return;
   if(!file.type.startsWith('image/')){toast('Pumili ng image file (PNG/JPG)');return;}
-  if(file.size>2*1024*1024){toast('Pumili ng image na mas mababa sa 2 MB');return;}
   const reader=new FileReader();
   reader.onload=()=>{
-    branding.logoSrc=String(reader.result||'');
-    applyBrandingUI();
-    toast('Logo preview ready — tap Save Branding');
+    const img=new Image();
+    img.onload=()=>{
+      const canvas=document.createElement('canvas');
+      const maxDim=220;
+      let w=img.width,h=img.height;
+      if(w>h&&w>maxDim){h=Math.round(h*(maxDim/w));w=maxDim;}
+      else if(h>maxDim){w=Math.round(w*(maxDim/h));h=maxDim;}
+      canvas.width=w;canvas.height=h;
+      const ctx=canvas.getContext('2d');
+      ctx.drawImage(img,0,0,w,h);
+      branding.logoSrc=canvas.toDataURL('image/webp',0.82);
+      applyBrandingUI();
+      toast('Logo ready — tap Save & Publish Branding');
+    };
+    img.src=String(reader.result||'');
   };
   reader.readAsDataURL(file);
 }
 
-function saveBrandingSettings(){
+async function saveBrandingSettings(){
   const nameVal=(document.getElementById('brandAppNameInput')?.value||'').trim()||DEFAULT_BRANDING.appName;
   const urlVal=(document.getElementById('brandLogoUrlInput')?.value||'').trim();
   const hTitleVal=(document.getElementById('brandHeroTitleInput')?.value||'').trim()||DEFAULT_BRANDING.heroTitle;
@@ -320,22 +366,38 @@ function saveBrandingSettings(){
     heroTitle:hTitleVal,
     heroDesc:hDescVal
   };
-  try{
-    localStorage.setItem('dvBranding',JSON.stringify(branding));
-  }catch(e){
-    toast('Masyadong malaki ang logo file para sa local storage');
-    return;
-  }
+  try{localStorage.setItem('dvBranding',JSON.stringify(branding));}catch(e){}
   applyBrandingUI();
-  toast('Branding & logo saved');
+
+  if(db){
+    try{
+      await db.collection('appConfig').doc('branding').set({
+        ...branding,
+        updatedAt:firebase.firestore.FieldValue.serverTimestamp()
+      });
+      toast('Branding & logo published to ALL users!');
+    }catch(err){
+      toast('Cloud save error: '+err.message);
+    }
+  }else{
+    toast('Saved locally (Offline)');
+  }
 }
 
-function resetBrandingSettings(){
+async function resetBrandingSettings(){
   branding={...DEFAULT_BRANDING};
   localStorage.removeItem('dvBranding');
   const fInput=document.getElementById('brandLogoFileInput');
   if(fInput)fInput.value='';
   applyBrandingUI();
+  if(db){
+    try{
+      await db.collection('appConfig').doc('branding').set({
+        ...branding,
+        updatedAt:firebase.firestore.FieldValue.serverTimestamp()
+      });
+    }catch(e){}
+  }
   toast('Reset to default DramaVerse branding');
 }
 
@@ -418,7 +480,6 @@ async function sendAccountWelcomeEmail(email,name){
     if(box){
       box.innerHTML=buildWelcomeEmailHTML(cleanEmail,displayName)+`<div style="margin-top:8px;color:#ff9bb2">Status: Hindi naipadala ang email. I-check ang Public Key at Template ID.</div>`;
     }
-    toast('Email send failed');
   }
 }
 
@@ -500,17 +561,88 @@ function handleSignOut(){
   toast('Signed out');
 }
 
-const dramas=[
-{title:'My Contract With The CEO',genre:'Romance',eps:24,desc:'A fake marriage becomes a real love story.',cls:'',badge:'HOT'},
-{title:'Reborn To Take Revenge',genre:'Revenge',eps:30,desc:'She returns with a plan to expose them all.',cls:'p2',badge:'NEW'},
-{title:'The Moon’s Secret',genre:'Fantasy',eps:18,desc:'An ordinary girl discovers an extraordinary fate.',cls:'p3',badge:'FANTASY'},
-{title:'Love After Midnight',genre:'Romance',eps:20,desc:'Two strangers meet when the city sleeps.',cls:'p4',badge:'ROMANCE'},
-{title:'The Last Witness',genre:'Thriller',eps:16,desc:'A witness. A mystery. A dangerous truth.',cls:'p5',badge:'MYSTERY'},
-{title:'CEO’s Hidden Heir',genre:'Romance',eps:22,desc:'A secret child changes the fate of two families.',cls:'p6',badge:'TRENDING'}];
+const DEFAULT_DRAMAS=[
+{id:'dv_default_1',title:'My Contract With The CEO',genre:'Romance',eps:24,desc:'A fake marriage becomes a real love story.',cls:'',badge:'HOT',episodes:{}},
+{id:'dv_default_2',title:'Reborn To Take Revenge',genre:'Revenge',eps:30,desc:'She returns with a plan to expose them all.',cls:'p2',badge:'NEW',episodes:{}},
+{id:'dv_default_3',title:'The Moon’s Secret',genre:'Fantasy',eps:18,desc:'An ordinary girl discovers an extraordinary fate.',cls:'p3',badge:'FANTASY',episodes:{}},
+{id:'dv_default_4',title:'Love After Midnight',genre:'Romance',eps:20,desc:'Two strangers meet when the city sleeps.',cls:'p4',badge:'ROMANCE',episodes:{}},
+{id:'dv_default_5',title:'The Last Witness',genre:'Thriller',eps:16,desc:'A witness. A mystery. A dangerous truth.',cls:'p5',badge:'MYSTERY',episodes:{}},
+{id:'dv_default_6',title:'CEO’s Hidden Heir',genre:'Romance',eps:22,desc:'A secret child changes the fate of two families.',cls:'p6',badge:'TRENDING',episodes:{}}];
 
+const dramas=[...DEFAULT_DRAMAS];
 let currentFilter='All',saved=JSON.parse(localStorage.getItem('dvSaved')||'[]');
 try { const stored=JSON.parse(localStorage.getItem('dvDramas')||'null'); if(Array.isArray(stored)&&stored.length) dramas.splice(0,dramas.length,...stored); } catch(e){}
-dramas.forEach((d,i)=>{if(!d.id)d.id='dv_legacy_'+i+'_'+Math.random().toString(36).slice(2,7);});
+dramas.forEach((d,i)=>{if(!d.id)d.id='dv_legacy_'+i;if(!d.episodes)d.episodes={};});
+
+function initRealtimeCloudSync(){
+  const statusBanner=document.getElementById('cloudSyncStatus');
+  const liveTag=document.getElementById('cloudLiveTag');
+  if(!db){
+    if(statusBanner)statusBanner.textContent='⚠️ Offline mode — hindi nakakonekta sa Firebase.';
+    return;
+  }
+
+  // 1. Real-time Branding & Logo Listener
+  db.collection('appConfig').doc('branding').onSnapshot(doc=>{
+    if(doc.exists){
+      const data=doc.data();
+      branding={
+        appName:data.appName||DEFAULT_BRANDING.appName,
+        logoSrc:data.logoSrc||'',
+        heroTitle:data.heroTitle||DEFAULT_BRANDING.heroTitle,
+        heroDesc:data.heroDesc||DEFAULT_BRANDING.heroDesc
+      };
+      try{localStorage.setItem('dvBranding',JSON.stringify(branding));}catch(e){}
+      applyBrandingUI();
+    }
+  },err=>{
+    console.warn('Branding sync error:',err);
+  });
+
+  // 2. Real-time Dramas & Episodes Listener (Updates ALL users instantly)
+  db.collection('dramas').orderBy('orderIndex','asc').onSnapshot(async snapshot=>{
+    if(snapshot.empty){
+      // Seed default dramas to Firestore on first run so all users see them
+      const batch=db.batch();
+      DEFAULT_DRAMAS.forEach((d,idx)=>{
+        const ref=db.collection('dramas').doc(d.id);
+        batch.set(ref,{...d,orderIndex:idx});
+      });
+      await batch.commit();
+      return;
+    }
+
+    const cloudList=[];
+    snapshot.forEach(doc=>{
+      const data=doc.data();
+      cloudList.push({
+        id:doc.id,
+        title:data.title||'Untitled Drama',
+        genre:data.genre||'Drama',
+        eps:Number(data.eps)||1,
+        desc:data.desc||'',
+        cls:data.cls||'',
+        badge:data.badge||'NEW',
+        poster:data.poster||'',
+        episodes:data.episodes||{},
+        orderIndex:typeof data.orderIndex==='number'?data.orderIndex:999
+      });
+    });
+
+    dramas.splice(0,dramas.length,...cloudList);
+    try{localStorage.setItem('dvDramas',JSON.stringify(dramas));}catch(e){}
+    render(document.getElementById('searchInput')?.value||'');
+    showAdminDramas();
+    refreshUploadDrama();
+    if(document.getElementById('player')?.classList.contains('open')){
+      loadEpisode();
+    }
+    if(statusBanner)statusBanner.textContent='✅ Connected to Firebase Cloud (dramaverse-8c233) · All updates sync live to every user.';
+    if(liveTag)liveTag.textContent='● Live Synced';
+  },err=>{
+    if(statusBanner)statusBanner.textContent='⚠️ Firestore Sync Error: '+err.message+' (Siguraduhing naka-Test Mode ang Firestore Rules)';
+  });
+}
 
 const DEFAULT_AD_SETTINGS={enabled:true,type:'both',frequency:3,appId:'',unitId:''};
 const DEFAULT_AD_STATS={completedVideos:0,adImpressions:0,demoEstimatedPhp:0,cycleCompleted:0,bothToggleIndex:0};
@@ -706,20 +838,89 @@ function handleVideoCompleted(){
   }
 }
 
-function persistDramas(){
-  localStorage.setItem('dvDramas',JSON.stringify(dramas));
-  render();
-  showAdminDramas();
-  refreshUploadDrama();
+function episodeMetaLabel(d,episode){
+  const epObj=d?.episodes?.[String(episode)];
+  if(!epObj)return '';
+  const parts=[];
+  if(epObj.title)parts.push(epObj.title);
+  if(epObj.url)parts.push('Cloud Video');
+  return parts.length?' · '+parts.join(' · '):'';
 }
 
-const DB_NAME='DramaVerseVideos', DB_VERSION=1;
-function openVideoDB(){return new Promise((resolve,reject)=>{const req=indexedDB.open(DB_NAME,DB_VERSION);req.onupgradeneeded=()=>{if(!req.result.objectStoreNames.contains('episodes'))req.result.createObjectStore('episodes',{keyPath:'key'});};req.onsuccess=()=>resolve(req.result);req.onerror=()=>reject(req.error);});}
-async function saveEpisodeVideo(dramaId,episode,record){const db=await openVideoDB();return new Promise((resolve,reject)=>{const tx=db.transaction('episodes','readwrite');tx.objectStore('episodes').put({key:String(dramaId)+'_'+episode,dramaId,episode,...record});tx.oncomplete=()=>resolve();tx.onerror=()=>reject(tx.error);});}
-async function getEpisodeVideo(dramaId,episode){try{const db=await openVideoDB();return await new Promise((resolve,reject)=>{const req=db.transaction('episodes','readonly').objectStore('episodes').get(String(dramaId)+'_'+episode);req.onsuccess=()=>resolve(req.result||null);req.onerror=()=>reject(req.error);});}catch(e){return null;}}
-function episodeMetaLabel(dramaId,episode){return '';}
-function refreshUploadDrama(){const sel=document.getElementById('uploadDrama');if(!sel)return;const old=sel.value;sel.innerHTML=dramas.map((d,i)=>`<option value="${i}">${escapeHTML(d.title)}</option>`).join('');if(old!==''&&Number(old)<dramas.length)sel.value=old;}
-async function uploadEpisode(){const idx=Number(document.getElementById('uploadDrama').value);const d=dramas[idx];const ep=Math.max(1,Number(document.getElementById('uploadEpisodeNo').value)||1);const file=document.getElementById('episodeVideoFile').files[0];const status=document.getElementById('uploadStatus');if(!d){toast('Add a drama first');return;}if(!file){toast('Choose a video file first');return;}if(!file.type.startsWith('video/')){toast('Please choose a video file');return;}if(file.size>500*1024*1024){toast('File is over 500 MB. Choose a smaller video.');return;}status.textContent='Saving video… please keep this page open.';try{if(!d.id)d.id='dv_'+Date.now()+'_'+Math.random().toString(36).slice(2,8);await saveEpisodeVideo(d.id,ep,{blob:file,name:file.name,title:document.getElementById('uploadEpisodeTitle').value.trim()});d.eps=Math.max(d.eps||1,ep);persistDramas();refreshUploadDrama();document.getElementById('uploadEpisodeNo').value=ep+1;document.getElementById('episodeVideoFile').value='';status.textContent='Saved: '+file.name+' ('+(file.size/1024/1024).toFixed(1)+' MB). Stored on this device only.';toast('Episode video saved!');}catch(err){status.textContent='Could not save. Check available phone storage and try a smaller video.';toast('Video save failed');}}
+function refreshUploadDrama(){
+  const sel=document.getElementById('uploadDrama');
+  if(!sel)return;
+  const old=sel.value;
+  sel.innerHTML=dramas.map((d,i)=>`<option value="${i}">${escapeHTML(d.title)}</option>`).join('');
+  if(old!==''&&Number(old)<dramas.length)sel.value=old;
+  const cName=document.getElementById('cloudinaryCloudName');
+  const cPreset=document.getElementById('cloudinaryUploadPreset');
+  if(cName&&!cName.value)cName.value=localStorage.getItem('dvCloudName')||'';
+  if(cPreset&&!cPreset.value)cPreset.value=localStorage.getItem('dvCloudPreset')||'';
+}
+
+async function uploadEpisode(){
+  const idx=Number(document.getElementById('uploadDrama').value);
+  const d=dramas[idx];
+  const ep=Math.max(1,Number(document.getElementById('uploadEpisodeNo').value)||1);
+  const epTitle=(document.getElementById('uploadEpisodeTitle')?.value||'').trim();
+  let videoUrl=(document.getElementById('uploadEpisodeUrl')?.value||'').trim();
+  const file=document.getElementById('episodeVideoFile')?.files?.[0];
+  const status=document.getElementById('uploadStatus');
+
+  if(!d){toast('Add a drama first');return;}
+  if(!videoUrl && !file){toast('Ilagay ang MP4 Video URL o pumili ng video file');return;}
+
+  try{
+    if(file){
+      const cloudName=(document.getElementById('cloudinaryCloudName')?.value||'').trim();
+      const uploadPreset=(document.getElementById('cloudinaryUploadPreset')?.value||'').trim();
+      if(!cloudName||!uploadPreset){
+        toast('Ilagay ang Cloudinary Cloud Name & Preset, o gamitin ang Direct MP4 URL');
+        return;
+      }
+      localStorage.setItem('dvCloudName',cloudName);
+      localStorage.setItem('dvCloudPreset',uploadPreset);
+      status.textContent='Uploading MP4 to Cloudinary… huwag isara ang app.';
+      const formData=new FormData();
+      formData.append('file',file);
+      formData.append('upload_preset',uploadPreset);
+      const res=await fetch(`https://api.cloudinary.com/v1_1/${encodeURIComponent(cloudName)}/video/upload`,{
+        method:'POST',
+        body:formData
+      });
+      const data=await res.json();
+      if(!res.ok||!data.secure_url)throw new Error(data.error?.message||'Cloudinary upload failed');
+      videoUrl=data.secure_url;
+    }
+
+    if(!videoUrl.startsWith('https://')&&!videoUrl.startsWith('http://')){
+      toast('Gamitin ang valid https:// video URL');
+      return;
+    }
+
+    const nextEps=Math.max(d.eps||1,ep);
+    const updatedEpisodes={...(d.episodes||{}),[String(ep)]:{url:videoUrl,title:epTitle}};
+
+    if(db){
+      status.textContent='Saving episode link to Firebase Cloud…';
+      await db.collection('dramas').doc(d.id).set({
+        eps:nextEps,
+        episodes:updatedEpisodes
+      },{merge:true});
+    }
+
+    document.getElementById('uploadEpisodeNo').value=ep+1;
+    document.getElementById('uploadEpisodeTitle').value='';
+    document.getElementById('uploadEpisodeUrl').value='';
+    if(document.getElementById('episodeVideoFile'))document.getElementById('episodeVideoFile').value='';
+    status.textContent=`✅ Published Episode ${ep} of "${d.title}" to ALL users!`;
+    toast('Episode published to all users!');
+  }catch(err){
+    status.textContent='Error: '+err.message;
+    toast('Episode publish failed');
+  }
+}
 
 function card(d,i){
   const posterStyle=d.poster?`style="background-image:linear-gradient(0deg,#100f13b8,transparent),url('${escapeHTML(d.poster)}')"` : '';
@@ -755,21 +956,23 @@ function loadEpisode(){
   document.getElementById('playerTitle').textContent=d.title;
   document.getElementById('episodeLabel').textContent=`Episode ${activeEpisode} of ${d.eps}`;
   let list='';
-  for(let e=1;e<=d.eps;e++)list+=`<button class="episode" style="${e===activeEpisode?'border-color:#ff4b78;background:#30232b':''}" onclick="selectEpisode(${e})">Episode ${e}<small>${e===activeEpisode?'Now selected':'Tap to play'}${episodeMetaLabel(d.id,e)}</small></button>`;
+  for(let e=1;e<=d.eps;e++)list+=`<button class="episode" style="${e===activeEpisode?'border-color:#ff4b78;background:#30232b':''}" onclick="selectEpisode(${e})">Episode ${e}<small>${e===activeEpisode?'Now selected':'Tap to play'}${escapeHTML(episodeMetaLabel(d,e))}</small></button>`;
   document.getElementById('episodeList').innerHTML=list;
   document.querySelectorAll('#episodeList .episode')[activeEpisode-1]?.scrollIntoView({block:'nearest'});
 }
 function selectEpisode(e){activeEpisode=e;loadEpisode();playCurrent();}
 
-let currentVideoUrl=null;
 async function playCurrent(){
   currentVideoCompletedInSession=false;
   const v=document.getElementById('videoPlayer');
   v.pause();
-  if(currentVideoUrl){URL.revokeObjectURL(currentVideoUrl);currentVideoUrl=null;}
-  const rec=await getEpisodeVideo(dramas[activeDrama].id,activeEpisode);
-  if(rec&&rec.blob){currentVideoUrl=URL.createObjectURL(rec.blob);v.src=currentVideoUrl;}
-  else{v.src='https://storage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4';}
+  const d=dramas[activeDrama];
+  const epRec=d?.episodes?.[String(activeEpisode)];
+  if(epRec&&epRec.url){
+    v.src=epRec.url;
+  }else{
+    v.src='https://storage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4';
+  }
   v.load();
   v.play().catch(()=>toast('Tap Play to start video'));
 }
@@ -779,48 +982,98 @@ function nextEpisode(){const d=dramas[activeDrama];if(activeEpisode<d.eps){activ
 function previousEpisode(){if(activeEpisode>1){activeEpisode--;loadEpisode();playCurrent();}else toast('This is the first episode');}
 document.getElementById('videoPlayer').addEventListener('ended',handleVideoCompleted);
 function closePlayer(){document.getElementById('videoPlayer').pause();document.getElementById('player').classList.remove('open');}
-function episodeToast(e){selectEpisode(e);}
-function saveDrama(i){if(!saved.includes(i)){saved.push(i);localStorage.setItem('dvSaved',JSON.stringify(saved));toast('Added to your watchlist ♡')}else toast('Already in your watchlist')}
-function showSaved(){
-  const valid=saved.filter(i=>typeof i==='number'&&i>=0&&i<dramas.length);
-  if(valid.length!==saved.length){saved=valid;localStorage.setItem('dvSaved',JSON.stringify(saved));}
-  let el=document.getElementById('savedGrid');
-  el.innerHTML=saved.map(i=>card(dramas[i],i)).join('');
-  document.getElementById('savedEmpty').style.display=saved.length?'none':'block';
+function saveDrama(i){
+  const d=dramas[i];if(!d)return;
+  if(!saved.includes(d.id)){saved.push(d.id);localStorage.setItem('dvSaved',JSON.stringify(saved));toast('Added to your watchlist ♡')}
+  else toast('Already in your watchlist');
 }
-function toast(msg){let t=document.getElementById('toast');t.textContent=msg;t.style.display='block';clearTimeout(window._dvToastTimer);window._dvToastTimer=setTimeout(()=>t.style.display='none',2300)}
+function showSaved(){
+  let el=document.getElementById('savedGrid');
+  const matched=dramas.map((d,i)=>({d,i})).filter(x=>saved.includes(x.d.id)||saved.includes(x.i));
+  el.innerHTML=matched.map(x=>card(x.d,x.i)).join('');
+  document.getElementById('savedEmpty').style.display=matched.length?'none':'block';
+}
+function toast(msg){let t=document.getElementById('toast');t.textContent=msg;t.style.display='block';clearTimeout(window._dvToastTimer);window._dvToastTimer=setTimeout(()=>t.style.display='none',2500)}
 
-function adminAddDrama(){
+async function adminAddDrama(){
  const title=document.getElementById('adminTitle').value.trim();
  const genre=document.getElementById('adminGenre').value.trim()||'Drama';
  const desc=document.getElementById('adminDesc').value.trim();
  const poster=document.getElementById('adminPoster').value.trim();
  const eps=Math.max(1,Math.min(500,Number(document.getElementById('adminEpisodes').value)||1));
  if(!title){toast('Please enter a drama title');return;}
- dramas.unshift({id:'dv_'+Date.now()+'_'+Math.random().toString(36).slice(2,8),title,genre,eps,desc:desc||'A new drama on '+(branding.appName||'DramaVerse')+'.',cls:'',badge:'NEW',poster});
- persistDramas();
+
+ const newId='dv_'+Date.now()+'_'+Math.random().toString(36).slice(2,7);
+ const minOrder=dramas.reduce((m,x)=>Math.min(m,typeof x.orderIndex==='number'?x.orderIndex:0),0)-1;
+ const newDrama={
+   id:newId,
+   title,
+   genre,
+   eps,
+   desc:desc||'A new drama on '+(branding.appName||'DramaVerse')+'.',
+   cls:'',
+   badge:'NEW',
+   poster,
+   episodes:{},
+   orderIndex:minOrder
+ };
+
+ if(db){
+   try{
+     await db.collection('dramas').doc(newId).set(newDrama);
+     toast('Drama published to ALL users!');
+   }catch(err){
+     toast('Publish error: '+err.message);
+     return;
+   }
+ }
  ['adminTitle','adminGenre','adminDesc','adminPoster'].forEach(id=>document.getElementById(id).value='');
- document.getElementById('adminEpisodes').value=12;toast('Drama added to this device');
+ document.getElementById('adminEpisodes').value=12;
 }
+
 function showAdminDramas(){
  const list=document.getElementById('adminDramaList');if(!list)return;
  document.getElementById('adminCount').textContent=dramas.length+' titles';
  list.innerHTML=dramas.map((d,i)=>`<div class="admin-row"><div><strong>${escapeHTML(d.title)}</strong><small>${escapeHTML(d.genre)} · ${d.eps} episodes</small></div><div class="admin-actions"><button onclick="adminEditDrama(${i})">Edit</button><button class="danger" onclick="adminDeleteDrama(${i})">Delete</button></div></div>`).join('');
 }
-function adminEditDrama(i){
- const d=dramas[i],title=prompt('Drama title:',d.title);if(title===null)return;
+
+async function adminEditDrama(i){
+ const d=dramas[i];if(!d)return;
+ const title=prompt('Drama title:',d.title);if(title===null)return;
  const genre=prompt('Genre:',d.genre);if(genre===null)return;
  const desc=prompt('Description:',d.desc||'');if(desc===null)return;
  const eps=prompt('Number of episodes:',d.eps);if(eps===null)return;
- d.title=title.trim()||d.title;d.genre=genre.trim()||d.genre;d.desc=desc.trim();d.eps=Math.max(1,Math.min(500,Number(eps)||d.eps));
- persistDramas();toast('Drama updated');
+
+ const updated={
+   title:title.trim()||d.title,
+   genre:genre.trim()||d.genre,
+   desc:desc.trim(),
+   eps:Math.max(1,Math.min(500,Number(eps)||d.eps))
+ };
+ if(db){
+   try{
+     await db.collection('dramas').doc(d.id).set(updated,{merge:true});
+     toast('Drama updated for all users');
+   }catch(err){
+     toast('Update error: '+err.message);
+   }
+ }
 }
-function adminDeleteDrama(i){
- if(!confirm('Delete "'+dramas[i].title+'"?'))return;
- dramas.splice(i,1);saved=saved.filter(x=>x!==i).map(x=>x>i?x-1:x);
- localStorage.setItem('dvSaved',JSON.stringify(saved));persistDramas();toast('Drama deleted');
+
+async function adminDeleteDrama(i){
+ const d=dramas[i];if(!d)return;
+ if(!confirm('Delete "'+d.title+'" for all users?'))return;
+ if(db){
+   try{
+     await db.collection('dramas').doc(d.id).delete();
+     toast('Drama deleted for all users');
+   }catch(err){
+     toast('Delete error: '+err.message);
+   }
+ }
 }
 
 applyBrandingUI();render();showAdminDramas();refreshUploadDrama();renderAdAdminUI();applyAuthUI();
+initRealtimeCloudSync();
 if(currentSession&&currentSession.email){sendAccountWelcomeEmail(currentSession.email,currentSession.name);}
 </script></body></html>
