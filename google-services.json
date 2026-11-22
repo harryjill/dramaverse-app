@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "75314098867",
+    "project_id": "dramaverse-8c233",
+    "storage_bucket": "dramaverse-8c233.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:75314098867:android:b684cb1ae417ede42eb6c6",
+        "android_client_info": {
+          "package_name": "com.dramaverse.app"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBYoR90NJP1_X8oWt_p13AN3uPub_lHnyI"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
