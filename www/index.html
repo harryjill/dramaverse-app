@@ -107,6 +107,7 @@ header{padding:16px 18px 12px;display:flex;justify-content:space-between;align-i
 .auth-stack{display:flex;flex-direction:column;gap:12px}
 .auth-provider-btn{width:100%;display:flex;align-items:center;justify-content:space-between;background:#19171e;border:1px solid #2a2633;color:#f8f5fa;border-radius:14px;padding:14px 16px;font-size:15px;font-weight:600;cursor:pointer;transition:.15s}
 .auth-provider-btn:hover{background:#211e28;border-color:#3d3649}
+.auth-provider-btn:disabled{opacity:.55;cursor:not-allowed}
 .auth-provider-btn.active-provider{border-color:#ff4b78;background:#221822}
 .auth-provider-left{display:flex;align-items:center;gap:12px}
 .auth-provider-icon{width:24px;height:24px;border-radius:50%;display:grid;place-items:center;font-weight:900;font-size:13px;flex-shrink:0}
@@ -114,16 +115,12 @@ header{padding:16px 18px 12px;display:flex;justify-content:space-between;align-i
 .icon-f{background:#1877f2;color:#fff}
 .icon-t{background:#09080c;color:#fff;border:1px solid #3c3645}
 .auth-provider-arrow{color:#8c8296;font-size:20px;line-height:1}
-.auth-drawer{margin-top:16px;background:#131117;border:1px solid #282330;border-radius:16px;padding:14px}
-.auth-tabs{display:flex;gap:8px;margin:8px 0 10px}
-.auth-tab{flex:1;padding:10px 12px;border-radius:12px;border:1px solid #352e3d;background:#19161e;color:#bdb4c4;font-weight:800;font-size:12px;cursor:pointer}
-.auth-tab.active{background:#ff4b7824;border-color:#ff4b78;color:#fff}
-.auth-pane{display:none}
-.auth-pane.active{display:block}
+.auth-status-card{margin-top:16px;background:#131117;border:1px solid #282330;border-radius:16px;padding:14px}
 .auth-legal-note{margin-top:20px;color:#8a8094;font-size:11px;line-height:1.5;text-align:left}
 .auth-legal-note a{color:#c9c0d2;text-decoration:underline}
 </style>
 <script src="https://www.gstatic.com/firebasejs/10.14.1/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.14.1/firebase-auth-compat.js"></script>
 <script src="https://www.gstatic.com/firebasejs/10.14.1/firebase-firestore-compat.js"></script>
 </head>
 <body>
@@ -301,10 +298,10 @@ header{padding:16px 18px 12px;display:flex;justify-content:space-between;align-i
       </div>
 
       <h2 class="auth-heading">Log in / Sign up</h2>
-      <p class="auth-sub" id="profileEmailText">Manage your account, check notifications, and save your watchlist.</p>
+      <p class="auth-sub" id="profileEmailText">One-tap sign in with your social account to sync your watchlist.</p>
 
       <div class="auth-stack">
-        <button class="auth-provider-btn active-provider" id="provBtnGoogle" onclick="selectProvider('Google', this)">
+        <button class="auth-provider-btn active-provider" id="provBtnGoogle" onclick="signInWithGoogle()">
           <span class="auth-provider-left">
             <span class="auth-provider-icon icon-g">G</span>
             <span>Continue with Google</span>
@@ -312,7 +309,7 @@ header{padding:16px 18px 12px;display:flex;justify-content:space-between;align-i
           <span class="auth-provider-arrow">›</span>
         </button>
 
-        <button class="auth-provider-btn" id="provBtnFacebook" onclick="selectProvider('Facebook', this)">
+        <button class="auth-provider-btn" id="provBtnFacebook" onclick="handleUpcomingProvider('Facebook')">
           <span class="auth-provider-left">
             <span class="auth-provider-icon icon-f">f</span>
             <span>Continue with Facebook</span>
@@ -320,7 +317,7 @@ header{padding:16px 18px 12px;display:flex;justify-content:space-between;align-i
           <span class="auth-provider-arrow">›</span>
         </button>
 
-        <button class="auth-provider-btn" id="provBtnTikTok" onclick="selectProvider('TikTok', this)">
+        <button class="auth-provider-btn" id="provBtnTikTok" onclick="handleUpcomingProvider('TikTok')">
           <span class="auth-provider-left">
             <span class="auth-provider-icon icon-t">♪</span>
             <span>Continue with TikTok</span>
@@ -329,57 +326,18 @@ header{padding:16px 18px 12px;display:flex;justify-content:space-between;align-i
         </button>
       </div>
 
-      <div class="auth-drawer" id="authDrawer">
-        <div style="display:flex;align-items:center;justify-content:space-between;gap:10px;flex-wrap:wrap;margin-bottom:6px">
+      <div class="auth-status-card" id="authStatusCard">
+        <div style="display:flex;align-items:center;justify-content:space-between;gap:10px;flex-wrap:wrap">
           <div>
             <strong id="profileName" style="font-size:14px">DramaVerse Guest</strong>
-            <div class="note-muted" id="providerHintText" style="margin:2px 0 0">Authorize Google / Gmail or use Sign In / Create Account below:</div>
+            <div class="note-muted" id="providerHintText" style="margin:2px 0 0">Tap "Continue with Google" to sign in automatically.</div>
           </div>
-          <button class="btn secondary" style="margin-left:0;padding:8px 13px;font-size:12px" onclick="handleSignOut()">Sign out</button>
-        </div>
-
-        <div class="auth-tabs">
-          <button class="auth-tab active" id="tabBtnProvider" onclick="switchAuthTab('provider')">Quick Authorize</button>
-          <button class="auth-tab" id="tabBtnLogin" onclick="switchAuthTab('login')">Sign In</button>
-          <button class="auth-tab" id="tabBtnRegister" onclick="switchAuthTab('register')">Create Account</button>
-        </div>
-
-        <div class="auth-pane active" id="authPaneProvider">
-          <label class="ad-label" for="loginDisplayName">Username / Display Name (optional)</label>
-          <input class="searchbox" id="loginDisplayName" placeholder="e.g. Your Username">
-
-          <label class="ad-label" for="loginGmailInput">Email / Gmail Address to Authorize</label>
-          <input class="searchbox" id="loginGmailInput" type="email" placeholder="name@gmail.com">
-
-          <button class="btn primary" style="width:100%;margin-top:8px" id="providerContinueBtn" onclick="handleProviderAuthorize()">Authorize &amp; Continue with Google</button>
-        </div>
-
-        <div class="auth-pane" id="authPaneLogin">
-          <label class="ad-label" for="loginIdentifierInput">Email or Username</label>
-          <input class="searchbox" id="loginIdentifierInput" placeholder="name@gmail.com or username">
-
-          <label class="ad-label" for="loginPasswordInput">Password</label>
-          <input class="searchbox" id="loginPasswordInput" type="password" placeholder="Enter your password">
-
-          <button class="btn primary" style="width:100%;margin-top:8px" onclick="handlePasswordLogin()">Sign In with Password</button>
-        </div>
-
-        <div class="auth-pane" id="authPaneRegister">
-          <label class="ad-label" for="regUsernameInput">Username</label>
-          <input class="searchbox" id="regUsernameInput" placeholder="e.g. drama_fan01">
-
-          <label class="ad-label" for="regEmailInput">Email / Gmail Address</label>
-          <input class="searchbox" id="regEmailInput" type="email" placeholder="name@gmail.com">
-
-          <label class="ad-label" for="regPasswordInput">Create Password (min. 6 characters)</label>
-          <input class="searchbox" id="regPasswordInput" type="password" placeholder="Create a password">
-
-          <button class="btn primary" style="width:100%;margin-top:8px" onclick="handleRegisterAccount()">✦ Create Account &amp; Sign In</button>
+          <button class="btn secondary" id="signOutBtn" style="margin-left:0;padding:8px 13px;font-size:12px;display:none" onclick="handleSignOut()">Sign out</button>
         </div>
 
         <div class="email-preview" id="welcomeEmailBox">
           <strong>Account Summary</strong><br>
-          Mag-authorize gamit ang Google/Facebook/TikTok, o mag-Sign In / Create Account gamit ang password.
+          Hindi na kailangang mag-type ng username o password. I-tap ang <strong>Continue with Google</strong> sa itaas para mag-sign in.
         </div>
       </div>
 
@@ -390,7 +348,7 @@ header{padding:16px 18px 12px;display:flex;justify-content:space-between;align-i
   </div>
 
   <div class="section-head"><h2>App info</h2></div>
-  <p id="appInfoSummary" style="color:#aaa;font-size:13px;line-height:1.7">DramaVerse is an AI mini-drama streaming app. Create an account, sign in with password, or authorize an account to watch and save dramas.</p>
+  <p id="appInfoSummary" style="color:#aaa;font-size:13px;line-height:1.7">DramaVerse is an AI mini-drama streaming app. Sign in with Google to watch and save dramas across devices.</p>
 </div>
 </main>
 
@@ -446,9 +404,11 @@ const firebaseConfig = {
 };
 
 let db = null;
+let auth = null;
 try {
   firebase.initializeApp(firebaseConfig);
   db = firebase.firestore();
+  auth = firebase.auth();
 } catch (e) {
   console.error('Firebase init error:', e);
 }
@@ -517,6 +477,7 @@ function applyBrandingUI() {
   const prevImg = document.getElementById('adminLogoPreviewImg');
   const prevText = document.getElementById('adminLogoPreviewText');
 
+  const userPhoto = currentSession && currentSession.photoURL ? currentSession.photoURL : '';
   const hasValidLogo = Boolean(branding.logoSrc && (
     branding.logoSrc.startsWith('data:image/') ||
     branding.logoSrc.startsWith('https://') ||
@@ -531,12 +492,6 @@ function applyBrandingUI() {
       hLogo.src = branding.logoSrc;
       hLogo.style.display = 'block';
     }
-    if (avImg) {
-      avImg.onerror = () => { avImg.style.display = 'none'; if (avEmoji) avEmoji.style.display = 'block'; };
-      avImg.src = branding.logoSrc;
-      avImg.style.display = 'block';
-    }
-    if (avEmoji) { avEmoji.style.display = 'none'; }
     if (prevImg) {
       prevImg.onerror = () => { prevImg.style.display = 'none'; };
       prevImg.src = branding.logoSrc;
@@ -545,10 +500,21 @@ function applyBrandingUI() {
     if (prevText) { prevText.textContent = 'Custom logo active (' + branding.logoSrc + ')'; }
   } else {
     if (hLogo) { hLogo.removeAttribute('src'); hLogo.style.display = 'none'; }
-    if (avImg) { avImg.removeAttribute('src'); avImg.style.display = 'none'; }
-    if (avEmoji) { avEmoji.style.display = 'block'; }
     if (prevImg) { prevImg.removeAttribute('src'); prevImg.style.display = 'none'; }
     if (prevText) { prevText.textContent = 'No custom logo active (default mark shown)'; }
+  }
+
+  const avatarSrc = userPhoto || (hasValidLogo ? branding.logoSrc : '');
+  if (avatarSrc) {
+    if (avImg) {
+      avImg.onerror = () => { avImg.style.display = 'none'; if (avEmoji) avEmoji.style.display = 'block'; };
+      avImg.src = avatarSrc;
+      avImg.style.display = 'block';
+    }
+    if (avEmoji) avEmoji.style.display = 'none';
+  } else {
+    if (avImg) { avImg.removeAttribute('src'); avImg.style.display = 'none'; }
+    if (avEmoji) avEmoji.style.display = 'block';
   }
 
   const heroH1 = document.getElementById('heroBrandHeadline');
@@ -557,7 +523,7 @@ function applyBrandingUI() {
   if (heroP) heroP.textContent = branding.heroDesc;
 
   const infoEl = document.getElementById('appInfoSummary');
-  if (infoEl) infoEl.textContent = `${cleanName} is an AI mini-drama streaming app. Create an account, sign in with password, or authorize an account to watch and save dramas.`;
+  if (infoEl) infoEl.textContent = `${cleanName} is an AI mini-drama streaming app. Sign in with Google to watch and save dramas across devices.`;
 
   const nameInput = document.getElementById('brandAppNameInput');
   const urlInput = document.getElementById('brandLogoUrlInput');
@@ -646,43 +612,18 @@ async function resetBrandingSettings() {
 }
 
 /* ============================================================
-   USER ACCOUNTS: PROVIDER AUTHORIZE, REGISTER & PASSWORD LOGIN
+   SOCIAL AUTHENTICATION (GOOGLE NATIVE / FIREBASE OAUTH)
 ============================================================ */
-let activeAuthProvider = 'Google';
-
-function selectProvider(providerName, btnEl) {
-  activeAuthProvider = providerName;
-  document.querySelectorAll('.auth-provider-btn').forEach(b => b.classList.remove('active-provider'));
-  if (btnEl) btnEl.classList.add('active-provider');
-  switchAuthTab('provider');
-  const hint = document.getElementById('providerHintText');
-  const contBtn = document.getElementById('providerContinueBtn');
-  if (hint) hint.textContent = `Continue with ${providerName}: ilagay ang iyong email/username sa ibaba.`;
-  if (contBtn) contBtn.textContent = `Authorize & Continue with ${providerName}`;
-}
-
-function loadUsersList() {
-  try {
-    const arr = JSON.parse(localStorage.getItem('dvUsers') || '[]');
-    return Array.isArray(arr) ? arr : [];
-  } catch (e) {
-    return [];
-  }
-}
-
-function saveUsersList(list) {
-  localStorage.setItem('dvUsers', JSON.stringify(list));
-}
-
 function loadSession() {
   try {
     const raw = JSON.parse(localStorage.getItem('dvSession') || 'null');
-    if (raw && (raw.email || raw.username)) {
+    if (raw && raw.email) {
       return {
-        email: normalizeEmail(raw.email || ''),
-        username: normalizeUsername(raw.username || ''),
+        uid: String(raw.uid || ''),
+        email: normalizeEmail(raw.email),
+        username: normalizeUsername(raw.username || raw.email.split('@')[0]),
         name: String(raw.name || '').trim(),
-        method: String(raw.method || 'account'),
+        photoURL: String(raw.photoURL || '').trim(),
         provider: String(raw.provider || 'Google')
       };
     }
@@ -691,32 +632,20 @@ function loadSession() {
 }
 
 let currentSession = loadSession();
-
-function switchAuthTab(tabName) {
-  document.getElementById('tabBtnProvider')?.classList.toggle('active', tabName === 'provider');
-  document.getElementById('tabBtnLogin')?.classList.toggle('active', tabName === 'login');
-  document.getElementById('tabBtnRegister')?.classList.toggle('active', tabName === 'register');
-
-  document.getElementById('authPaneProvider')?.classList.toggle('active', tabName === 'provider');
-  document.getElementById('authPaneLogin')?.classList.toggle('active', tabName === 'login');
-  document.getElementById('authPaneRegister')?.classList.toggle('active', tabName === 'register');
-}
+let isSigningIn = false;
 
 function buildAccountSummaryHTML(sessionObj) {
   const safeName = escapeHTML(sessionObj.name || sessionObj.username || (sessionObj.email ? sessionObj.email.split('@')[0] : 'Viewer'));
   const safeEmail = escapeHTML(sessionObj.email || 'Not set');
-  const safeUser = escapeHTML(sessionObj.username || '—');
   const appTitle = escapeHTML(branding.appName || 'DramaVerse');
   const roleLabel = isAdminGmail(sessionObj.email) ? 'Admin Creator' : 'Viewer';
-  const methodLabel = sessionObj.method === 'provider_authorized'
-    ? `Authorized (${escapeHTML(sessionObj.provider || 'Google')})`
-    : (sessionObj.method === 'registered' ? 'Registered Password Account' : 'Password Login');
+  const providerLabel = escapeHTML(sessionObj.provider || 'Google');
   return `
     <div style="border-left:3px solid #ff4b78;padding-left:10px">
-      <strong>Active Account:</strong> ${safeName} (@${safeUser})<br>
-      <strong>Email:</strong> ${safeEmail}<br>
-      <strong>Sign-In Method:</strong> ${methodLabel} · <strong>Role:</strong> ${roleLabel}<br>
-      <p style="margin:8px 0 0;color:#d6ceda">Naka-sign in ka na sa <strong>${appTitle}</strong>.</p>
+      <strong>Signed In:</strong> ${safeName}<br>
+      <strong>Gmail:</strong> ${safeEmail}<br>
+      <strong>Provider:</strong> ${providerLabel} OAuth · <strong>Role:</strong> ${roleLabel}<br>
+      <p style="margin:8px 0 0;color:#d6ceda">Naka-connect na ang iyong Google account sa <strong>${appTitle}</strong>.</p>
     </div>
   `;
 }
@@ -727,7 +656,6 @@ async function sendAccountWelcomeEmail(email, name) {
   const displayName = (name || cleanEmail.split('@')[0] || 'Viewer').trim();
   const appTitle = branding.appName || 'DramaVerse';
   const accountRole = isAdminGmail(cleanEmail) ? 'Admin Creator' : 'Viewer';
-  const box = document.getElementById('welcomeEmailBox');
 
   const ready = Boolean(
     EMAILJS_CONFIG.enabled &&
@@ -735,11 +663,10 @@ async function sendAccountWelcomeEmail(email, name) {
     EMAILJS_CONFIG.serviceId && !EMAILJS_CONFIG.serviceId.startsWith('YOUR_') &&
     EMAILJS_CONFIG.templateId && !EMAILJS_CONFIG.templateId.startsWith('YOUR_')
   );
-
   if (!ready) return;
 
   try {
-    const res = await fetch('https://api.emailjs.com/api/v1.0/email/send', {
+    await fetch('https://api.emailjs.com/api/v1.0/email/send', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({
@@ -756,145 +683,133 @@ async function sendAccountWelcomeEmail(email, name) {
         }
       })
     });
-    if (res.ok && box) {
-      box.innerHTML += `<div style="margin-top:6px;color:#7be0a6">Welcome email sent to ${escapeHTML(cleanEmail)}.</div>`;
-    }
   } catch (e) {}
 }
 
-function completeSessionLogin(sessionObj, showWelcomeMail = false) {
-  currentSession = sessionObj;
+async function syncFirebaseUserToSession(fbUser, providerName = 'Google', shouldNavigate = true) {
+  if (!fbUser || !fbUser.email) return;
+  const email = normalizeEmail(fbUser.email);
+  const username = normalizeUsername(email.split('@')[0] || 'viewer');
+  const displayName = (fbUser.displayName || username).trim();
+  const isNewSession = !currentSession || currentSession.email !== email;
+
+  currentSession = {
+    uid: fbUser.uid || '',
+    email,
+    username,
+    name: displayName,
+    photoURL: fbUser.photoURL || '',
+    provider: providerName
+  };
   localStorage.setItem('dvSession', JSON.stringify(currentSession));
+  applyBrandingUI();
   applyAuthUI();
-  const box = document.getElementById('welcomeEmailBox');
-  if (box) box.innerHTML = buildAccountSummaryHTML(currentSession);
-  if (showWelcomeMail && currentSession.email) {
-    sendAccountWelcomeEmail(currentSession.email, currentSession.name || currentSession.username);
-  }
-  if (isAdminGmail(currentSession.email)) {
-    toast('Admin account authorized — Admin Panel unlocked');
-    showScreen('admin', document.getElementById('navAdmin'));
-  } else {
-    toast('Signed in as ' + (currentSession.name || currentSession.username || currentSession.email));
-    showScreen('home', document.getElementById('navHome'));
-  }
-}
-
-async function handleRegisterAccount() {
-  const rawUser = document.getElementById('regUsernameInput')?.value || '';
-  const rawEmail = document.getElementById('regEmailInput')?.value || '';
-  const password = document.getElementById('regPasswordInput')?.value || '';
-
-  const username = normalizeUsername(rawUser);
-  const email = normalizeEmail(rawEmail);
-
-  if (!username || username.length < 3) {
-    toast('Gumawa ng username (at least 3 letters/numbers)');
-    return;
-  }
-  if (!email || !email.includes('@')) {
-    toast('Ilagay ang valid na email o Gmail address');
-    return;
-  }
-  if (!password || password.length < 6) {
-    toast('Gumawa ng password na hindi bababa sa 6 characters');
-    return;
-  }
-
-  const users = loadUsersList();
-  const exists = users.find(u => normalizeEmail(u.email) === email || normalizeUsername(u.username) === username);
-  if (exists) {
-    toast('May account na gamit ang email o username na iyan. Mag-Sign In ka na.');
-    switchAuthTab('login');
-    document.getElementById('loginIdentifierInput').value = email;
-    return;
-  }
-
-  const newUser = { username, email, password, createdAt: Date.now() };
-  users.push(newUser);
-  saveUsersList(users);
 
   if (db) {
     try {
-      await db.collection('users').doc(username).set({
+      await db.collection('users').doc(fbUser.uid || username).set({
+        uid: fbUser.uid || '',
         username,
+        name: displayName,
         email,
-        createdAt: firebase.firestore.FieldValue.serverTimestamp()
+        photoURL: fbUser.photoURL || '',
+        provider: providerName,
+        lastLoginAt: firebase.firestore.FieldValue.serverTimestamp()
       }, { merge: true });
     } catch (e) {}
   }
 
-  document.getElementById('regPasswordInput').value = '';
-  completeSessionLogin({ email, username, name: username, method: 'registered', provider: activeAuthProvider }, true);
+  if (isNewSession) {
+    sendAccountWelcomeEmail(email, displayName);
+  }
+
+  if (shouldNavigate) {
+    if (isAdminGmail(email)) {
+      toast('Admin Google account signed in — Admin Panel unlocked');
+      showScreen('admin', document.getElementById('navAdmin'));
+    } else {
+      toast('Welcome, ' + displayName + '!');
+      showScreen('home', document.getElementById('navHome'));
+    }
+  }
 }
 
-function handlePasswordLogin() {
-  const identifier = (document.getElementById('loginIdentifierInput')?.value || '').trim();
-  const password = document.getElementById('loginPasswordInput')?.value || '';
-
-  if (!identifier) {
-    toast('Ilagay ang iyong email o username');
-    return;
-  }
-  if (!password) {
-    toast('Ilagay ang iyong password');
+async function signInWithGoogle() {
+  if (isSigningIn) return;
+  const gBtn = document.getElementById('provBtnGoogle');
+  if (!auth) {
+    toast('Firebase Auth hindi pa handa. I-refresh ang app.');
     return;
   }
 
-  const cleanIdLower = identifier.toLowerCase();
-  const users = loadUsersList();
-  const found = users.find(u =>
-    (normalizeEmail(u.email) === cleanIdLower || normalizeUsername(u.username) === normalizeUsername(cleanIdLower)) &&
-    u.password === password
-  );
+  isSigningIn = true;
+  if (gBtn) gBtn.disabled = true;
+  toast('Opening Google Sign-In…');
 
-  if (!found) {
-    toast('Mali ang email/username o password. Kung bago ka, i-tap ang Create Account.');
-    return;
+  try {
+    const capFirebaseAuth = window.Capacitor?.Plugins?.FirebaseAuthentication;
+    if (capFirebaseAuth && typeof capFirebaseAuth.signInWithGoogle === 'function') {
+      const nativeRes = await capFirebaseAuth.signInWithGoogle();
+      const idToken = nativeRes?.credential?.idToken;
+      if (idToken) {
+        const credential = firebase.auth.GoogleAuthProvider.credential(idToken);
+        const userCred = await auth.signInWithCredential(credential);
+        await syncFirebaseUserToSession(userCred.user, 'Google', true);
+        return;
+      }
+      if (nativeRes?.user?.email) {
+        await syncFirebaseUserToSession(nativeRes.user, 'Google', true);
+        return;
+      }
+    }
+
+    const provider = new firebase.auth.GoogleAuthProvider();
+    provider.setCustomParameters({ prompt: 'select_account' });
+
+    try {
+      const result = await auth.signInWithPopup(provider);
+      if (result && result.user) {
+        await syncFirebaseUserToSession(result.user, 'Google', true);
+      }
+    } catch (popupErr) {
+      if (
+        popupErr &&
+        (popupErr.code === 'auth/popup-blocked' ||
+         popupErr.code === 'auth/operation-not-supported-in-this-environment' ||
+         popupErr.code === 'auth/cancelled-popup-request')
+      ) {
+        await auth.signInWithRedirect(provider);
+      } else {
+        throw popupErr;
+      }
+    }
+  } catch (err) {
+    console.error('Google Sign-In error:', err);
+    const msg = err?.message || 'Google Sign-In cancelled or failed';
+    toast('Google Sign-In: ' + msg);
+  } finally {
+    isSigningIn = false;
+    if (gBtn) gBtn.disabled = false;
   }
-
-  document.getElementById('loginPasswordInput').value = '';
-  completeSessionLogin({
-    email: normalizeEmail(found.email),
-    username: normalizeUsername(found.username),
-    name: found.username,
-    method: 'password',
-    provider: activeAuthProvider
-  }, false);
 }
 
-function handleProviderAuthorize() {
-  const rawEmail = document.getElementById('loginGmailInput')?.value || '';
-  const rawDisplay = (document.getElementById('loginDisplayName')?.value || '').trim();
-  const email = normalizeEmail(rawEmail);
-
-  if (!email || !email.includes('@')) {
-    toast('Ilagay muna ang email o Gmail address na ia-authorize');
-    return;
-  }
-
-  const fallbackUser = normalizeUsername(rawDisplay || email.split('@')[0] || 'viewer');
-  const displayName = rawDisplay || fallbackUser;
-
-  completeSessionLogin({
-    email,
-    username: fallbackUser,
-    name: displayName,
-    method: 'provider_authorized',
-    provider: activeAuthProvider
-  }, true);
+function handleUpcomingProvider(providerName) {
+  toast(providerName + ' Sign-In ay isusunod natin! Gamitin muna ang Continue with Google.');
 }
 
-function handleSignOut() {
+async function handleSignOut() {
+  try {
+    const capFirebaseAuth = window.Capacitor?.Plugins?.FirebaseAuthentication;
+    if (capFirebaseAuth && typeof capFirebaseAuth.signOut === 'function') {
+      await capFirebaseAuth.signOut();
+    }
+    if (auth) await auth.signOut();
+  } catch (e) {}
+
   currentSession = null;
   localStorage.removeItem('dvSession');
-  const passIn = document.getElementById('loginPasswordInput');
-  if (passIn) passIn.value = '';
+  applyBrandingUI();
   applyAuthUI();
-  const box = document.getElementById('welcomeEmailBox');
-  if (box) {
-    box.innerHTML = '<strong>Account Summary</strong><br>Naka-sign out ka na. Pwede kang mag-Authorize, mag-Sign In, o mag-Create Account.';
-  }
   toast('Signed out');
 }
 
@@ -905,10 +820,13 @@ function applyAuthUI() {
   const roleTag = document.getElementById('accountRoleTag');
   const pName = document.getElementById('profileName');
   const pEmail = document.getElementById('profileEmailText');
+  const hintEl = document.getElementById('providerHintText');
+  const signOutBtn = document.getElementById('signOutBtn');
   const adminEmailEl = document.getElementById('adminSessionEmail');
+  const box = document.getElementById('welcomeEmailBox');
   const appLabel = branding.appName || 'DramaVerse';
 
-  if (currentSession && (currentSession.email || currentSession.username)) {
+  if (currentSession && currentSession.email) {
     const admin = isAdminGmail(currentSession.email);
     const labelName = currentSession.name || currentSession.username || (admin ? appLabel + ' Admin' : appLabel + ' Viewer');
     if (adminNav) adminNav.style.display = admin ? 'block' : 'none';
@@ -916,19 +834,15 @@ function applyAuthUI() {
       showScreen('home', document.getElementById('navHome'));
     }
     if (badge) {
-      badge.textContent = admin ? '⚙ Admin' : '◉ ' + (currentSession.username || 'Member');
+      badge.textContent = admin ? '⚙ Admin' : '◉ ' + (currentSession.name || currentSession.username);
       badge.className = 'role-pill' + (admin ? ' admin' : '');
     }
-    if (roleTag) roleTag.textContent = admin ? 'ADMIN AUTO-DETECTED' : 'SIGNED IN';
+    if (roleTag) roleTag.textContent = admin ? 'ADMIN VERIFIED' : 'GOOGLE CONNECTED';
     if (pName) pName.textContent = labelName;
-    if (pEmail) {
-      const subParts = [];
-      if (currentSession.username) subParts.push('@' + currentSession.username);
-      if (currentSession.email) subParts.push(currentSession.email);
-      pEmail.textContent = subParts.join(' · ') || 'Signed in';
-    }
-    if (adminEmailEl) adminEmailEl.textContent = currentSession.email || currentSession.username;
-    const box = document.getElementById('welcomeEmailBox');
+    if (pEmail) pEmail.textContent = currentSession.email;
+    if (hintEl) hintEl.textContent = 'Connected via ' + (currentSession.provider || 'Google') + ' OAuth';
+    if (signOutBtn) signOutBtn.style.display = 'inline-block';
+    if (adminEmailEl) adminEmailEl.textContent = currentSession.email;
     if (box) box.innerHTML = buildAccountSummaryHTML(currentSession);
   } else {
     if (adminNav) adminNav.style.display = 'none';
@@ -941,9 +855,31 @@ function applyAuthUI() {
     }
     if (roleTag) roleTag.textContent = 'GUEST';
     if (pName) pName.textContent = appLabel + ' Guest';
-    if (pEmail) pEmail.textContent = 'Manage your account, check notifications, and save your watchlist.';
+    if (pEmail) pEmail.textContent = 'One-tap sign in with your social account to sync your watchlist.';
+    if (hintEl) hintEl.textContent = 'Tap "Continue with Google" to sign in automatically.';
+    if (signOutBtn) signOutBtn.style.display = 'none';
     if (adminEmailEl) adminEmailEl.textContent = 'ADMIN ONLY';
+    if (box) {
+      box.innerHTML = '<strong>Account Summary</strong><br>Hindi na kailangang mag-type ng username o password. I-tap ang <strong>Continue with Google</strong> sa itaas para mag-sign in.';
+    }
   }
+}
+
+function initFirebaseAuthListener() {
+  if (!auth) return;
+  auth.getRedirectResult().then(res => {
+    if (res && res.user) {
+      syncFirebaseUserToSession(res.user, 'Google', true);
+    }
+  }).catch(err => {
+    if (err && err.message) toast('Google Sign-In: ' + err.message);
+  });
+
+  auth.onAuthStateChanged(fbUser => {
+    if (fbUser && fbUser.email) {
+      syncFirebaseUserToSession(fbUser, 'Google', false);
+    }
+  });
 }
 
 /* ============================================================
@@ -1592,6 +1528,7 @@ showAdminDramas();
 refreshUploadDrama();
 renderAdAdminUI();
 applyAuthUI();
+initFirebaseAuthListener();
 initRealtimeCloudSync();
 </script>
 </body>
